@@ -63,21 +63,53 @@ def fact_rows(offer: dict):
                 yield {"field": name, "value": item["value"], "quote": item["quote"], "source_ref": item["source_ref"]}
 
 
+def itinerary_text(safety: dict) -> str:
+    plan = safety["plan"]
+    lines = [
+        "ITINERARY AND CHECK-INS",
+        f"Traveller alias: {plan['traveller_alias']}",
+        "Contacts:",
+        *[f"- {c['alias']} via {c['channel']}" for c in plan["contacts"]],
+        "Itinerary:",
+        *([f"- {item}" for item in plan["itinerary"]] or ["- (none entered)"]),
+        f"Check-in interval: every {plan['checkin_interval_hours']} hours",
+        f"Last check-in: {plan.get('last_checkin') or 'none'}",
+        f"Status: {safety.get('status', 'not computed')}",
+        "Check-ins:",
+        *([f"- {c['at']}: {c['note']}" for c in safety.get("checkins", [])] or ["- (none)"]),
+        "Alerts (SIMULATED - nothing was sent to anyone):",
+        *([f"- {a['at']} to {a['to_alias']} via {a['channel']} for check-in due {a['due']} (simulated)"
+           for a in safety.get("alerts", [])] or ["- (none)"]),
+    ]
+    return "\n".join(lines) + "\n"
+
+
 def packet_zip(view: dict) -> bytes:
     label = "SYNTHETIC DEMO" if view.get("demo") else "Saavdhan report packet"
     analysis = view.get("analysis") or {}
     offer, verdict = analysis.get("offer", {}), analysis.get("verdict", {})
     facts = list(fact_rows(offer))
     hits = verdict.get("rule_hits", [])
+    safety = view.get("safety")
+    paragraphs = [
+        f"Result: {verdict.get('level', 'not analysed')}. Recruiter list date: {verdict.get('ra_list_date', 'not loaded')}.",
+        "Rule checks compare stated facts with India's emigration guidance. They are not a legal finding about any person or agency.",
+    ]
+    if safety:
+        paragraphs.append(
+            f"Safety net: last check-in {safety['plan'].get('last_checkin') or 'none'}. "
+            f"Status {safety.get('status', 'not computed')}. "
+            f"Simulated alerts recorded: {len(safety.get('alerts', []))}."
+        )
+    paragraphs.append(WHERE_TO_REPORT)
     output = io.BytesIO()
     with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED) as archive:
         archive.writestr("offer-copy.txt", "\n\n".join(s["text"] for s in view["sources"] if not s.get("line")))
         archive.writestr("extracted-facts.csv", csv_bytes(facts, ["field", "value", "quote", "source_ref"]))
         archive.writestr("rule-checks.csv", csv_bytes(hits, ["rule_id", "severity", "status", "rule_source_url", "heuristic"]))
         archive.writestr("where-to-report.txt", WHERE_TO_REPORT)
-        archive.writestr("summary.pdf", pdf_bytes(f"{label}: offer check", [
-            f"Result: {verdict.get('level', 'not analysed')}. Recruiter list date: {verdict.get('ra_list_date', 'not loaded')}.",
-            "Rule checks compare stated facts with India's emigration guidance. They are not a legal finding about any person or agency.",
-            WHERE_TO_REPORT,
-        ], [["Rule", "Severity", "Status"]] + [[h["rule_id"], h["severity"], h["status"]] for h in hits]))
+        if safety:
+            archive.writestr("itinerary-and-checkins.txt", itinerary_text(safety))
+        archive.writestr("summary.pdf", pdf_bytes(f"{label}: offer check", paragraphs,
+            [["Rule", "Severity", "Status"]] + [[h["rule_id"], h["severity"], h["status"]] for h in hits]))
     return output.getvalue()
