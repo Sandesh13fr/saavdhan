@@ -44,7 +44,11 @@ Three modules:
 
 ## Screenshots
 
-`docs/screenshots/` (synthetic data): to be added before submission. Each image must be labelled synthetic.
+All screenshots use synthetic demo data (full set and capture script: [docs/screenshots](docs/screenshots/README.md)).
+
+| Verdict (STOP) | Check-in plan, missed check-in | Family alert (simulated) | Pattern map (synthetic) |
+|---|---|---|---|
+| ![Verdict](docs/screenshots/02-verdict-stop-mobile.png) | ![Missed check-in](docs/screenshots/06-missed-mobile.png) | ![Family alert](docs/screenshots/07-family-mobile.png) | ![Pattern map](docs/screenshots/08-map-mobile.png) |
 
 ## Quick start (Windows PowerShell)
 

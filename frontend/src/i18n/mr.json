@@ -59,7 +59,7 @@
   "rule.R1_TOURIST_VISA.clear": "ऑफरमध्ये लिहिले आहे की व्हिसा कामासाठी आहे.",
   "rule.R1_TOURIST_VISA.unknown": "ऑफरमध्ये कोणता व्हिसा मिळेल ते लिहिलेले नाही. नियोक्त्याकडून व्हिसाचा प्रकार लेखी मागा.",
 
-  "rule.R2_RA_NOT_LISTED.title": "एजंट MEA यादीत नाही",
+  "rule.R2_RA_NOT_LISTED.title": "एजंट MEA यादीत आहे का?",
   "rule.R2_RA_NOT_LISTED.hit": "हा एजंट MEA च्या सक्रिय भरती एजंट यादीत सापडला नाही, जी {date} रोजीची आहे. पैसे देण्यापूर्वी एजंटचा RC नंबर मागा आणि eMigrate वर तपासा.",
   "rule.R2_RA_NOT_LISTED.clear": "हा एजंट MEA च्या सक्रिय भरती एजंट यादीत दिसतो, जी {date} रोजीची आहे. तरीही eMigrate वर खात्री करा.",
   "rule.R2_RA_NOT_LISTED.unknown": "Saavdhan या एजंटची MEA यादीशी तपासणी करू शकला नाही.",
@@ -104,7 +104,7 @@
   "rule.H1_SALARY_ANOMALY.clear": "या कामासाठी पगार नेहमीच्या मर्यादेत आहे.",
   "rule.H1_SALARY_ANOMALY.unknown": "ऑफरमध्ये पगार लिहिलेला नाही. मासिक पगार लेखी मागा.",
 
-  "rule.H2_PASSPORT_HANDOVER.title": "एजंटला तुमचा पासपोर्ट ठेवायचा आहे",
+  "rule.H2_PASSPORT_HANDOVER.title": "तुमचा पासपोर्ट कोण ठेवणार?",
   "rule.H2_PASSPORT_HANDOVER.hit": "हा इशाऱ्याचा संकेत आहे, कायदेशीर नियम नाही. सही केलेला करार मिळेपर्यंत आणि एजंटची तपासणी होईपर्यंत तुमचा पासपोर्ट एजंटकडे देऊ नका.",
   "rule.H2_PASSPORT_HANDOVER.clear": "ऑफरमध्ये तुमचा पासपोर्ट मागितलेला नाही.",
   "rule.H2_PASSPORT_HANDOVER.unknown": "तुमचा पासपोर्ट ठेवला जाईल की नाही ते ऑफरमध्ये लिहिलेले नाही.",

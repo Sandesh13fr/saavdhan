@@ -59,7 +59,7 @@
   "rule.R1_TOURIST_VISA.clear": "The offer says the visa is for work.",
   "rule.R1_TOURIST_VISA.unknown": "The offer does not say what visa you will get. Ask the employer for the visa type in writing.",
 
-  "rule.R2_RA_NOT_LISTED.title": "Agent not on MEA list",
+  "rule.R2_RA_NOT_LISTED.title": "Agent on MEA's active list?",
   "rule.R2_RA_NOT_LISTED.hit": "This agent was not found on MEA's active recruiting agent list dated {date}. Ask for the agent's RC number and check it on eMigrate before you pay.",
   "rule.R2_RA_NOT_LISTED.clear": "This agent appears on MEA's active recruiting agent list dated {date}. Still confirm on eMigrate.",
   "rule.R2_RA_NOT_LISTED.unknown": "Saavdhan could not check this agent against MEA's list.",
@@ -104,7 +104,7 @@
   "rule.H1_SALARY_ANOMALY.clear": "The salary is in the usual range for this job.",
   "rule.H1_SALARY_ANOMALY.unknown": "The offer does not give a salary. Ask for the monthly salary in writing.",
 
-  "rule.H2_PASSPORT_HANDOVER.title": "Agent asks to hold your passport",
+  "rule.H2_PASSPORT_HANDOVER.title": "Who keeps your passport?",
   "rule.H2_PASSPORT_HANDOVER.hit": "This is a warning sign, not a legal rule. Do not give your passport to an agent until you have a signed contract and have checked the agent.",
   "rule.H2_PASSPORT_HANDOVER.clear": "The offer does not ask for your passport.",
   "rule.H2_PASSPORT_HANDOVER.unknown": "The offer does not say whether your passport will be kept.",
