@@ -1,4 +1,5 @@
 import asyncio
+import json
 
 import pytest
 import httpx
@@ -15,6 +16,30 @@ def test_disabled_provider_never_calls_network(monkeypatch):
     monkeypatch.setattr(httpx.AsyncClient, "post", lambda *a, **k: pytest.fail("network called"))
     assert not provider_available()
     assert asyncio.run(extract_offer(SRC)) is None
+
+
+def test_configured_openrouter_extraction_validates_quotes(monkeypatch):
+    monkeypatch.setenv('SAAVDHAN_ENV', 'local')
+    monkeypatch.setenv('SAAVDHAN_ENABLE_LLM', 'true')
+    monkeypatch.setenv('SAAVDHAN_LLM_BASE_URL', 'https://openrouter.ai/api/v1')
+    monkeypatch.setenv('SAAVDHAN_OPENAI_MODEL', 'nvidia/nemotron-3-ultra-550b-a55b:free')
+    monkeypatch.setenv('LITELLM_API_KEY', '')
+    monkeypatch.setenv('OPENAI_API_KEY', 'synthetic-test-key')
+    fields = [{'name': 'visa_type', 'value': 'tourist', 'quote': 'Tourist visa'}]
+
+    def respond(request):
+        assert str(request.url) == 'https://openrouter.ai/api/v1/chat/completions'
+        assert request.headers['Authorization'] == 'Bearer synthetic-test-key'
+        assert json.loads(request.content)['model'] == 'nvidia/nemotron-3-ultra-550b-a55b:free'
+        return httpx.Response(200, json={'choices': [{'finish_reason': 'stop',
+            'message': {'content': json.dumps({'fields': fields})}}]})
+
+    client = httpx.AsyncClient
+    monkeypatch.setattr(httpx, 'AsyncClient', lambda **kwargs: client(transport=httpx.MockTransport(respond), **kwargs))
+    assert asyncio.run(extract_offer(SRC)).visa_type.source_ref == 'S1'
+    fields[0]['quote'] = 'Invented visa quote'
+    with pytest.raises(ValueError, match='quote is absent'):
+        asyncio.run(extract_offer(SRC))
 
 
 def test_server_attaches_source_ref_from_quote():

@@ -11,6 +11,7 @@ Hack for Social Cause 2027 requires teams to disclose how AI tools were used and
 | 2026-10-25 | Claude Code lead + QA and reviewer subagents (Sonnet and Haiku 5.5) | Phase 3: evaluation harness and report (`eval/run_eval.py`, `eval/REPORT.md`), security review, fixes for review findings, anonymous retention and rate limit | Sandesh to review; evaluation caveat stated in the report |
 | 2026-10-25 | Claude Code docs subagent (Haiku 5.5) | Phase 4 docs: README, architecture, rules, privacy, demo script, deck outline, this log. Removed Bakaya-specific `docs/PRODUCTION.md` and `backend/README.md` | Sandesh to review; open items listed in each document |
 | 2026-10-26 | Codex CLI | Screenshot capture script and 22 synthetic screenshots; second code review; fixes for its 11 findings with 40 regression tests | Lead reviewed diffs; Sandesh to review |
+| 2026-10-26 | Codex CLI | Configured local OpenRouter extraction, clarified quote-length and JSON instructions, added a mocked gateway regression test, updated setup/privacy notes; live synthetic probe passed | Pending human review; 210 tests and frontend build passed |
 
 ## Human work that remains
 
@@ -22,7 +23,7 @@ Humans must still do all of the following before submission:
 - Verify the MEA fee cap (Rs 30,000 + 18% GST) against the current official figure, and fix the matching copy.
 - Verify each rule's MEA source passage and the problem-statement links, which were taken from the brief and not re-checked in the docs pass.
 - Load the MEA active recruiting agent list and confirm the list date appears on every verdict.
-- Run the LLM path live through the chosen gateway (the last attempt returned HTTP 401) and update the privacy notice with the disclosure.
+- Complete broader live and multilingual LLM evaluation beyond the passing synthetic OpenRouter probe, configure the hosted gateway separately, and add the provider disclosure to the in-app privacy notice.
 - Legal review of the DPDP Act 2023 open questions in `docs/PRIVACY.md`.
 - Team member details, team name, college details and self-certifications (Annexure 1) are entered by humans only. No agent handles them.
 - Sign-off on every verdict and check-in wording.

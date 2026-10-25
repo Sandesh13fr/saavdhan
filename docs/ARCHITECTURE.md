@@ -88,7 +88,7 @@ New for Saavdhan: the `Offer` schema and quote-carrying `FieldValue`, `rules.py`
 ## Known gaps
 
 - The MEA recruiter list is not parsed yet. R2 reports "not checked"; the verdict cannot reach `NO_RED_FLAGS_FOUND`.
-- The LLM path has not been run live in this build.
+- The OpenRouter LLM path passed one synthetic extraction probe on 2026-10-26. Broader model evaluation, multilingual live checks and hosted configuration remain unverified.
 - Anonymous visitors share one tenant in production with a 10-case cap. Per-client limits need review before any public deployment.
 - `FORWARDED_ALLOW_IPS` should be narrowed to the proxy address.
 - Login lockout per account is not implemented; throttling is per email and per IP.

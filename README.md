@@ -72,7 +72,7 @@ Optional steps:
 
 - **Configuration.** Copy `.env.example` to `.env` and edit it. `.env` is gitignored; never commit it.
 - **OCR for image offers.** Install Tesseract. For Hindi and Marathi screenshots add the `hin` and `mar` tessdata, then set `SAAVDHAN_OCR_LANGS=eng+hin+mar`. Set `SAAVDHAN_OCR_ENABLED=true` and `TESSERACT_CMD` if Tesseract is not on PATH.
-- **LLM extraction (off by default).** Set `SAAVDHAN_ENABLE_LLM=true`, `SAAVDHAN_LLM_BASE_URL` (any OpenAI-compatible gateway, for example TokenRouter), `SAAVDHAN_OPENAI_MODEL` and an API key. Offer text is then sent to that gateway. See [docs/PRIVACY.md](docs/PRIVACY.md). The live LLM path was not verified in this build.
+- **LLM extraction (off by default in the example configuration).** For OpenRouter, set `SAAVDHAN_ENABLE_LLM=true`, `SAAVDHAN_LLM_BASE_URL=https://openrouter.ai/api/v1`, `SAAVDHAN_OPENAI_MODEL=nvidia/nemotron-3-ultra-550b-a55b:free` and `OPENAI_API_KEY` in your ignored local `.env`. Offer text is then sent to that gateway; use synthetic demo text only. See [docs/PRIVACY.md](docs/PRIVACY.md). A live synthetic probe on 2026-10-26 returned four expected facts with validated quotes; broader model evaluation and hosted configuration remain unverified. Restart an existing backend after changing configuration.
 - **Pattern map (M3).** Run `.\.venv\Scripts\python scripts\seed_demo_officer.py` once. It creates a local demo officer account, and the password is written to `.env` as `SAAVDHAN_DEMO_OFFICER_PASSWORD`. Local use only.
 
 ## Tests and evaluation

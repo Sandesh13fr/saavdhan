@@ -46,9 +46,9 @@ Saavdhan never sends a report, complaint or message to any authority. The report
 
 ## Third parties
 
-- **LLM gateway (opt-in, off by default).** When `SAAVDHAN_ENABLE_LLM=true` and a key is set, the text of the uploaded offer is sent to the configured OpenAI-compatible endpoint. In the project setup this is TokenRouter (`https://api.tokenrouter.com/v1`). If `SAAVDHAN_LLM_BASE_URL` is empty the code uses `https://api.openai.com/v1`.
+- **LLM gateway (opt-in, off by default in the example configuration).** When `SAAVDHAN_ENABLE_LLM=true` and a key is set, the text of the uploaded offer is sent to the configured OpenAI-compatible endpoint. The local project setup uses OpenRouter (`https://openrouter.ai/api/v1`) and `nvidia/nemotron-3-ultra-550b-a55b:free`. When `SAAVDHAN_LLM_BASE_URL` is unset, the code uses `https://api.openai.com/v1`.
   - Users must be told before the text is sent. The current in-app privacy note does not yet say this. Copy change is an open item.
-  - `.env.example` describes the LLM as OpenAI-only. Update that comment to match the gateway setting.
+  - The [free model's provider notice](https://openrouter.ai/nvidia/nemotron-3-ultra-550b-a55b%3Afree) states that requests are logged for security and product improvement and prohibits confidential or personal data. Use synthetic demo text only. The live check used synthetic text without real people, agencies or contact details.
 - **OpenStreetMap tiles (map view).** Map tiles are loaded from OpenStreetMap tile servers. Each tile request discloses the viewer's IP address, browser headers and the map area viewed. Requests do not include report counts, district selections, hashes or documents. The referrer is limited to the origin.
 - **geoBoundaries district boundaries.** Local file; no request at runtime.
 
