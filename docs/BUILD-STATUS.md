@@ -61,6 +61,15 @@ Sandesh13fr), Docker present, Tesseract 5.4.0 at `C:\Program Files\Tesseract-OCR
   districts, one hash across 5 districts).
 - Copy reworded after review (no "MEA high-risk list" claim; fee cap stated; list date in R2 copy).
 
+## Phase 4 — deployed (26 Oct)
+
+- Live demo: **https://saavdhan.onrender.com** (Render free Docker web service, Singapore, auto-deploy
+  from `main`). Verified live: health ok with OCR (eng+hin+mar); Bangkok demo STOP (R1, R3, R4, R5, R6,
+  R7, R8, R9, H1, H3 hit); near-miss VERIFY_FIRST; packet ZIP 200; pattern map 401 anonymous and 200
+  for the demo officer; cross-origin POST 403. Recruiter list not loaded, so R2 stays unknown.
+- Free plan: sleeps when idle (~1 min cold start); disk resets on restart (demo officer re-created).
+- Docs lane: README, ARCHITECTURE, RULES, PRIVACY, DEMO-SCRIPT, DECK-OUTLINE, AI_USAGE, DEPLOY.
+
 ## Known gaps
 
 - R2 shows "dated not loaded" until the MEA RA list is parsed.

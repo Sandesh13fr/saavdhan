@@ -4,6 +4,8 @@
 
 Tagline: **Check the job before you board.**
 
+Live demo (synthetic data, free hosting, may take a minute to wake): https://saavdhan.onrender.com
+
 Status: prototype for Hack for Social Cause 2027 (theme 8, Digital Safety & Cyber Fraud Awareness, state framing Maharashtra). Demo data is synthetic.
 
 ## Provenance

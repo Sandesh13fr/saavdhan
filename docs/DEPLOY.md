@@ -5,6 +5,9 @@ OCR (Tesseract with English, Hindi and Marathi) is included in the image.
 
 ## Render (hosted demo)
 
+Current deployment: https://saavdhan.onrender.com (service `saavdhan`, region Singapore, free plan,
+auto-deploys on every push to `main`).
+
 The repo has a Blueprint, [`render.yaml`](../render.yaml): one free Docker web service.
 
 1. Sign in to https://render.com with GitHub and allow Render to read `Sandesh13fr/saavdhan`.
