@@ -76,6 +76,14 @@ Sandesh13fr), Docker present, Tesseract 5.4.0 at `C:\Program Files\Tesseract-OCR
   all fixed with 40 regression tests. 209 tests pass; eval unchanged (40/40 on the tuning set).
 - Rule titles for R2 and H2 made neutral ("Agent on MEA's active list?", "Who keeps your passport?").
 
+- Frontend rebuilt (26 Oct) to match the 14 mock screens and identity board (paper/ink/alert red,
+  Archivo + Noto Sans Devanagari + IBM Plex Mono, S-mark logo, board verdict language). Flow: home →
+  submit (stepper, tabs) → review extracted facts → result → evidence → check-in setup → check-in →
+  family alert → help; institution login → tile-less pattern map → pattern detail. Map screens lazy-loaded.
+  Deliberate differences from the mocks listed in `design/REVIEW.md`. 32 synthetic screenshots re-captured.
+- OpenFreeMap basemap not merged (mock shows a tile-less map); branch `lane/openfreemap` kept.
+- OpenRouter configured as the optional LLM gateway (off by default and in production).
+
 ## Known gaps
 
 - R2 shows "dated not loaded" until the MEA RA list is parsed.

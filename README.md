@@ -48,7 +48,7 @@ All screenshots use synthetic demo data (full set and capture script: [docs/scre
 
 | Verdict (STOP) | Check-in plan, missed check-in | Family alert (simulated) | Pattern map (synthetic) |
 |---|---|---|---|
-| ![Verdict](docs/screenshots/02-verdict-stop-mobile.png) | ![Missed check-in](docs/screenshots/06-missed-mobile.png) | ![Family alert](docs/screenshots/07-family-mobile.png) | ![Pattern map](docs/screenshots/08-map-mobile.png) |
+| ![Verdict](docs/screenshots/04-result-stop-mobile.png) | ![Missed check-in](docs/screenshots/09-missed-mobile.png) | ![Family alert](docs/screenshots/10-family-mobile.png) | ![Pattern map](docs/screenshots/13-map-mobile.png) |
 
 ## Quick start (Windows PowerShell)
 

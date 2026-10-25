@@ -12,6 +12,7 @@ Hack for Social Cause 2027 requires teams to disclose how AI tools were used and
 | 2026-10-25 | Claude Code docs subagent (Haiku 5.5) | Phase 4 docs: README, architecture, rules, privacy, demo script, deck outline, this log. Removed Bakaya-specific `docs/PRODUCTION.md` and `backend/README.md` | Sandesh to review; open items listed in each document |
 | 2026-10-26 | Codex CLI | Screenshot capture script and 22 synthetic screenshots; second code review; fixes for its 11 findings with 40 regression tests | Lead reviewed diffs; Sandesh to review |
 | 2026-10-26 | Codex CLI | Configured local OpenRouter extraction, clarified quote-length and JSON instructions, added a mocked gateway regression test, updated setup/privacy notes; live synthetic probe passed | Pending human review; 210 tests and frontend build passed |
+| 2026-10-26 | Claude Code subagent (Opus 5.5, impeccable skill) | Frontend rebuilt to the team's mock screens and brand board; 231 new en/hi/mr strings; screenshots re-captured | Lead reviewed screenshots against mocks; Sandesh to review; hi/mr need native review |
 
 ## Human work that remains
 
