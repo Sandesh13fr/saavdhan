@@ -4,13 +4,14 @@ import hashlib
 import os
 import uuid
 from contextlib import asynccontextmanager
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile, Request
 from fastapi.responses import FileResponse, Response, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.trustedhost import TrustedHostMiddleware
+from starlette.concurrency import run_in_threadpool
 
 from . import storage, telemetry, auth
 from .agent import RA_LIST_DATE, analyze
@@ -120,6 +121,19 @@ async def rate_limit(request: Request, call_next):
 
 
 @app.middleware("http")
+async def body_limit(request: Request, call_next):
+    length = request.headers.get("content-length")
+    if length is not None:
+        try:
+            size = int(length)
+        except ValueError:
+            return JSONResponse({"detail":"Invalid Content-Length"}, status_code=400)
+        if size > float(os.getenv("SAAVDHAN_MAX_BODY_MB", "160")) * 1024 * 1024:
+            return JSONResponse({"detail":"Request body exceeds upload limit"}, status_code=413)
+    return await call_next(request)
+
+
+@app.middleware("http")
 async def security_headers(request: Request, call_next):
     response = await call_next(request)
     if request.url.path.startswith("/api/"):
@@ -163,6 +177,11 @@ async def tenant_capacity_error(request: Request, exc):
     return JSONResponse({"detail":str(exc)},status_code=413)
 
 
+@app.exception_handler(storage.ConcurrentCaseUpdate)
+async def concurrent_case_error(request: Request, exc):
+    return JSONResponse({"detail":"Case changed; reload and try again"},status_code=409)
+
+
 def stamp():
     return datetime.now(timezone.utc).isoformat()
 
@@ -175,12 +194,25 @@ def require_case(case_id):
     state=storage.get_case(case_id)
     if not state:
         raise HTTPException(404,"Case not found")
+    retention = float(os.getenv("SAAVDHAN_RETENTION_HOURS", "24"))
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=retention)
+    if storage.TENANT.get() == storage.ANONYMOUS and datetime.fromisoformat(state["created_at"]) < cutoff:
+        storage.purge_anonymous(retention)
+        raise HTTPException(404,"Case not found")
     return state
 
 
 def view(state):
     result={key:state.get(key) for key in ("id","created_at","demo","revision","sources","audit","analysis")}
     result["safety"]=safety.status(state,datetime.now(timezone.utc))
+    return result
+
+
+def save_update(state):
+    revision = state["revision"]
+    state["revision"] = revision + 1
+    result = view(state)  # Include alerts generated while computing the response.
+    storage.save_case(state, expected_revision=revision)
     return result
 
 
@@ -218,9 +250,9 @@ def reports_map():
 
 @app.post("/api/offers")
 async def create_offer(files:list[UploadFile]=File(default=[]),text:str|None=Form(default=None)):
-    uploads=[(file.filename or "upload",await file.read(MAX_FILE_BYTES+1)) for file in files[:11]]
-    if len(uploads)>10:
+    if len(files)>10:
         raise HTTPException(400,"At most 10 files per offer")
+    uploads=[(file.filename or "upload",await file.read(MAX_FILE_BYTES+1)) for file in files]
     if text and len(text)>50000:
         raise HTTPException(413,"Pasted text is limited to 50,000 characters")
     if text and text.strip():
@@ -230,7 +262,7 @@ async def create_offer(files:list[UploadFile]=File(default=[]),text:str|None=For
     sources,staged,notes=[],[],[]
     for name,data in uploads:
         try:
-            ingested,errors=ingest_bytes(name,data)
+            ingested,errors=await run_in_threadpool(ingest_bytes,name,data)
         except Exception as exc:
             raise HTTPException(400,f"Could not read {Path(name).name}: {exc}") from exc
         sources.extend(ingested)
@@ -238,8 +270,10 @@ async def create_offer(files:list[UploadFile]=File(default=[]),text:str|None=For
         notes.extend(errors)
     state=new_case(sources,staged)
     if notes:
+        if any(source.status == "truncated" for source in sources):
+            state["ingest_truncated"] = True
         audit(state,"ingest_notes","; ".join(notes))
-        storage.save_case(state)
+        return save_update(state)
     return view(state)
 
 
@@ -254,18 +288,21 @@ def demo_offer(name:str):
 
 @app.get("/api/offers/{case_id}")
 def get_offer(case_id:str):
-    return view(require_case(case_id))
+    state = require_case(case_id)
+    alerts = len((state.get("safety") or {}).get("alerts", []))
+    result = view(state)
+    if len((state.get("safety") or {}).get("alerts", [])) > alerts:
+        return save_update(state)
+    return result
 
 
 @app.post("/api/offers/{case_id}/analyze")
 async def analyze_offer(case_id:str):
     state=require_case(case_id)
     state["analysis"]=await analyze(state)
-    state["revision"]+=1
     verdict=state["analysis"]["verdict"]
     audit(state,"analyzed",f"{state['analysis']['extraction_method']} extraction; verdict {verdict['level']} set by Python rules")
-    storage.save_case(state)
-    return view(state)
+    return save_update(state)
 
 
 @app.get("/api/offers/{case_id}/packet")
@@ -274,8 +311,7 @@ def packet(case_id:str):
     if not state.get("analysis"):
         raise HTTPException(409,"Analyze the offer before downloading the packet")
     audit(state,"packet","Report packet downloaded locally; nothing sent")
-    storage.save_case(state)
-    return Response(packet_zip(view(state)),media_type="application/zip",headers={"Content-Disposition":f'attachment; filename="saavdhan-{case_id[:8]}.zip"'})
+    return Response(packet_zip(save_update(state)),media_type="application/zip",headers={"Content-Disposition":f'attachment; filename="saavdhan-{case_id[:8]}.zip"'})
 
 
 @app.post("/api/offers/{case_id}/safety-plan")
@@ -283,8 +319,7 @@ def safety_plan(case_id:str,plan:SafetyPlan):
     state=require_case(case_id)
     safety.create_plan(state,plan,datetime.now(timezone.utc))
     audit(state,"safety_plan",f"{len(plan.contacts)} family contact(s); check-in every {plan.checkin_interval_hours}h")
-    storage.save_case(state)
-    return view(state)
+    return save_update(state)
 
 
 @app.post("/api/offers/{case_id}/checkin")
@@ -295,8 +330,7 @@ def checkin(case_id:str,body:dict):
     except ValueError as exc:
         raise HTTPException(409,str(exc)) from exc
     audit(state,"checkin","Traveller checked in")
-    storage.save_case(state)
-    return view(state)
+    return save_update(state)
 
 
 @app.post("/api/demo/advance-clock")
@@ -308,10 +342,8 @@ def advance_clock(body:dict):
         safety.advance_clock(state,int(body.get("hours",24)))
     except (ValueError,TypeError) as exc:
         raise HTTPException(422,str(exc)) from exc
-    view(state)  # status() records simulated alerts for any missed check-in
     audit(state,"demo_clock",f"DEMO: simulated clock moved {body.get('hours',24)}h")
-    storage.save_case(state)
-    return view(state)
+    return save_update(state)
 
 
 @app.get("/api/offers/{case_id}/sources/{source_id}")

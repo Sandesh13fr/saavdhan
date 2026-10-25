@@ -48,7 +48,7 @@ def ocr_image(data: bytes) -> str:
             image.convert("RGB").save(path)
             result = subprocess.run([executable, str(path), "stdout", "-l", os.getenv("SAAVDHAN_OCR_LANGS", "eng"), "--psm", "6"],
                                     capture_output=True, timeout=30, check=True)
-    return result.stdout.decode("utf-8")[:100000].strip()
+    return result.stdout.decode("utf-8").strip()
 
 
 
@@ -61,13 +61,23 @@ def ingest_bytes(filename: str, data: bytes):
     root = "SRC-"+uuid.uuid4().hex[:12]
     base = SourceRef(id=root,file=Path(filename).name,kind="uploaded_document",sha256=hashlib.sha256(data).hexdigest(),stored_name=root+suffix)
     sources, errors = [base], []
+
+    def checked_text(text):
+        if len(text) > 100000:
+            note = "Only the first 100,000 characters were checked."
+            if note not in errors:
+                errors.append(note)
+            base.status = "truncated"
+        return text[:100000]
+
     if suffix in {".png",".jpg",".jpeg",".webp",".tif",".tiff"}:
         base.status="ocr_unavailable"
         base.text="OCR is not configured. Paste the offer text instead. Nothing was inferred from this image."
         try:
             text = ocr_image(data)
             if text:
-                base.text, base.status = text, "unstructured_review"
+                base.status = "unstructured_review"
+                base.text = checked_text(text)
                 base.kind = "ocr_document"
         except (OSError, ValueError, subprocess.SubprocessError, Image.DecompressionBombError):
             errors.append("OCR failed or exceeded its limit; paste the offer text instead.")
@@ -100,21 +110,23 @@ def ingest_bytes(filename: str, data: bytes):
                 except (OSError, ValueError, subprocess.SubprocessError, pdfium.PdfiumError):
                     errors.append(f"Page {n}: OCR failed; manual evidence review required.")
             sid=f"{root}-P{n}"
-            source=base.model_copy(update={"id":sid,"page":n,"text":text[:100000],"stored_name":base.stored_name})
-            source.status="unstructured_review" if text.strip() else "ocr_unavailable"
+            source=base.model_copy(update={"id":sid,"page":n,"text":checked_text(text),"stored_name":base.stored_name})
+            source.status="truncated" if len(text)>100000 else "unstructured_review" if text.strip() else "ocr_unavailable"
             if text.strip() and not (page.extract_text() or "").strip():
                 source.kind = "ocr_document"
             sources.append(source)
             pages.append(text)
-        base.text="\n".join(pages)[:100000]
-        base.status="parsed" if base.text.strip() else "ocr_unavailable"
+        base.text=checked_text("\n".join(pages))
+        if base.status != "truncated":
+            base.status="parsed" if base.text.strip() else "ocr_unavailable"
         return sources,errors
     text=data.decode("utf-8-sig")
-    base.text=text[:100000]
+    base.text=checked_text(text)
     base.kind="message_export"
     for n,line in enumerate(base.text.splitlines(),1):
         if len(sources)>MAX_LINE_SOURCES:
             errors.append(f"Only the first {MAX_LINE_SOURCES} lines were checked.")
+            base.status="truncated"
             break
         if line.strip():
             sources.append(base.model_copy(update={"id":f"{root}-L{n}","line":n,"text":line}))
