@@ -21,7 +21,7 @@ export function RuleHitCard({ hit }: { hit: RuleHit }) {
         {hit.heuristic && <span className="badge badge-heuristic">{t('verdict.heuristic_badge')}</span>}
       </p>
       <p>{t(`rule.${hit.rule_id}.${hit.status}`)}</p>
-      {hit.evidence.map((f, i) => <QuoteBlock key={i} field={f} />)}
+      {hit.evidence.filter((f, i, all) => all.findIndex((g) => g.quote === f.quote && g.source_ref === f.source_ref) === i).map((f, i) => <QuoteBlock key={i} field={f} />)}
       {!hit.heuristic && isUrl && (
         <a className="rule-src" href={hit.rule_source_url} target="_blank" rel="noreferrer noopener">
           {t('verdict.rule_source')} <ExternalLink size={14} aria-hidden="true" />
