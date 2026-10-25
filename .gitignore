@@ -19,3 +19,4 @@ deploy/backups/
 .vercel
 .agents/
 skills-lock.json
+.claude/worktrees/
