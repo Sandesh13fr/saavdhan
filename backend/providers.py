@@ -14,7 +14,7 @@ import httpx
 
 from . import telemetry
 from .auth import external_calls_allowed
-from .extract_fallback import amount_values
+from .extract_fallback import amount_values, supported_by_quote
 from .models import LIST_FIELDS, SCALAR_FIELDS, FieldValue, Offer, SourceRef
 
 FIELD_NAMES = sorted(SCALAR_FIELDS | LIST_FIELDS)
@@ -37,6 +37,7 @@ def _normalize(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip().casefold()
 
 
+MIN_QUOTE_CHARS, MAX_QUOTE_CHARS, MAX_VALUE_CHARS, MAX_LIST_ITEMS = 8, 400, 200, 20
 NUMERIC_FIELDS = {"fees_demanded_inr", "salary_amount"}
 
 NORMALISATION = (
@@ -75,8 +76,18 @@ def validate_extraction(payload: dict, sources: list[SourceRef]) -> Offer:
         ref = next((sid for sid, text in texts if quote.strip() and _normalize(quote) in text), None)
         if ref is None:
             raise ValueError("Model quote is absent from the uploaded source.")
+        if len(quote) < MIN_QUOTE_CHARS or sum(bool(re.search(r"[\wऀ-ॿ]", t)) for t in quote.split()) < 2:
+            raise ValueError("Model quote is too short to support a fact.")
+        if len(quote) > MAX_QUOTE_CHARS:
+            raise ValueError("Model quote is too long; quote the specific phrase.")
+        if len(value) > MAX_VALUE_CHARS:
+            raise ValueError("Model value is too long.")
         if name in NUMERIC_FIELDS and not _number_ok(value, quote):
             raise ValueError("Model numeric value does not match the amount in its quote.")
+        if not supported_by_quote(name, value, quote):
+            raise ValueError("Model value not supported by quote.")
+        if name in LIST_FIELDS and len(getattr(offer, name)) >= MAX_LIST_ITEMS:
+            raise ValueError("Model returned too many list items.")
         item = FieldValue(value=value, quote=quote, source_ref=ref, confidence="llm")
         if name in LIST_FIELDS:
             getattr(offer, name).append(item)

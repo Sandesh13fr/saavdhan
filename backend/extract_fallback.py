@@ -8,6 +8,7 @@ Values follow docs/CONTRACTS.md; every quote is a verbatim substring of its sour
 from __future__ import annotations
 
 import re
+import unicodedata
 from dataclasses import dataclass
 from decimal import Decimal
 
@@ -44,9 +45,10 @@ _WORD_NUM = {"अडीच": "2.5", "अढाई": "2.5", "ढाई": "2.5", "
              "सव्वा": "1.25", "पाऊण": "0.75", "पौन": "0.75", "एक": "1", "दो": "2", "दोन": "2", "तीन": "3",
              "चार": "4", "पाच": "5", "पांच": "5", "पाँच": "5", "सहा": "6", "छह": "6", "सात": "7", "आठ": "8",
              "नऊ": "9", "नौ": "9", "दस": "10", "दहा": "10"}
+_HALF = r"साढ़े|साडे|साढे|साड़े"
 _NUM = r"\d[\d,]*(?:\.\d+)?"
 _AMOUNT = re.compile(
-    rf"(?P<c1>{_CUR_RE})?\s*(?:(?P<num>{_NUM})|(?P<word>{'|'.join(_WORD_NUM)}))\s*(?P<mult>{_MULT_RE})?\s*(?P<c2>{_CUR_RE})?",
+    rf"(?P<c1>{_CUR_RE})?\s*(?P<half>{_HALF})?\s*(?:(?P<num>{_NUM})|(?P<word>{'|'.join(sorted(_WORD_NUM, key=len, reverse=True))}))\s*(?P<mult>{_MULT_RE})?\s*(?P<c2>{_CUR_RE})?",
     re.I)
 
 
@@ -80,12 +82,12 @@ def parse_amounts(text: str, bare: bool = False) -> list[Amount]:
         if m["word"]:
             if not m["mult"]:
                 continue  # 'दो' alone is not money
-            base = Decimal(_WORD_NUM[m["word"]])
+            base = Decimal(_WORD_NUM[m["word"]]) + (Decimal("0.5") if m["half"] else 0)
         else:
             digits = m["num"].rstrip(",").replace(",", "")
             if len(digits.split(".")[0]) >= 8 and not m["mult"]:
                 continue
-            base = Decimal(digits)
+            base = Decimal(digits) + (Decimal("0.5") if m["half"] and m["mult"] else 0)
             if not (m["mult"] or cur or (bare and base * mult >= 1000)):
                 continue
         out.append(Amount((base * mult).normalize(), cur or ("INR" if m["mult"] else None)))
@@ -102,7 +104,7 @@ def _num_str(value: Decimal) -> str:
 
 # ---------------------------------------------------------------- lexicons
 FEE_STRONG = rx(r"\bfees?\b", r"processing", r"\bcharges?\b", r"deposit", r"शुल्क", r"फी",r"फीस", r"चार्ज", r"डिपॉ[झज]िट")
-FEE_WEAK = rx(r"\bpay(?:ment|able)?\b", r"\bsend\b", r"bhej", r"भेज", r"पाठव", r"transfer", r"\bupi\b", r"g\s?pay", r"phone\s*pe",
+FEE_WEAK = rx(r"\btotal\b", r"कुल", r"एकूण", r"\bpay(?:ment|able)?\b", r"\bsend\b", r"bhej", r"भेज", r"पाठव", r"transfer", r"\bupi\b", r"g\s?pay", r"phone\s*pe",
               r"paytm", r"\bcash\b", r"नकद", r"रोख", r"\bneft\b", r"\bimps\b",r"advance", r"booking", r"\btoken\b", r"commission", r"भरा", r"भराव", r"देना", r"द्यावे",
               r"द्यावा", r"लागेल", r"लगेगा", r"लगेंगे", r"पैसे", r"रक्कम", r"\bcost\b")
 SAL_STRONG = rx(r"salary", r"pag[ao]?ar", r"\bwages?\b", r"earn", r"वेतन", r"पगार", r"तनख", r"तन्ख", r"कमाई", r"कमव", r"tankh")
@@ -117,12 +119,20 @@ VISA_TYPES = [  # (type, word before/after the word visa)
     ("work", r"(?:work(?:ing)?|वर्क|कार्य)"),
 ]
 NEGATION = rx(r"\b(?:not|no|never|isn'?t|nahi|nahin|nhi)\b", r"नहीं", r"नही", r"नाही", r"नको", r"नका")
-INJECTION = rx(r"(?:ignore|disregard|override|forget)\b.{0,40}\b(?:rules?|instructions?|prompts?|above|previous)",
-               r"system prompt", r"you are now", r"\bset\s+\w+\s*(?:=|to)\b", r"\bas an ai\b", r"नियम(?:ों)? को (?:अनदेखा|भूल)")
+NEG_BEFORE = re.compile(r"(?:^|\s)(?:not|no|never|isn'?t|nahi|nahin|नहीं|नही|नाही|नको|नका)\s+(?:\S+\s+){0,2}$", re.I)
+NEG_AFTER = re.compile(r"^\s*(?:\S+\s+){0,2}?(?:nahi|nahin|नहीं|नही|नाही)(?!\S)", re.I)
 
-ROLES = {
+IT_WORD = re.compile(r"(?<![A-Za-z0-9])I\.?T\.?(?![A-Za-z0-9])|आईटी|आयटी")  # case-sensitive: not the pronoun "it"
+IT_NEXT = [("technician", r"technician|तकनीशियन|तंत्रज्ञ"), ("support", r"support|सपोर्ट"), ("engineer", r"engineer|इंजीनियर|अभियंता"),
+           ("specialist", r"specialist")]
+HIGH_RISK_ROLE_COUNT = 5  # the first N entries of ROLES outrank IT and the rest
+ROLES = {  # high-risk roles first: the first role that matches on a line wins
     "data entry": [r"data\s*entry", r"डेटा\s*एं?न?्?ट्री", r"डाटा\s*एं?न?्?ट्री"],
-    "customer support": [r"customer\s*(?:support|service|care)", r"call\s*cent(?:er|re)", r"कस्टमर\s*(?:सपोर्ट|सर्विस|केयर)"],
+    "chat support": [r"chat\s*support", r"चै?ट\s*सपोर्ट", r"चॅट\s*सपोर्ट"],
+    "digital marketing": [r"digital\s*marketing", r"डिजिटल\s*मार्केटिंग"],
+    "online marketing": [r"online\s*marketing", r"ऑनलाइन\s*मार्केटिंग"],
+    "customer support": [r"customer\s*(?:support|service|care)", r"call\s*cent(?:er|re)", r"कस्टमर\s*(?:सपोर्ट|सर्विस|केयर)",
+                         r"ग्राहक\s*(?:सहायता|सेवा|सपोर्ट)"],
     "telecaller": [r"tele\s*caller", r"टेलीकॉलर", r"टेलिकॉलर"],
     "electrician": [r"electrician", r"इलेक्ट्रीशियन", r"इलेक्ट्रिशियन"],
     "plumber": [r"plumber", r"प्लंबर"],
@@ -143,7 +153,7 @@ ROLES = {
     "labourer": [r"labou?rer", r"मजदूर", r"मजूर"],
     "typist": [r"typist", r"टाइपिस्ट"],
 }
-ROLE_LABEL = re.compile(r"(?:position|post|role|designation|vacancy|पद|पोस्ट)\s*[:\-]\s*([^,;.\n(]{3,40})", re.I)
+ROLE_LABEL = re.compile(r"(?:position|post|role|designation|vacancy|पद|पोस्ट)\s*[:\-]\s*([^,;.।\n(]{3,40})", re.I)
 
 COUNTRIES = {
     "Thailand": ["thailand", "bangkok", "pattaya", "phuket", "mae sot", "chiang mai", "थाईलैंड", "थायलंड", "थाईलॅंड",
@@ -183,7 +193,7 @@ SIGN = rx(r"\bsign", r"हस्ताक्षर", r"स्वाक्षर�
 SIGNATORIES = [("employer", rx(r"employer", r"\bcompany\b", r"कंपनी", r"नियोक्ता", r"मालक", r"मालिक")),
                ("agent", rx(r"agent", r"agency", r"एजेंट", r"एजंट", r"एजेंसी")),
                ("worker", rx(r"worker", r"employee", r"candidate", r"कामगार", r"कर्मचारी", r"उम्मीदवार", r"मजदूर", r"कामकरी"))]
-PBBY = rx(r"\bpbby\b", r"pravasi\s*bharatiya\s*bima", r"insurance", r"प्रवासी\s*भारतीय\s*(?:बीमा|विमा)", r"बीमा", r"विमा")
+PBBY = rx(r"\bpbby\b", r"pravasi\s*bharatiya\s*bima", r"insurance", r"प्रवासी\s*भारतीय\s*(?:बीमा|विमा)", r"बीमा", r"विमा", r"विम्य")
 PASSPORT = rx(r"passport", r"पासपोर्ट")
 HANDOVER = rx(r"jama", r"submit", r"hand\s*over", r"\bgive\b", r"surrender", r"deposit", r"\bkeep\b", r"\bhold\b", r"collect",
               r"जमा", r"सौंप", r"सुपूर्द", r"द्या", r"ठेवू", r"रखेंगे", r"रखना", r"रखू", r"भेज", r"\bsend\b")
@@ -210,10 +220,10 @@ PHONE_INTL = re.compile(r"(?<![\w])\+\s?\d[\d\s\-()]{8,16}\d")
 PHONE_IN = re.compile(r"(?<![\d,.+])(?:91[\s-]?|0)?([6-9]\d{4}[\s-]?\d{5})(?![\d,])")
 RC_SHAPE = re.compile(r"(?<![A-Za-z0-9])[A-Z]-\d{3,5}(?:/[A-Za-z0-9+.\-]+)+")
 RC_LABEL = re.compile(
-    r"(?:\bRC\b|\bR\.C\.|\bRA\b|licen[cs]e|registration|\breg\b\.?|लायसन्स|लायसेंस|परवाना|पंजीकरण)\s*"
-    r"(?:no\.?|number|क्र\.?|नंबर|संख्या)?\s*[:\-#]?\s*([A-Z0-9][A-Za-z0-9/\-+.]{3,})", re.I)
+    r"(?:\bRC\b|\bR\.C\.|\bRA\b|licen[cs]e|registration|\breg\b\.?|लायसन्स|लायसेंस|लाइसेंस|लाईसेन्स|लाइसन्स|परवाना|पंजीकरण|नोंदणी|रजिस्ट्रेशन)\s*"
+    r"(?:no\.?|number|क्रमांक|क्र\.?|नंबर|संख्या)?\s*[:\-#]?\s*([A-Z0-9][A-Za-z0-9/\-+.]{3,})", re.I)
 _ORG = r"(?:[A-Z][A-Za-z0-9&.'\-]*\s+)"
-AGENT_NAME = re.compile(rf"\b({_ORG}{{0,4}}(?:Overseas|Placements?|Recruitment|Manpower|Consultancy|Consultants|Immigration|Agency)"
+AGENT_NAME = re.compile(rf"\b({_ORG}{{1,4}}(?:Overseas|Placements?|Recruitment|Manpower|Consultancy|Consultants|Immigration|Agency)"
                         r"(?:\s+(?:Placements?|Services|Consultants|Pvt\.?|Ltd\.?|India))*)")
 AGENT_LABEL = re.compile(r"(?i:\bagent|\bagency|एजेंट|एजंट|एजेंसी)(?i:\s*name|\s*नाम)?\s*[:\-]\s*([A-Z][^,;\n(]{2,50})")
 EMPLOYER_NAME = re.compile(rf"\b({_ORG}{{1,5}}(?:LLC|L\.L\.C\.?|Ltd\.?|Limited|FZE|FZCO|FZ-LLC|Pte|Co\.|Company|Trading|Group|"
@@ -231,7 +241,11 @@ class Unit:
 
 
 def _units(sources: list[SourceRef]) -> list[Unit]:
-    """Per-line/page sources first, base copies last; identical bodies counted once."""
+    """Per-line/page sources first, base copies last; identical bodies counted once.
+
+    Instruction-like text is never a reason to drop a line: the extractor cannot be instructed,
+    and dropping lines would let a sender hide red flags.
+    """
     ordered = sorted(sources, key=lambda s: s.line is None and s.page is None)
     seen, units = set(), []
     for s in ordered:
@@ -239,10 +253,10 @@ def _units(sources: list[SourceRef]) -> list[Unit]:
             body = raw.strip()
             m = WA_PREFIX.match(body)
             body = body[m.end():].strip() if m else body
-            if not body or len(body) > MAX_LINE_CHARS or body in seen or INJECTION.search(body):
+            if not body or len(body) > MAX_LINE_CHARS or body in seen:
                 continue
             seen.add(body)
-            units.append(Unit(body, body.translate(_DIGITS), s.id))
+            units.append(Unit(body, unicodedata.normalize("NFC", body.translate(_DIGITS)), s.id))
             if len(units) >= MAX_LINES:
                 return units
     return units
@@ -278,11 +292,10 @@ def _visa(units):
     found = []
     for u in units:
         for clause in _clauses(u.norm):
-            if NEGATION.search(clause):
-                continue
             for kind, word in VISA_TYPES:
-                if re.search(rf"{word}\s*{VISA}|{VISA}\s*(?:type)?\s*[:\-]\s*(?:an?\s+)?{word}", clause, re.I):
-                    found.append((kind, u))
+                for m in re.finditer(rf"{word}\s*{VISA}|{VISA}\s*(?:type)?\s*[:\-]\s*(?:an?\s+)?{word}", clause, re.I):
+                    if not (NEG_BEFORE.search(clause[max(0, m.start() - 40):m.start()]) or NEG_AFTER.match(clause[m.end():m.end() + 40])):
+                        found.append((kind, u))
     # tourist/visit anywhere wins over employment/work: the conservative reading for a safety check
     pick = next((f for f in found if f[0] in {"tourist", "visit"}), found[0] if found else None)
     return _fv(*pick) if pick else FieldValue()
@@ -291,6 +304,7 @@ def _visa(units):
 def _money(units):
     """fee / salary amount and currency, classified per clause."""
     fee = sal = cur = None
+    fee_best = Decimal(-1)
     for u in units:
         for clause in _clauses(u.norm):
             kind = ("salary" if SAL_STRONG.search(clause) else "fee" if FEE_STRONG.search(clause)
@@ -301,9 +315,11 @@ def _money(units):
             if not amounts:
                 continue
             a = amounts[0]
-            if kind == "fee" and fee is None and a.currency in (None, "INR"):
-                fee = _fv(_num_str(a.value), u)
-            elif kind == "salary" and sal is None:
+            if kind == "fee":  # largest INR fee wins: covers GST-inclusive totals and small "registration" fees
+                for b in amounts:
+                    if b.currency in (None, "INR") and b.value > fee_best:
+                        fee_best, fee = b.value, _fv(_num_str(b.value), u)
+            elif sal is None:
                 sal = _fv(_num_str(a.value), u)
                 if a.currency:
                     cur = _fv(a.currency, u)
@@ -311,6 +327,14 @@ def _money(units):
 
 
 def _role(u):
+    for role, pats in list(ROLES.items())[:HIGH_RISK_ROLE_COUNT]:
+        if any(re.search(p if not p.isascii() else rf"(?<![A-Za-z]){p}(?![A-Za-z])", u.norm, re.I) for p in pats):
+            return role
+    it = IT_WORD.search(u.norm)
+    if it:
+        nxt = u.norm[it.end():it.end() + 30]
+        word = next((w for w, p in IT_NEXT if re.match(rf"\s*(?:{p})", nxt, re.I)), None)
+        return f"it {word}" if word else "it"
     for role, pats in ROLES.items():
         if any(re.search(p if not p.isascii() else rf"(?<![A-Za-z]){p}(?![A-Za-z])", u.norm, re.I) for p in pats):
             return role
@@ -341,20 +365,31 @@ def _payment(u):
     return next((mode for mode, p in PAYMENT if p.search(u.norm)), None)
 
 
-def _yes_no(pat, neg=NEGATION, extra=None):
+_SENT = re.compile(r"(?:[^.।;?!\n]|(?<=[Rr][Ss])\.|(?<=[Nn][Oo])\.|\.(?=\d))+[.।;?!]?")
+
+
+def _sentences(text: str):
+    """Sentences of a line (questions dropped); negation is judged inside one sentence only."""
+    return [m.group(0) for m in _SENT.finditer(text) if not m.group(0).rstrip().endswith("?")]
+
+
+def _yes_no(pat, neg=NEGATION):
     def finder(u):
-        if not pat.search(u.norm) or (extra and not extra(u)):
-            return None
-        return "no" if neg.search(u.norm) else "yes"
+        for sent in _sentences(u.norm):
+            if pat.search(sent):
+                return "no" if neg.search(sent) else "yes"
+        return None
     return finder
 
 
 def _passport(u):
-    if not PASSPORT.search(u.norm) or not HANDOVER.search(u.norm):
-        return None
-    if PASSPORT_COPY.search(u.norm) and not re.search(r"original|ओरिजिनल|मूळ|असली", u.norm, re.I):
-        return None
-    return "no" if PASSPORT_NO.search(u.norm) else "yes"
+    for sent in _sentences(u.norm):
+        if not PASSPORT.search(sent) or not HANDOVER.search(sent):
+            continue
+        if PASSPORT_COPY.search(sent) and not re.search(r"original|ओरिजिनल|मूळ|मूल|असली", sent, re.I):
+            continue
+        return "no" if PASSPORT_NO.search(sent) else "yes"
+    return None
 
 
 def _signatories(u):
@@ -377,9 +412,13 @@ def _phones(u):
 
 
 def _channels(u):
-    out = [name for name, p in CHANNELS if p.search(u.norm)]
-    if "office_address" not in out and PIN.search(u.norm) and ADDRESS_WORDS.search(u.norm):
-        out.append("office_address")
+    out = [name for name, p in CHANNELS if name != "office_address" and p.search(u.norm)]
+    for sent in _sentences(u.norm):  # "no office address" / "कार्यालय नहीं" is not an office
+        if NEGATION.search(sent):
+            continue
+        if dict(CHANNELS)["office_address"].search(sent) or (PIN.search(sent) and ADDRESS_WORDS.search(sent)):
+            out.append("office_address")
+            break
     if PHONE_CTX.search(u.norm) and _phones(u) and "phone" not in out:
         out.append("phone")
     return out
@@ -390,10 +429,15 @@ def _rc(u):
     return (m.group(m.lastindex or 0) if m else "").rstrip(".,;)") or None
 
 
+GENERIC_FIRST = {"Our", "The", "This", "That", "Your", "We", "Apply", "Contact", "Visit", "For", "In", "Only", "No",
+                 "Recruitment", "Agency", "Agent"}
+
+
 def _named(shape, label):
     def finder(u):
         m = label.search(u.norm) or shape.search(u.norm)
-        return m[1].strip().rstrip(".,") if m else None
+        v = m[1].strip().rstrip(".,") if m else None
+        return v if v and v.split()[0] not in GENERIC_FIRST else None
     return finder
 
 
@@ -419,3 +463,37 @@ def extract(sources: list[SourceRef]) -> Offer:
     employer = _first(units, _named(EMPLOYER_NAME, EMPLOYER_LABEL))
     offer.employer_name = employer if employer.value != offer.agent_name.value else FieldValue()
     return offer
+
+
+_AGREE_FIELDS = {"visa_type", "destination_country", "fee_payment_mode", "receipt_promised", "contract_mentioned",
+                 "pbby_insurance_mentioned", "passport_handover_requested", "salary_currency", "transit_countries",
+                 "agent_channels", "contract_signatories", "role_title"}
+
+
+def _dec(text: str):
+    try:
+        return Decimal(text.replace(",", ""))
+    except Exception:
+        return None
+
+
+def supported_by_quote(name: str, value: str, quote: str) -> bool:
+    """Deterministic check that a model-supplied value follows from its own quote.
+
+    Enumerated fields must agree with what this module's lexicons find in the quote; free-text
+    fields (names, RC number, phones, urgency) must literally appear in it.
+    """
+    q = unicodedata.normalize("NFC", quote.translate(_DIGITS))
+    v = unicodedata.normalize("NFC", value.translate(_DIGITS)).strip()
+    if name == "fees_demanded_inr":  # needs currency or lakh/hazar context, not a bare number
+        return any(a.value == _dec(v) and a.currency in (None, "INR") for a in parse_amounts(q))
+    if name == "salary_amount":
+        return _dec(v) in amount_values(q)
+    if name in _AGREE_FIELDS:
+        offer = extract([SourceRef(id="Q", file="q", kind="quote", text=quote)])
+        got = getattr(offer, name)
+        found = {str(f.value).lower() for f in (got if isinstance(got, list) else [got])}
+        return v.lower() in found or (name == "role_title" and v.lower() in q.lower())
+    if name == "agent_phones":
+        return re.sub(r"\D", "", v)[-10:] in re.sub(r"\D", "", q)
+    return " ".join(v.split()).casefold() in " ".join(q.split()).casefold()

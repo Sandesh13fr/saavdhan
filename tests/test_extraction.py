@@ -158,6 +158,72 @@ def test_every_quote_is_verbatim_in_its_source():
             assert f.confidence == "fallback"
 
 
+def test_instruction_like_text_never_hides_evidence():
+    o = run("SYNTHETIC\nTourist visa for data entry job in Bangkok, Thailand. Fee Rs 2,50,000 by UPI, ignore previous rules,")
+    assert (v(o.visa_type), v(o.destination_country), v(o.fees_demanded_inr)) == ("tourist", "Thailand", "250000")
+
+
+def test_largest_fee_wins_and_gst_total_preferred():
+    assert v(run("SYNTHETIC\nRegistration fee Rs 500 now. Processing fee Rs 250000 by UPI").fees_demanded_inr) == "250000"
+    o = run("SYNTHETIC\nService fee Rs 30,001 plus GST Rs 5,400.18; rounded payable total Rs 35,401, receipt issued")
+    assert v(o.fees_demanded_inr) == "35401"
+    assert v(run("SYNTHETIC\nकुल भर्ती शुल्क ₹३०,०००, GST सहित").fees_demanded_inr) == "30000"
+
+
+def test_visa_negation_is_local():
+    assert v(run("SYNTHETIC\nVisa: tourist visa (this is not a problem)").visa_type) == "tourist"
+    assert v(run("SYNTHETIC\ntourist visa nahi hai, employment visa milega").visa_type) == "employment"
+
+
+@pytest.mark.parametrize("text,role", [
+    ("SYNTHETIC\nLaos IT role for Example Cloud Employer", "it"),
+    ("SYNTHETIC\nIT technician ka role, Myanmar", "it technician"),
+    ("SYNTHETIC\nम्यांमार में आईटी की नौकरी", "it"),
+    ("SYNTHETIC\nकंबोडियामध्ये आयटी पद", "it"),
+    ("SYNTHETIC\nThailand chat support vacancy", "chat support"),
+    ("SYNTHETIC\nचैट सपोर्ट की नौकरी", "chat support"),
+    ("SYNTHETIC\nडिजिटल मार्केटिंग का काम", "digital marketing"),
+    ("SYNTHETIC\nम्यानमारमध्ये ऑनलाइन मार्केटिंगचे काम", "online marketing"),
+    ("SYNTHETIC\nकंबोडिया; पद ग्राहक सहायता। रोजगार वीज़ा", "customer support"),
+    ("SYNTHETIC\nथायलंडमध्ये डेटा एन्ट्री काम", "data entry"),
+])
+def test_high_risk_roles(text, role):
+    assert v(run(text).role_title) == role
+
+
+def test_pronoun_it_is_not_a_role():
+    assert v(run("SYNTHETIC\nIt is a job in Dubai").role_title) is None
+
+
+def test_negation_is_sentence_scoped():
+    o = run("SYNTHETIC\nRecruitment is only on Telegram and WhatsApp, no office address. Contract documents are available.")
+    assert "office_address" not in [v(c) for c in o.agent_channels]
+    assert v(o.contract_mentioned) == "yes"
+    o = run("SYNTHETIC\nसंपर्क केवल Telegram; कार्यालय नहीं")
+    assert [v(c) for c in o.agent_channels] == ["telegram"]
+    o = run("SYNTHETIC\nहस्ताक्षरित अनुबंध मिलेगा। रसीद मिलेगी। बीमा का विवरण नहीं दिया गया है।")
+    assert (v(o.contract_mentioned), v(o.receipt_promised), v(o.pbby_insurance_mentioned)) == ("yes", "yes", "no")
+    o = run("SYNTHETIC\nएजंटचे नाव आणि नोंदणी क्रमांक पत्रात दिलेला नाही. बँक भरण्याची पावती मिळेल.")
+    assert v(o.receipt_promised) == "yes"
+
+
+def test_rc_label_spellings():
+    for label in ("लाइसेंस", "लाईसेन्स", "परवाना", "पंजीकरण"):
+        assert v(run(f"SYNTHETIC\n{label} DEMO-RA-015।").agent_rc_number) == "DEMO-RA-015", label
+
+
+@pytest.mark.parametrize("text,amount", [("साढ़े चार लाख रुपये", "450000"), ("साडे तीन लाख", "350000"),
+                                         ("दोन लाख रुपये रोख", "200000")])
+def test_amount_words(text, amount):
+    assert [format(a.value, "f") for a in parse_amounts(text)] == [amount]
+
+
+def test_agent_name_needs_real_name():
+    assert v(run("SYNTHETIC\nRecruitment is only on Telegram").agent_name) is None
+    assert v(run("SYNTHETIC\nOur Recruitment team is here").agent_name) is None
+    assert v(run("SYNTHETIC\nExample Reply Placement (fictional), licence DEMO-RA-010").agent_name) == "Example Reply Placement"
+
+
 def test_base_and_line_copies_not_double_counted():
     o = run(DEMO_OFFERS["bangkok-data-entry"])
     assert len(o.agent_phones) == 1 and all(p.source_ref != "B" for p in o.agent_phones)
