@@ -53,7 +53,9 @@ Sandesh13fr), Docker present, Tesseract 5.4.0 at `C:\Program Files\Tesseract-OCR
   both extractors, stricter status wins) + quote/value validation; injection-skip removed; no best
   verdict without a real recruiter-list date; pasted-text and line caps; anonymous retention (24h),
   eviction and per-IP rate limit; demo clock limited to demo cases in production; HMAC phone hashes
-  with required production salt. Re-verification by reviewer pending.
+  with required production salt. Reviewer re-verified: SIGN-OFF, no critical findings. Its two
+  follow-ups also fixed: anonymous upload budget recomputed from disk (purge frees space);
+  uvicorn --proxy-headers so rate limit and login throttle see real client IPs.
 - Demo officer: `scripts/seed_demo_officer.py` (password only in gitignored `.env`).
 - Browser-checked: Bangkok STOP, check-in plan, missed check-in, family alert, pattern map (36
   districts, one hash across 5 districts).
@@ -71,8 +73,8 @@ Sandesh13fr), Docker present, Tesseract 5.4.0 at `C:\Program Files\Tesseract-OCR
 
 Filled as phases land.
 
-- Open from review (deploy lane): uvicorn `--proxy-headers` for real client IPs behind Caddy; login
-  lockout per account; docs/PRODUCTION.md still Bakaya text; LLM sends offer text to a third party
+- Open from review (deploy lane): narrow FORWARDED_ALLOW_IPS to the proxy; per-account
+  login lockout per account; docs/PRODUCTION.md still Bakaya text; LLM sends offer text to a third party
   (TokenRouter) — disclose in privacy copy; up to 10 files x 500 lines per case.
 - TokenRouter key returns 401 (quota exhausted); LLM path untested live. `eval/run_eval.py --llm` once fixed.
 - Fee cap Rs 30,000 + 18% GST is as reported; verify against the current official figure.

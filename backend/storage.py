@@ -49,6 +49,14 @@ def reserve_upload_bytes(size):
     # Reservations are retained on failed writes; operator review is required to reclaim capacity.
     if os.getenv("SAAVDHAN_ENV") != "production":
         return
+    if TENANT.get() == ANONYMOUS:
+        # Recomputed from disk each time, so purged anonymous cases free their space.
+        with connect() as conn:
+            ids = [row[0] for row in conn.execute("SELECT id FROM cases WHERE tenant_id=?", (ANONYMOUS,))]
+        used = sum(f.stat().st_size for cid in ids for f in (DATA_DIR/"uploads"/cid).glob("*") if f.is_file())
+        if used + size > int(os.getenv("SAAVDHAN_ANON_UPLOAD_MB", "500")) * 1024 * 1024:
+            raise TenantCapacityExceeded("Upload capacity is full right now; paste the offer text or try later")
+        return
     with connect() as conn:
         conn.execute("CREATE TABLE IF NOT EXISTS upload_budget (tenant_id TEXT PRIMARY KEY, bytes INTEGER NOT NULL)")
         conn.commit()

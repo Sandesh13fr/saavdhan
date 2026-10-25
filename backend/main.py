@@ -93,6 +93,8 @@ async def rate_limit(request: Request, call_next):
         if len(recent) >= RATE_MAX:
             return Response("Too many offer checks; try again in a few minutes", status_code=429)
         _hits[key] = recent + [now]
+        if len(_hits) > 10000:
+            _hits.clear()  # ponytail: crude bound on tracked IPs
     return await call_next(request)
 
 

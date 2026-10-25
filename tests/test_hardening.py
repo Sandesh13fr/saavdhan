@@ -67,3 +67,15 @@ def test_anonymous_cases_expire_and_evict(client, monkeypatch):
     client.post("/api/offers", data={"text": "z"})
     assert client.get(f"/api/offers/{first}").status_code == 404
     assert storage.purge_anonymous(0, 100) == 2  # age 0h: everything left is expired
+
+
+def test_anonymous_upload_budget_is_freed_by_purge(tmp_path, monkeypatch):
+    monkeypatch.setattr(storage, "DATA_DIR", tmp_path)
+    monkeypatch.setenv("SAAVDHAN_ENV", "production")
+    monkeypatch.setenv("SAAVDHAN_ANON_UPLOAD_MB", "1")
+    storage.save_case({"id": "old", "created_at": "2000-01-01T00:00:00+00:00", "audit": []})
+    (storage.upload_dir("old") / "f.txt").write_bytes(b"x" * 900_000)
+    with pytest.raises(storage.TenantCapacityExceeded):
+        storage.reserve_upload_bytes(200_000)
+    storage.purge_anonymous(24, 100)
+    storage.reserve_upload_bytes(200_000)  # space is back
