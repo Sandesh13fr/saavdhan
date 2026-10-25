@@ -1,4 +1,4 @@
-{$BAKAYA_DOMAIN} {
+{$SAAVDHAN_DOMAIN} {
     request_body {
         max_size 16MB
     }

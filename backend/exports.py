@@ -1,10 +1,10 @@
+"""Family report packet. Contents are local downloads; nothing is sent anywhere."""
 from __future__ import annotations
 
 import csv
 import io
 import json
 import zipfile
-from pathlib import Path
 from xml.sax.saxutils import escape
 
 from reportlab.lib import colors
@@ -12,8 +12,14 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.units import inch
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
 
-from .engine import CONVENTION, RULES_SOURCE
-from .storage import upload_dir
+WHERE_TO_REPORT = """WHERE TO REPORT - VERIFY EACH CONTACT ON THE OFFICIAL SITE BEFORE USE
+- Ministry of External Affairs helpline: helpline@mea.gov.in
+- MADAD consular grievance portal: https://madad.gov.in
+- Indian embassy or consulate in the destination country (see https://www.mea.gov.in)
+- National cyber crime helpline: 1930, and https://cybercrime.gov.in
+- Local police station
+- Protector of Emigrants / eMigrate: https://emigrate.gov.in
+"""
 
 
 def csv_bytes(rows, keys):
@@ -21,12 +27,12 @@ def csv_bytes(rows, keys):
     writer=csv.DictWriter(output,fieldnames=keys,extrasaction="ignore")
     writer.writeheader()
     for row in rows:
-        safe={key:json.dumps(row[key]) if isinstance(row.get(key),(list,dict)) else row.get(key,"") for key in keys}
-        # Prevent a source filename/reference being interpreted as a spreadsheet formula.
-        for key,value in safe.items():
+        cells={key:json.dumps(row[key],ensure_ascii=False) if isinstance(row.get(key),(list,dict)) else row.get(key,"") for key in keys}
+        # Prevent quoted offer text being interpreted as a spreadsheet formula.
+        for key,value in cells.items():
             if isinstance(value,str) and value.startswith(("=","+","-","@")):
-                safe[key]="'"+value
-        writer.writerow(safe)
+                cells[key]="'"+value
+        writer.writerow(cells)
     return output.getvalue().encode("utf-8-sig")
 
 
@@ -48,50 +54,30 @@ def pdf_bytes(title, paragraphs, rows=None, col_widths=None):
     return output.getvalue()
 
 
-def packet_zip(view: dict, state: dict):
-    demo=any(r["synthetic"] for r in state["input"]["rates"])
-    label="SYNTHETIC DEMO - NOT FOR FILING" if demo else "REVIEWED PREPARATION DRAFT - VERIFY BEFORE FILING"
-    totals=view["totals"]
-    supplier,buyer=view["supplier"],view["buyer"]
-    letter=(f"{label}\n\nDate: {view['as_of']}\nTo: {buyer['name']}\n{buyer['address']}\n\n"
-            f"Subject: Request for settlement of delayed supplier payments\n\n"
-            f"We, {supplier['name']}, request reconciliation and settlement of the attached invoice schedule. "
-            f"As of {view['as_of']}, unpaid principal is INR {totals['principal']}; calculated delayed-payment interest is INR {totals['interest']}; "
-            f"the preparation total is INR {totals['total']}. Bank receipts of INR {totals['bank_received']} and documented TDS credit of INR {totals['tds_recognized']} are accounted for separately.\n\n"
-            "Sections 15 and 16 of the MSMED Act 2006 govern payment deadlines and monthly-rest compound interest at three times the notified RBI bank rate, subject to eligibility and the underlying facts. "
-            "Please review the evidence index and contact us to resolve any disagreement about these records.\n\n"
-            "Tax note for professional review: the legacy Income-tax Act 1961 Section 43B(h), and the applicable successor provision under the Income-tax Act 2025, address certain deductions for delayed MSE payments on an actual-payment basis. "
-            "Applicability, tax year and current provision should be checked by your tax adviser. This letter makes no determination of your tax liability.\n\n"
-            f"Calculation convention: {CONVENTION}\n\n"
-            f"Prepared with Bakaya for {supplier['name']}; reviewed locally by {state['approval']['reviewer']}. "
-            "Document preparation only; not legal advice. No portal submission or buyer communication has occurred.\n")
-    odr={"document_status":label,"portal_schema_verified":False,"notice":"Generic claim field worksheet; current ODR mandatory fields and format have not been verified.",
-         "supplier":supplier,"buyer":buyer,"as_of":view["as_of"],"totals":totals,"invoices":view["invoices"],"rules_source":RULES_SOURCE,"convention":CONVENTION}
-    evidence=[{key:source.get(key) for key in ("id","file","kind","page","line","status","sha256","text","replacement_source_id")} for source in view["sources"]]
-    output=io.BytesIO()
-    with zipfile.ZipFile(output,"w",zipfile.ZIP_DEFLATED) as archive:
-        archive.writestr("README.txt",label+"\n\nHuman approval permits this local download only. Nothing has been filed or sent.\n"+CONVENTION+"\nRate and invoice evidence references appear in each CSV line.\nPDF figures use rounded display amounts; sum interest_exact for exact totals.\n")
-        archive.writestr("odr-field-sheet.json",json.dumps(odr,indent=2))
-        archive.writestr("invoice-summary.csv",csv_bytes(view["invoices"],["id","number","amount","due_date","interest_start","outstanding","interest","total","source_refs","field_sources"]))
-        archive.writestr("interest-schedule.csv",csv_bytes(view["schedule"],["invoice_id","start","end","days","principal","capitalized_interest","bank_rate","annual_rate","interest","interest_exact","rate_source","source_refs"]))
-        archive.writestr("payment-reconciliation.csv",csv_bytes(view["matches"],["payment_id","invoice_id","amount","tds_amount","confidence","reason","source_refs"]))
-        archive.writestr("evidence-index.csv",csv_bytes(evidence,["id","file","kind","page","line","status","sha256","text","replacement_source_id"]))
-        archive.writestr("evidence-index.json",json.dumps(evidence,indent=2))
-        archive.writestr("demand-letter.txt",letter)
-        archive.writestr("demand-letter.pdf",pdf_bytes("Bakaya demand letter draft",[letter]))
-        archive.writestr("interest-schedule.pdf",pdf_bytes("Bakaya interest schedule",[label,f"As of {view['as_of']}. Principal INR {totals['principal']}; interest INR {totals['interest']}; total INR {totals['total']}.",CONVENTION,"End dates below are exclusive. Each segment links to invoice/payment/rate evidence IDs in the evidence index. Row accruals round for display; the CSV includes exact unrounded values."],
-            [["Invoice / period","Days","Principal INR","Capitalized INR","3x rate %","Accrual INR","Evidence IDs"]]+
-            [[r["invoice_id"]+"\n"+r["start"]+" to "+r["end"],r["days"],r["principal"],r["capitalized_interest"],r["annual_rate"],r["interest"],", ".join(r["source_refs"])] for r in view["schedule"]],
-            col_widths=[130,25,62,60,38,65,125]))
-        archive.writestr("odr-field-sheet.pdf",pdf_bytes("Claim preparation worksheet",[label,odr["notice"],f"Supplier: {supplier['name']} | Udyam: {supplier['udyam_number']}",f"Buyer: {buyer['name']} | {buyer['address']}",f"Total: INR {totals['total']} | principal INR {totals['principal']} | interest INR {totals['interest']}",f"Rules: {RULES_SOURCE}"]))
-        archive.writestr("audit.json",json.dumps(view["audit"],indent=2))
-        archive.writestr("approval.json",json.dumps(state["approval"],indent=2))
-        used=set()
-        for source in view["sources"]:
-            name=source.get("stored_name")
-            if name and name not in used:
-                path=upload_dir(view["id"])/Path(name).name
-                if path.is_file():
-                    archive.write(path,"evidence/"+Path(name).name)
-                    used.add(name)
+def fact_rows(offer: dict):
+    for name, value in offer.items():
+        if name == "source_ids":
+            continue
+        for item in value if isinstance(value, list) else [value]:
+            if item.get("value") is not None:
+                yield {"field": name, "value": item["value"], "quote": item["quote"], "source_ref": item["source_ref"]}
+
+
+def packet_zip(view: dict) -> bytes:
+    label = "SYNTHETIC DEMO" if view.get("demo") else "Saavdhan report packet"
+    analysis = view.get("analysis") or {}
+    offer, verdict = analysis.get("offer", {}), analysis.get("verdict", {})
+    facts = list(fact_rows(offer))
+    hits = verdict.get("rule_hits", [])
+    output = io.BytesIO()
+    with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED) as archive:
+        archive.writestr("offer-copy.txt", "\n\n".join(s["text"] for s in view["sources"] if not s.get("line")))
+        archive.writestr("extracted-facts.csv", csv_bytes(facts, ["field", "value", "quote", "source_ref"]))
+        archive.writestr("rule-checks.csv", csv_bytes(hits, ["rule_id", "severity", "status", "rule_source_url", "heuristic"]))
+        archive.writestr("where-to-report.txt", WHERE_TO_REPORT)
+        archive.writestr("summary.pdf", pdf_bytes(f"{label}: offer check", [
+            f"Result: {verdict.get('level', 'not analysed')}. Recruiter list date: {verdict.get('ra_list_date', 'not loaded')}.",
+            "Rule checks compare stated facts with India's emigration guidance. They are not a legal finding about any person or agency.",
+            WHERE_TO_REPORT,
+        ], [["Rule", "Severity", "Status"]] + [[h["rule_id"], h["severity"], h["status"]] for h in hits]))
     return output.getvalue()

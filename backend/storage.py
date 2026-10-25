@@ -6,9 +6,9 @@ import sqlite3
 from pathlib import Path
 from contextvars import ContextVar
 
-TENANT = ContextVar("bakaya_tenant", default="local-demo")
+TENANT = ContextVar("saavdhan_tenant", default="local-demo")
 
-DATA_DIR = Path(os.getenv("BAKAYA_DATA_DIR", Path(__file__).resolve().parents[1] / "data"))
+DATA_DIR = Path(os.getenv("SAAVDHAN_DATA_DIR", Path(__file__).resolve().parents[1] / "data"))
 
 
 class ClosingConnection(sqlite3.Connection):
@@ -21,7 +21,7 @@ class ClosingConnection(sqlite3.Connection):
 
 def connect():
     DATA_DIR.mkdir(parents=True,exist_ok=True)
-    conn=sqlite3.connect(DATA_DIR/"bakaya.sqlite3",timeout=15,factory=ClosingConnection)
+    conn=sqlite3.connect(DATA_DIR/"saavdhan.sqlite3",timeout=15,factory=ClosingConnection)
     conn.execute("CREATE TABLE IF NOT EXISTS cases (id TEXT PRIMARY KEY, payload TEXT NOT NULL)")
     columns={row[1] for row in conn.execute("PRAGMA table_info(cases)")}
     if "tenant_id" not in columns:
@@ -44,7 +44,7 @@ class TenantCapacityExceeded(RuntimeError):
 
 def reserve_upload_bytes(size):
     # Reservations are retained on failed writes; operator review is required to reclaim capacity.
-    if os.getenv("BAKAYA_ENV") != "production":
+    if os.getenv("SAAVDHAN_ENV") != "production":
         return
     with connect() as conn:
         conn.execute("CREATE TABLE IF NOT EXISTS upload_budget (tenant_id TEXT PRIMARY KEY, bytes INTEGER NOT NULL)")
@@ -62,7 +62,7 @@ def reserve_upload_bytes(size):
 
 
 def save_case(case: dict, expected_revision: int | None = None):
-    if os.getenv("BAKAYA_ENV", "local") != "local" and len(case.get("audit",[]))>1000:
+    if os.getenv("SAAVDHAN_ENV", "local") != "local" and len(case.get("audit",[]))>1000:
         raise TenantCapacityExceeded("Case audit capacity reached (1000 events); contact the operator")
     with connect() as conn:
         conn.execute("BEGIN IMMEDIATE")
@@ -71,7 +71,7 @@ def save_case(case: dict, expected_revision: int | None = None):
             if not row or json.loads(row[0])["revision"]!=expected_revision:
                 raise ConcurrentCaseUpdate("Case changed while agent was working; resume against latest reviewer decisions")
         existing=conn.execute("SELECT tenant_id FROM cases WHERE id=?",(case["id"],)).fetchone()
-        if not existing and os.getenv("BAKAYA_ENV") == "production" and conn.execute("SELECT count(*) FROM cases WHERE tenant_id=?",(TENANT.get(),)).fetchone()[0]>=10:
+        if not existing and os.getenv("SAAVDHAN_ENV") == "production" and conn.execute("SELECT count(*) FROM cases WHERE tenant_id=?",(TENANT.get(),)).fetchone()[0]>=10:
             raise TenantCapacityExceeded("Tenant case capacity reached (10); contact the operator")
         if existing and existing[0]!=TENANT.get():
             raise PermissionError("Case belongs to another tenant")

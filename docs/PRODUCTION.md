@@ -19,7 +19,7 @@ On a dedicated Linux Docker host:
 3. In deploy, run `docker compose --env-file production.env config --quiet`, then `docker compose --env-file production.env build`, and `docker compose --env-file production.env up -d`.
 4. Provision each authorized account with `docker compose --env-file production.env exec app python -m backend.auth create-user --email EMAIL --name NAME --tenant TENANT --role reviewer`. The password prompt is interactive; never put passwords in command arguments. A distinct tenant identifies each organization.
 5. Check HTTPS, health, cookie flags, sign-in/out, two-tenant evidence isolation, approval/export and rejection of unauthenticated/cross-origin writes against the deployed URL. A successful build alone does not pass these checks.
-6. Install the backup service/timer from deploy into /etc/systemd/system after inspecting the fixed /opt/bakaya path. Make deploy/backup.sh executable, reload systemd and enable bakaya-backup.timer. Confirm a backup and restore drill before allowing real uploads.
+6. Install the backup service/timer from deploy into /etc/systemd/system after inspecting the fixed /opt/bakaya path. Make deploy/backup.sh executable, reload systemd and enable saavdhan-backup.timer. Confirm a backup and restore drill before allowing real uploads.
 
 ## Encrypted backups
 
@@ -29,7 +29,7 @@ The 128 MB in-memory backup limit is deliberate and fits the bounded pilot conta
 
 The daily timer runs at 02:30 UTC (08:00 IST), stops the application writer briefly, performs the backup, and restarts it even on failure. This maintenance window keeps database and file evidence consistent. Fourteen-day cleanup is restricted to the dedicated backup directory. Daily backups imply an intended recovery point up to 24 hours; no measured recovery-time guarantee exists. Monitor the service failure state; the timer alone is not a notification service.
 
-Manual drill, using an environment-held BAKAYA_BACKUP_KEY:
+Manual drill, using an environment-held SAAVDHAN_BACKUP_KEY:
 
 ```
 python scripts/backup.py create data artifacts/backup-drill.enc
@@ -40,7 +40,7 @@ Run create only in a maintenance window with application writers stopped. Inspec
 
 ## OCR
 
-Set BAKAYA_OCR_ENABLED=true to enable local Tesseract; TESSERACT_CMD can name its executable. The Docker package includes Tesseract/English. On Windows an existing standard Program Files installation is recognized. No external OCR provider or paid API is called.
+Set SAAVDHAN_OCR_ENABLED=true to enable local Tesseract; TESSERACT_CMD can name its executable. The Docker package includes Tesseract/English. On Windows an existing standard Program Files installation is recognized. No external OCR provider or paid API is called.
 
 Uploads remain capped at 15 MB; PDFs are capped at 50 pages; OCR renders a scanned page at 216 DPI, caps images at 20 million pixels and gives each Tesseract subprocess 30 seconds. Searchable PDF pages retain native text extraction. OCR text carries the original upload hash and PDF page provenance; it enters unstructured_review and never directly creates invoices, payments or dates. Errors/no text preserve ocr_unavailable. An owner must verify the original, extraction and all money/date facts. A readable string is not a quality guarantee.
 
@@ -69,7 +69,7 @@ Reviewer record template: reviewer name and qualification; organization; permiss
 
 The frontend project is bakayaai in the owner's Vercel team. The verified reserved domain is https://bakayaai-sandesh.vercel.app; bakayaai.vercel.app was already assigned elsewhere. Production login origin is this exact frontend URL. Until the approved synthetic AWS backend passes deployment checks, frontend/vercel.json routes API requests to an explicit HTTP503 maintenance endpoint; no local demo or account data is published.
 
-After the synthetic backend passes deployed checks, replace only the first rewrite with https://BACKEND_HOST/api/:path*. Use the Caddy backend HTTPS hostname in BAKAYA_DOMAIN and BAKAYA_ALLOWED_HOSTS (plus 127.0.0.1 for health), and keep BAKAYA_PUBLIC_ORIGIN as the Vercel frontend URL. Cookies have no Domain attribute so the proxy response binds them to the frontend. Test through the Vercel origin: sign-in/out, CSRF, cookie flags, uploads, two-tenant isolation and exports. Do not replace the temporary endpoint until the authenticated backend passes checks. Preview Vercel deployments retain Vercel protection; the public production shell exposes no claim data.
+After the synthetic backend passes deployed checks, replace only the first rewrite with https://BACKEND_HOST/api/:path*. Use the Caddy backend HTTPS hostname in SAAVDHAN_DOMAIN and SAAVDHAN_ALLOWED_HOSTS (plus 127.0.0.1 for health), and keep SAAVDHAN_PUBLIC_ORIGIN as the Vercel frontend URL. Cookies have no Domain attribute so the proxy response binds them to the frontend. Test through the Vercel origin: sign-in/out, CSRF, cookie flags, uploads, two-tenant isolation and exports. Do not replace the temporary endpoint until the authenticated backend passes checks. Preview Vercel deployments retain Vercel protection; the public production shell exposes no claim data.
 
 Authentication is implemented and tested with server-provisioned viewer/editor/reviewer/admin accounts, salted scrypt hashes, revocable eight-hour HttpOnly sessions, CSRF tokens, account/IP login throttling and server-bound reviewer attribution. CLI password reset revokes active sessions. Legacy local demo cases are not adopted by customer tenants. No self-signup, MFA or email recovery is implemented; independent security review is still required before sensitive customer use.
 

@@ -288,7 +288,7 @@ function NewClaimModal({ onClose, onCreate, busy }: { onClose: () => void; onCre
 }
 
 function SignIn({initialError}: {initialError: string}) {
-  const demoLogin = ['bakayaai.vercel.app', 'bakayaai-sandesh.vercel.app'].includes(window.location.hostname) ? {email: "demo@bakaya.example", password: "MpwAsr9Y8So1CX2CDHcGJTEWvDOjhZVz"} : null;
+  const demoLogin = null as {email: string; password: string} | null;
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const [busy,setBusy] = useState(false);

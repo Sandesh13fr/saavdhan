@@ -2,15 +2,15 @@ services:
   app:
     build:
       context: ..
-    image: bakaya:local
+    image: saavdhan:local
     restart: unless-stopped
     env_file: production.env
     environment:
-      BAKAYA_ENV: production
-      BAKAYA_DATA_DIR: /app/data
-      BAKAYA_PUBLIC_ORIGIN: ${BAKAYA_PUBLIC_ORIGIN:?Set BAKAYA_PUBLIC_ORIGIN}
-      BAKAYA_ALLOWED_HOSTS: ${BAKAYA_DOMAIN},127.0.0.1
-      BAKAYA_OCR_ENABLED: "true"
+      SAAVDHAN_ENV: production
+      SAAVDHAN_DATA_DIR: /app/data
+      SAAVDHAN_PUBLIC_ORIGIN: ${SAAVDHAN_PUBLIC_ORIGIN:?Set SAAVDHAN_PUBLIC_ORIGIN}
+      SAAVDHAN_ALLOWED_HOSTS: ${SAAVDHAN_DOMAIN},127.0.0.1
+      SAAVDHAN_OCR_ENABLED: "true"
     volumes:
       - ./data:/app/data
     read_only: true
@@ -28,7 +28,7 @@ services:
     restart: unless-stopped
     ports: ["80:80", "443:443"]
     environment:
-      BAKAYA_DOMAIN: ${BAKAYA_DOMAIN}
+      SAAVDHAN_DOMAIN: ${SAAVDHAN_DOMAIN}
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data

@@ -22,7 +22,7 @@ def create_backup(data_dir: Path, output: Path, key: bytes):
     data_dir = data_dir.resolve()
     if output.exists() or output.resolve().is_relative_to(data_dir):
         raise ValueError("Backup output must be new and outside the live data directory")
-    database = data_dir / "bakaya.sqlite3"
+    database = data_dir / "saavdhan.sqlite3"
     if not database.is_file():
         raise ValueError("Database is missing")
     with tempfile.TemporaryDirectory() as temporary:
@@ -69,7 +69,7 @@ def restore_backup(backup: Path, target: Path, key: bytes):
         if len(names) != len(set(names)) or sum(x.file_size for x in bundle.infolist()) > MAX_BACKUP_BYTES:
             raise ValueError("Invalid or oversized archive")
         manifest = json.loads(bundle.read("manifest.json"))
-        if set(names) != set(manifest) | {"manifest.json"} or "bakaya.sqlite3" not in manifest:
+        if set(names) != set(manifest) | {"manifest.json"} or "saavdhan.sqlite3" not in manifest:
             raise ValueError("Archive manifest mismatch")
         files = {}
         for name, expected in manifest.items():
@@ -87,7 +87,7 @@ def restore_backup(backup: Path, target: Path, key: bytes):
             destination = staging / name
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_bytes(data)
-        with closing(sqlite3.connect(staging / "bakaya.sqlite3")) as database:
+        with closing(sqlite3.connect(staging / "saavdhan.sqlite3")) as database:
             if database.execute("PRAGMA integrity_check").fetchone()[0] != "ok":
                 raise ValueError("Restored database integrity failed")
         staging.rename(target)
@@ -100,7 +100,7 @@ def main():
     parser.add_argument("source", type=Path)
     parser.add_argument("target", type=Path)
     args = parser.parse_args()
-    key = os.environ.get("BAKAYA_BACKUP_KEY", "").encode()
+    key = os.environ.get("SAAVDHAN_BACKUP_KEY", "").encode()
     Fernet(key)  # Validate the secret before touching any file.
     result = create_backup(args.source, args.target, key) if args.action == "create" else restore_backup(args.source, args.target, key)
     print(f"{args.action}: verified {len(result)} files")

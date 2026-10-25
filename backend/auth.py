@@ -12,12 +12,12 @@ import uuid
 from fastapi import HTTPException
 from . import storage
 
-USER = ContextVar("bakaya_user", default=None)
+USER = ContextVar("saavdhan_user", default=None)
 SESSION_SECONDS = 8 * 60 * 60
 
 
 def production():
-    return os.getenv("BAKAYA_ENV", "local") != "local"
+    return os.getenv("SAAVDHAN_ENV", "local") != "local"
 
 
 def database():
