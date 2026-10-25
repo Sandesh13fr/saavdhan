@@ -10,6 +10,7 @@ Hack for Social Cause 2027 requires teams to disclose how AI tools were used and
 | 2026-10-25 | Codex CLI (0.162.1) | Phase 2: 40 synthetic labelled offers in `eval/offers/`; Leaflet map and district boundary handling | Sandesh to review; boundaries from geoBoundaries (ODbL) |
 | 2026-10-25 | Claude Code lead + QA and reviewer subagents (Sonnet and Haiku 5.5) | Phase 3: evaluation harness and report (`eval/run_eval.py`, `eval/REPORT.md`), security review, fixes for review findings, anonymous retention and rate limit | Sandesh to review; evaluation caveat stated in the report |
 | 2026-10-25 | Claude Code docs subagent (Haiku 5.5) | Phase 4 docs: README, architecture, rules, privacy, demo script, deck outline, this log. Removed Bakaya-specific `docs/PRODUCTION.md` and `backend/README.md` | Sandesh to review; open items listed in each document |
+| 2026-10-26 | Codex CLI | Screenshot capture script and 22 synthetic screenshots; second code review; fixes for its 11 findings with 40 regression tests | Lead reviewed diffs; Sandesh to review |
 
 ## Human work that remains
 

@@ -70,6 +70,12 @@ Sandesh13fr), Docker present, Tesseract 5.4.0 at `C:\Program Files\Tesseract-OCR
 - Free plan: sleeps when idle (~1 min cold start); disk resets on restart (demo officer re-created).
 - Docs lane: README, ARCHITECTURE, RULES, PRIVACY, DEMO-SCRIPT, DECK-OUTLINE, AI_USAGE, DEPLOY.
 
+- Codex lanes (26 Oct): 22 synthetic-data screenshots (`docs/screenshots/`, capture script in
+  `tools/screenshots/`); second code review found 11 issues (4 high: unbounded multipart body, blocking
+  OCR in async route, lost updates without revision checks, office-city hiding a high-risk route) —
+  all fixed with 40 regression tests. 209 tests pass; eval unchanged (40/40 on the tuning set).
+- Rule titles for R2 and H2 made neutral ("Agent on MEA's active list?", "Who keeps your passport?").
+
 ## Known gaps
 
 - R2 shows "dated not loaded" until the MEA RA list is parsed.

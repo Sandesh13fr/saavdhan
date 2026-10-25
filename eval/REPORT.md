@@ -2,8 +2,8 @@
 
 > **Synthetic evaluation set of 40 offers written for this project. Not real-world accuracy. The fallback extractor was tuned on this same set after the first run (27/40), so these scores are optimistic; a held-out set is needed for an honest estimate.**
 
-- Date: 2026-10-25
-- Git commit: `cf35ce7`
+- Date: 2026-10-26
+- Git commit: `5510a06`
 - Extractor mode: `fallback`
 - Offers: 40; LLM fallbacks on ValueError: 0
 
@@ -12,7 +12,7 @@
 - Verdict accuracy: 1.000
 - Macro rule F1: 0.948
 - Field accuracy: 0.880
-- Median analysis time: 2.29 ms (p95 2.87 ms)
+- Median analysis time: 2.58 ms (p95 3.67 ms)
 
 ## Verdict confusion matrix (rows expected, columns predicted)
 
@@ -61,8 +61,8 @@ Macro F1 (rules with any truth or prediction): 0.948
 
 ## Analysis time
 
-- Median: 2.29 ms
-- p95: 2.87 ms
+- Median: 2.58 ms
+- p95: 3.67 ms
 
 Time covers extraction, rules and verdict; ingest is excluded.
 
