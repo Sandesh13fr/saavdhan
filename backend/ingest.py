@@ -15,6 +15,7 @@ from PIL import Image
 from .models import SourceRef
 
 MAX_FILE_BYTES = 15 * 1024 * 1024
+MAX_LINE_SOURCES = 500
 ALLOWED = {".pdf", ".txt", ".png", ".jpg", ".jpeg", ".webp", ".tif", ".tiff"}
 
 
@@ -111,7 +112,10 @@ def ingest_bytes(filename: str, data: bytes):
     text=data.decode("utf-8-sig")
     base.text=text[:100000]
     base.kind="message_export"
-    for n,line in enumerate(text.splitlines(),1):
+    for n,line in enumerate(base.text.splitlines(),1):
+        if len(sources)>MAX_LINE_SOURCES:
+            errors.append(f"Only the first {MAX_LINE_SOURCES} lines were checked.")
+            break
         if line.strip():
             sources.append(base.model_copy(update={"id":f"{root}-L{n}","line":n,"text":line}))
     return sources,errors

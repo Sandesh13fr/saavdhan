@@ -30,7 +30,7 @@ def csv_bytes(rows, keys):
         cells={key:json.dumps(row[key],ensure_ascii=False) if isinstance(row.get(key),(list,dict)) else row.get(key,"") for key in keys}
         # Prevent quoted offer text being interpreted as a spreadsheet formula.
         for key,value in cells.items():
-            if isinstance(value,str) and value.startswith(("=","+","-","@")):
+            if isinstance(value,str) and value.startswith(("=","+","-","@","\t","\r")):
                 cells[key]="'"+value
         writer.writerow(cells)
     return output.getvalue().encode("utf-8-sig")

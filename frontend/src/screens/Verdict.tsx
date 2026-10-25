@@ -31,7 +31,7 @@ export default function Verdict({ view, onPlan }: { view: CaseView | null; onPla
         <a className="btn" href={packetUrl(view.id)} download><Download size={18} aria-hidden="true" /> {t('verdict.download_packet')}</a>
         <button className="btn btn-primary" type="button" onClick={onPlan}>{t('verdict.make_safety_plan')}</button>
       </div>
-      <ul className="plain stack">{hits.map((h) => <RuleHitCard key={h.rule_id} hit={h} />)}</ul>
+      <ul className="plain stack">{hits.map((h) => <RuleHitCard key={h.rule_id} hit={h} raDate={verdict.ra_list_date} />)}</ul>
       <section className="card" aria-labelledby="facts-h">
         <h2 id="facts-h">{t('verdict.facts_title')}</h2>
         <p className="muted">{t(`verdict.method.${a.extraction_method}`)}</p>

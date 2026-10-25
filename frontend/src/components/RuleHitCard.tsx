@@ -5,7 +5,7 @@ import { QuoteBlock } from './small';
 
 const ICON = { hit: Flag, clear: CheckCircle2, unknown: CircleHelp };
 
-export function RuleHitCard({ hit }: { hit: RuleHit }) {
+export function RuleHitCard({ hit, raDate }: { hit: RuleHit; raDate: string }) {
   const { t } = useI18n();
   const Icon = ICON[hit.status];
   const isUrl = /^https?:\/\//.test(hit.rule_source_url);
@@ -20,7 +20,7 @@ export function RuleHitCard({ hit }: { hit: RuleHit }) {
         <span className="badge">{t(`severity.${hit.severity}`)}</span>
         {hit.heuristic && <span className="badge badge-heuristic">{t('verdict.heuristic_badge')}</span>}
       </p>
-      <p>{t(`rule.${hit.rule_id}.${hit.status}`)}</p>
+      <p>{t(`rule.${hit.rule_id}.${hit.status}`, { date: raDate, cap: '35,400' })}</p>
       {hit.evidence.filter((f, i, all) => all.findIndex((g) => g.quote === f.quote && g.source_ref === f.source_ref) === i).map((f, i) => <QuoteBlock key={i} field={f} />)}
       {!hit.heuristic && isUrl && (
         <a className="rule-src" href={hit.rule_source_url} target="_blank" rel="noreferrer noopener">

@@ -35,6 +35,8 @@ async def lifespan(app):
         raise RuntimeError("SAAVDHAN_ENV must be local or production")
     if auth.production() and not os.getenv("SAAVDHAN_PUBLIC_ORIGIN", "").startswith("https://"):
         raise RuntimeError("Production requires SAAVDHAN_PUBLIC_ORIGIN with HTTPS")
+    if auth.production() and len(os.getenv("SAAVDHAN_HASH_SALT", ""))<16:
+        raise RuntimeError("Production requires SAAVDHAN_HASH_SALT (16+ characters)")
     yield
 
 
@@ -74,6 +76,24 @@ async def session_guard(request: Request, call_next):
     finally:
         auth.USER.reset(user_token)
         storage.TENANT.reset(tenant_token)
+
+
+RATE_WINDOW_SECONDS, RATE_MAX = 600, int(os.getenv("SAAVDHAN_RATE_MAX", "30"))
+_hits: dict[str, list[float]] = {}
+
+
+@app.middleware("http")
+async def rate_limit(request: Request, call_next):
+    # ponytail: in-process per-IP limit on case creation; use the proxy/Redis limiter if scaled out
+    path = request.url.path
+    if request.method == "POST" and (path == "/api/offers" or path.startswith("/api/demo/offers/")):
+        now = __import__("time").monotonic()
+        key = request.client.host if request.client else "unknown"
+        recent = [t for t in _hits.get(key, []) if now - t < RATE_WINDOW_SECONDS]
+        if len(recent) >= RATE_MAX:
+            return Response("Too many offer checks; try again in a few minutes", status_code=429)
+        _hits[key] = recent + [now]
+    return await call_next(request)
 
 
 @app.middleware("http")
@@ -142,8 +162,9 @@ def view(state):
 
 
 def new_case(sources, staged, demo=False):
-    if auth.production() and len(storage.list_cases())>=10:
-        # ponytail: shared anonymous tenant cap; replace with retention + per-client limits before public deploy
+    if storage.TENANT.get()==storage.ANONYMOUS:
+        storage.purge_anonymous(float(os.getenv("SAAVDHAN_RETENTION_HOURS","24")),int(os.getenv("SAAVDHAN_ANON_CASE_CAP","200"))-1)
+    elif auth.production() and len(storage.list_cases())>=10:
         raise storage.TenantCapacityExceeded("Case capacity reached; try again later")
     state={"id":uuid.uuid4().hex,"created_at":stamp(),"demo":demo,"revision":1,"audit":[],"analysis":None,
            "sources":[s.model_dump(mode="json") for s in sources]}
@@ -177,6 +198,8 @@ async def create_offer(files:list[UploadFile]=File(default=[]),text:str|None=For
     uploads=[(file.filename or "upload",await file.read(MAX_FILE_BYTES+1)) for file in files[:11]]
     if len(uploads)>10:
         raise HTTPException(400,"At most 10 files per offer")
+    if text and len(text)>50000:
+        raise HTTPException(413,"Pasted text is limited to 50,000 characters")
     if text and text.strip():
         uploads.append(("pasted-offer.txt",text.encode("utf-8")))
     if not uploads:
@@ -256,6 +279,8 @@ def checkin(case_id:str,body:dict):
 @app.post("/api/demo/advance-clock")
 def advance_clock(body:dict):
     state=require_case(str(body.get("case_id","")))
+    if auth.production() and not state.get("demo"):
+        raise HTTPException(404,"Demo clock is only available for demo offers")
     try:
         safety.advance_clock(state,int(body.get("hours",24)))
     except (ValueError,TypeError) as exc:

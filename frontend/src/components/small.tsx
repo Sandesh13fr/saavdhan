@@ -35,7 +35,7 @@ export function VerdictBanner({ level, raDate, children }: { level: Level; raDat
       <div>
         <h1 id="verdict-h">{t(`verdict.${level}.title`)}</h1>
         <p>{t(`verdict.${level}.body`)}</p>
-        <p className="banner-date"><strong>{t('verdict.ra_list_date', { date: raDate })}</strong></p>
+        <p className="banner-date"><strong>{/^\d{4}-\d{2}-\d{2}$/.test(raDate) ? t('verdict.ra_list_date', { date: raDate }) : t('verdict.ra_not_checked')}</strong></p>
         {children}
       </div>
     </section>

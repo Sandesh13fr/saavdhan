@@ -5,6 +5,7 @@ Raw phone numbers never leave this module: they are salted+hashed before aggrega
 from __future__ import annotations
 
 import hashlib
+import hmac
 import os
 import re
 from collections import defaultdict
@@ -15,7 +16,7 @@ from .models import Report
 
 def phone_hash(phone: str) -> str:
     salt = os.getenv("SAAVDHAN_HASH_SALT", "local-demo-salt")
-    return hashlib.sha256((salt + re.sub(r"\D", "", phone)).encode()).hexdigest()
+    return hmac.new(salt.encode(), re.sub(r"\D", "", phone).encode(), hashlib.sha256).hexdigest()
 
 
 def template_hash(text: str) -> str:

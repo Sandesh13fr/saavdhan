@@ -2,11 +2,14 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import sqlite3
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from contextvars import ContextVar
 
-TENANT = ContextVar("saavdhan_tenant", default="local-demo")
+ANONYMOUS = "local-demo"
+TENANT = ContextVar("saavdhan_tenant", default=ANONYMOUS)
 
 DATA_DIR = Path(os.getenv("SAAVDHAN_DATA_DIR", Path(__file__).resolve().parents[1] / "data"))
 
@@ -71,7 +74,7 @@ def save_case(case: dict, expected_revision: int | None = None):
             if not row or json.loads(row[0])["revision"]!=expected_revision:
                 raise ConcurrentCaseUpdate("Case changed while agent was working; resume against latest reviewer decisions")
         existing=conn.execute("SELECT tenant_id FROM cases WHERE id=?",(case["id"],)).fetchone()
-        if not existing and os.getenv("SAAVDHAN_ENV") == "production" and conn.execute("SELECT count(*) FROM cases WHERE tenant_id=?",(TENANT.get(),)).fetchone()[0]>=10:
+        if not existing and os.getenv("SAAVDHAN_ENV") == "production" and TENANT.get() != ANONYMOUS and conn.execute("SELECT count(*) FROM cases WHERE tenant_id=?",(TENANT.get(),)).fetchone()[0]>=10:
             raise TenantCapacityExceeded("Tenant case capacity reached (10); contact the operator")
         if existing and existing[0]!=TENANT.get():
             raise PermissionError("Case belongs to another tenant")
@@ -90,6 +93,18 @@ def list_cases():
     with connect() as conn:
         rows=conn.execute("SELECT payload FROM cases WHERE tenant_id=? ORDER BY rowid DESC",(TENANT.get(),)).fetchall()
     return [json.loads(row[0]) for row in rows]
+
+
+def purge_anonymous(max_age_hours: float, keep: int):
+    """Delete anonymous cases older than max_age_hours, then the oldest beyond `keep`."""
+    cutoff = (datetime.now(timezone.utc) - timedelta(hours=max_age_hours)).isoformat()
+    with connect() as conn:
+        rows = conn.execute("SELECT id, payload FROM cases WHERE tenant_id=? ORDER BY rowid DESC", (ANONYMOUS,)).fetchall()
+        doomed = [cid for n, (cid, payload) in enumerate(rows) if n >= keep or json.loads(payload).get("created_at", "") < cutoff]
+        conn.executemany("DELETE FROM cases WHERE id=? AND tenant_id=?", [(cid, ANONYMOUS) for cid in doomed])
+    for cid in doomed:
+        shutil.rmtree(DATA_DIR / "uploads" / cid, ignore_errors=True)
+    return len(doomed)
 
 
 def upload_dir(case_id):

@@ -37,6 +37,7 @@ const DEFAULTS: Record<string, string> = {
   'verdict.facts_title': 'Facts we read from the offer',
   'verdict.method.llm': 'Read by an AI model; quotes checked against the text',
   'verdict.method.fallback': 'Read by simple pattern matching',
+  'verdict.ra_not_checked': 'Agent list not checked yet.',
   'verdict.not_found': 'No offer loaded yet.',
   'severity.critical': 'Critical', 'severity.high': 'High', 'severity.medium': 'Medium', 'severity.low': 'Low', 'severity.info': 'Info',
   'safety.title': 'Family safety plan',
