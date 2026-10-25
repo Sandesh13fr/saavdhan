@@ -44,9 +44,23 @@ Sandesh13fr), Docker present, Tesseract 5.4.0 at `C:\Program Files\Tesseract-OCR
 - LLM provider: TokenRouter (OpenAI-compatible, `https://api.tokenrouter.com/v1`), configured in `.env`.
   Live call blocked: key quota exhausted (HTTP 401). Fallback extractor runs meanwhile.
 
+## Phase 3 — evaluation and review (25 Oct)
+
+- Eval harness `eval/run_eval.py` -> `eval/REPORT.md`. Fallback extractor on the 40 synthetic offers:
+  baseline 27/40 verdicts; after fixes 40/40, macro rule F1 0.948, field accuracy 0.880, median 2.3 ms.
+  The extractor was tuned on this same set, so scores are optimistic (stated in the report).
+- Security review: 1 critical, 4 high, 5 medium. Fixed: LLM can only add red flags (rules run on
+  both extractors, stricter status wins) + quote/value validation; injection-skip removed; no best
+  verdict without a real recruiter-list date; pasted-text and line caps; anonymous retention (24h),
+  eviction and per-IP rate limit; demo clock limited to demo cases in production; HMAC phone hashes
+  with required production salt. Re-verification by reviewer pending.
+- Demo officer: `scripts/seed_demo_officer.py` (password only in gitignored `.env`).
+- Browser-checked: Bangkok STOP, check-in plan, missed check-in, family alert, pattern map (36
+  districts, one hash across 5 districts).
+- Copy reworded after review (no "MEA high-risk list" claim; fee cap stated; list date in R2 copy).
+
 ## Known gaps
 
-- Pattern map needs a provisioned officer account (`python -m backend.auth create-user`); none exists yet.
 - R2 shows "dated not loaded" until the MEA RA list is parsed.
 - Anonymous visitors share one tenant with a 10-case cap in production: replace with retention
   + per-client limits before public deploy.
@@ -56,3 +70,9 @@ Sandesh13fr), Docker present, Tesseract 5.4.0 at `C:\Program Files\Tesseract-OCR
 ## Works / simulated / known limits
 
 Filled as phases land.
+
+- Open from review (deploy lane): uvicorn `--proxy-headers` for real client IPs behind Caddy; login
+  lockout per account; docs/PRODUCTION.md still Bakaya text; LLM sends offer text to a third party
+  (TokenRouter) — disclose in privacy copy; up to 10 files x 500 lines per case.
+- TokenRouter key returns 401 (quota exhausted); LLM path untested live. `eval/run_eval.py --llm` once fixed.
+- Fee cap Rs 30,000 + 18% GST is as reported; verify against the current official figure.
