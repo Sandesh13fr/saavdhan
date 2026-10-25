@@ -1,4 +1,4 @@
-name: Validate Bakaya
+name: Validate Saavdhan
 on: [push, pull_request]
 permissions:
   contents: read
