@@ -79,11 +79,11 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     if (vars) for (const [k, v] of Object.entries(vars)) s = s.replaceAll(`{${k}}`, String(v));
     return s;
   }, [lang]);
-  // Maps a thrown error to user text; 404/405/501 mean the backend route is not built yet.
+  // Maps a thrown error to user text; 405/501 mean the backend route is not built yet.
   const err = useCallback((e: unknown) => {
     if (e instanceof ApiError) {
       if (e.status === 0) return t('error.network');
-      if ([404, 405, 501].includes(e.status)) return t('error.unavailable');
+      if ([405, 501].includes(e.status)) return t('error.unavailable');
       if (e.message) return e.message;
     }
     return t('error.generic');
