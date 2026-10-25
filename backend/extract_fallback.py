@@ -178,6 +178,7 @@ _PLACE = [(re.compile((rf"(?<![A-Za-z]){re.escape(a)}(?![A-Za-z])" if a.isascii(
           for c, aliases in COUNTRIES.items() for a in aliases]
 _TRANSIT_BEFORE = re.compile(r"(?:\bvia|\bthrough|\bthru|\btransit(?:ing)?(?:\s+(?:in|via|through))?|\bby way of)\W*(?:the\s+)?$", re.I)
 _TRANSIT_AFTER = re.compile(r"\s*(?:से\s*होकर|के\s*रास्ते|के\s*माध्यम|के\s*मार्गे|मार्गे|मार्गाने|होकर|वरून|(?:ke\s+)?(?:through|via|raste|se\s*ho\s*kar|ho\s*kar))", re.I)
+OFFICE_CONTEXT = rx(r"\boffice\b", r"\baddress\b", r"\bheadquarters\b", r"\bbased\s+in\b", r"कार्यालय", r"ऑफिस", r"पत्ता")
 
 PAYMENT = [  # first match wins
     ("upi", rx(r"\bupi\b", r"g\s?pay", r"google\s*pay", r"phone\s*pe", r"paytm", r"\bbhim\b", r"यूपीआई")),
@@ -253,12 +254,14 @@ def _units(sources: list[SourceRef]) -> list[Unit]:
             body = raw.strip()
             m = WA_PREFIX.match(body)
             body = body[m.end():].strip() if m else body
-            if not body or len(body) > MAX_LINE_CHARS or body in seen:
-                continue
-            seen.add(body)
-            units.append(Unit(body, unicodedata.normalize("NFC", body.translate(_DIGITS)), s.id))
-            if len(units) >= MAX_LINES:
-                return units
+            for start in range(0, len(body), MAX_LINE_CHARS):
+                chunk = body[start:start + MAX_LINE_CHARS]
+                if chunk in seen:
+                    continue
+                seen.add(chunk)
+                units.append(Unit(chunk, unicodedata.normalize("NFC", chunk.translate(_DIGITS)), s.id))
+                if len(units) >= MAX_LINES:
+                    return units
     return units
 
 
@@ -302,27 +305,29 @@ def _visa(units):
 
 
 def _money(units):
-    """fee / salary amount and currency, classified per clause."""
+    """Fee / salary amounts follow the nearest preceding label in the clause."""
     fee = sal = cur = None
     fee_best = Decimal(-1)
     for u in units:
         for clause in _clauses(u.norm):
-            kind = ("salary" if SAL_STRONG.search(clause) else "fee" if FEE_STRONG.search(clause)
-                    else "salary" if SAL_WEAK.search(clause) else "fee" if FEE_WEAK.search(clause) else None)
-            if kind is None:
+            labels = sorted((m.start(), kind) for pattern, kind in (
+                (SAL_STRONG, "salary"), (FEE_STRONG, "fee"),
+                (SAL_WEAK, "salary"), (FEE_WEAK, "fee")) for m in pattern.finditer(clause))
+            if not labels:
                 continue
-            amounts = parse_amounts(clause) or parse_amounts(clause, bare=True)
-            if not amounts:
-                continue
-            a = amounts[0]
-            if kind == "fee":  # largest INR fee wins: covers GST-inclusive totals and small "registration" fees
-                for b in amounts:
-                    if b.currency in (None, "INR") and b.value > fee_best:
-                        fee_best, fee = b.value, _fv(_num_str(b.value), u)
-            elif sal is None:
-                sal = _fv(_num_str(a.value), u)
-                if a.currency:
-                    cur = _fv(a.currency, u)
+            # Keep suffix-only labels (e.g. "INR 50000 per month") working too.
+            if labels[0][0] > 0:
+                labels.insert(0, (0, labels[0][1]))
+            for i, (start, kind) in enumerate(labels):
+                section = clause[start:labels[i + 1][0] if i + 1 < len(labels) else len(clause)]
+                amounts = parse_amounts(section) or parse_amounts(section, bare=True)
+                for a in amounts:
+                    if kind == "fee" and a.currency in (None, "INR") and a.value > fee_best:
+                        fee_best, fee = a.value, _fv(_num_str(a.value), u)
+                    elif kind == "salary" and sal is None:
+                        sal = _fv(_num_str(a.value), u)
+                        if a.currency:
+                            cur = _fv(a.currency, u)
     return fee or FieldValue(), sal or FieldValue(), cur or FieldValue()
 
 
@@ -343,13 +348,16 @@ def _role(u):
 
 
 def _places(u):
-    """[(country, is_transit)] in order of appearance."""
+    """[(country, excluded_from_destination)] in order of appearance."""
     hits = []
+    sentences = list(_SENT.finditer(u.norm))
     for pat, country in _PLACE:
         for m in pat.finditer(u.norm):
-            transit = bool(_TRANSIT_BEFORE.search(u.norm[max(0, m.start() - 25):m.start()])
-                           or _TRANSIT_AFTER.match(u.norm, m.end()))
-            hits.append((m.start(), country, transit))
+            context = next(s.group(0) for s in sentences if s.start() <= m.start() < s.end())
+            excluded = bool(OFFICE_CONTEXT.search(context)
+                            or _TRANSIT_BEFORE.search(u.norm[max(0, m.start() - 25):m.start()])
+                            or _TRANSIT_AFTER.match(u.norm, m.end()))
+            hits.append((m.start(), country, excluded))
     return [(c, t) for _, c, t in sorted(hits)]
 
 
@@ -357,8 +365,8 @@ def _destination(units):
     return _first(units, lambda u: next((c for c, t in _places(u) if not t), None))
 
 
-def _transit(units):
-    return _all(units, lambda u: [c for c, t in _places(u) if t])
+def _transit(units, destination):
+    return _all(units, lambda u: [c for c, _ in _places(u) if c != destination])
 
 
 def _payment(u):
@@ -448,7 +456,7 @@ def extract(sources: list[SourceRef]) -> Offer:
     offer.fees_demanded_inr, offer.salary_amount, offer.salary_currency = _money(units)
     offer.role_title = _first(units, _role)
     offer.destination_country = _destination(units)
-    offer.transit_countries = _transit(units)
+    offer.transit_countries = _transit(units, offer.destination_country.value)
     offer.fee_payment_mode = _first(units, _payment)
     offer.receipt_promised = _first(units, _yes_no(RECEIPT))
     offer.contract_mentioned = _first(units, _yes_no(CONTRACT))

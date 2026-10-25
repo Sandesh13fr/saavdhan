@@ -40,5 +40,10 @@ async def analyze(state: dict) -> dict:
         offer, method = llm, "llm"
         hits = [_stricter(a, b) for a, b in zip(hits, run_rules(llm, None))]
     verdict = decide(hits, RA_LIST_DATE)
+    if state.get("ingest_truncated"):
+        errors.append("Part of the document was not checked.")
+        if verdict.level == "NO_RED_FLAGS_FOUND":
+            verdict.level = "VERIFY_FIRST"
+            verdict.next_steps_key = "next.VERIFY_FIRST"
     return {"offer": offer.model_dump(mode="json"), "fallback_offer": fallback.model_dump(mode="json") if llm else None,
             "verdict": verdict.model_dump(mode="json"), "extraction_method": method, "errors": errors}
