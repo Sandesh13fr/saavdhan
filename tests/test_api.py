@@ -63,3 +63,25 @@ def test_input_errors(client):
     assert client.get("/api/offers/missing/packet").status_code == 404
     case = client.post("/api/offers", data={"text": "x"}).json()
     assert client.get(f"/api/offers/{case['id']}/packet").status_code == 409
+
+
+def test_safety_plan_missed_checkin_alerts_family_and_packet(client):
+    case = client.post("/api/demo/offers/bangkok-data-entry").json()
+    cid = case["id"]
+    client.post(f"/api/offers/{cid}/analyze")
+    plan = {"traveller_alias": "Student (demo)", "contacts": [{"alias": "Brother (demo)", "channel": "SMS (simulated)"}],
+            "itinerary": ["Pune -> Bangkok (demo)"], "checkin_interval_hours": 24}
+    assert client.post(f"/api/offers/{cid}/safety-plan", json=plan).json()["safety"]["status"] == "ok"
+    assert client.post(f"/api/offers/{cid}/checkin", json={"note": "Landed"}).json()["safety"]["checkins"]
+    result = client.post("/api/demo/advance-clock", json={"case_id": cid, "hours": 30}).json()
+    assert result["safety"]["status"] == "missed"
+    alerts = client.get(f"/api/offers/{cid}").json()["safety"]["alerts"]
+    assert len(alerts) == 1 and alerts[0]["simulated"] is True
+    names = zipfile.ZipFile(io.BytesIO(client.get(f"/api/offers/{cid}/packet").content)).namelist()
+    assert "itinerary-and-checkins.txt" in names
+
+
+def test_demo_bangkok_story_stops(client):
+    cid = client.post("/api/demo/offers/bangkok-data-entry").json()["id"]
+    level = client.post(f"/api/offers/{cid}/analyze").json()["analysis"]["verdict"]["level"]
+    assert level in {"STOP", "VERIFY_FIRST"}  # STOP once the fallback extractor lands

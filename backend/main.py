@@ -20,6 +20,8 @@ from .ingest import ingest_bytes, MAX_FILE_BYTES, ocr_available
 from .providers import provider_available
 from .rules import FEE_CAP_INR, RULES
 from .reports import aggregate, synthetic_reports
+from . import safety
+from .models import SafetyPlan
 
 try:
     from dotenv import load_dotenv
@@ -134,7 +136,9 @@ def require_case(case_id):
 
 
 def view(state):
-    return {key:state.get(key) for key in ("id","created_at","demo","revision","sources","audit","analysis")}
+    result={key:state.get(key) for key in ("id","created_at","demo","revision","sources","audit","analysis")}
+    result["safety"]=safety.status(state,datetime.now(timezone.utc))
+    return result
 
 
 def new_case(sources, staged, demo=False):
@@ -226,6 +230,40 @@ def packet(case_id:str):
     audit(state,"packet","Report packet downloaded locally; nothing sent")
     storage.save_case(state)
     return Response(packet_zip(view(state)),media_type="application/zip",headers={"Content-Disposition":f'attachment; filename="saavdhan-{case_id[:8]}.zip"'})
+
+
+@app.post("/api/offers/{case_id}/safety-plan")
+def safety_plan(case_id:str,plan:SafetyPlan):
+    state=require_case(case_id)
+    safety.create_plan(state,plan,datetime.now(timezone.utc))
+    audit(state,"safety_plan",f"{len(plan.contacts)} family contact(s); check-in every {plan.checkin_interval_hours}h")
+    storage.save_case(state)
+    return view(state)
+
+
+@app.post("/api/offers/{case_id}/checkin")
+def checkin(case_id:str,body:dict):
+    state=require_case(case_id)
+    try:
+        safety.checkin(state,str(body.get("note",""))[:280],datetime.now(timezone.utc))
+    except ValueError as exc:
+        raise HTTPException(409,str(exc)) from exc
+    audit(state,"checkin","Traveller checked in")
+    storage.save_case(state)
+    return view(state)
+
+
+@app.post("/api/demo/advance-clock")
+def advance_clock(body:dict):
+    state=require_case(str(body.get("case_id","")))
+    try:
+        safety.advance_clock(state,int(body.get("hours",24)))
+    except (ValueError,TypeError) as exc:
+        raise HTTPException(422,str(exc)) from exc
+    view(state)  # status() records simulated alerts for any missed check-in
+    audit(state,"demo_clock",f"DEMO: simulated clock moved {body.get('hours',24)}h")
+    storage.save_case(state)
+    return view(state)
 
 
 @app.get("/api/offers/{case_id}/sources/{source_id}")
