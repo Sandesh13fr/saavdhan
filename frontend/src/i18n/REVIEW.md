@@ -184,3 +184,248 @@ The English source is the reference text. Keys are the contract keys in `docs/CO
 | `common.loading` | Loading... | लोड हो रहा है... | लोड होत आहे... |
 | `common.back` | Back | वापस | मागे |
 | `common.close` | Close | बंद करें | बंद करा |
+
+
+## UI rebuild keys (mock screens), all Hindi and Marathi NEED NATIVE REVIEW
+
+Added for the rebuilt screens. They use app-only prefixes (`ui.`, `nav2.`, `home.`, `submit.`, `review.`, `result.`, `evidence.`, `plan.`, `checkin.`, `family2.`, `help.`, `login.`, `pmap.`, `pdetail.`, `fact.`, `value.`, `steps.`, `illo.`, `demo.`). None uses a prefix that `backend/templates` mirrors, so no backend change is needed. Every key is listed in `EXTRA_KEYS` in `check_i18n.py`.
+
+Notes for reviewers:
+- `home.hindi_line` is the board's Hindi line and stays Hindi in every language.
+- `result.word.*` are the giant verdict words. Hindi uses रुकें / पहले जाँचें and Marathi uses थांबा / आधी तपासा. Check that they read naturally as a one-word headline.
+- `help.cyber.what` avoids "fraud" (forbidden word): "Cyber crime and lost money".
+- Brand and product names (WhatsApp, UPI, MEA, MADAD, eMigrate, PBBY, RC) stay in Latin script.
+
+| Key | English source | Hindi (needs native review) | Marathi (needs native review) |
+|---|---|---|---|
+| `ui.demo` | Demo | डेमो | डेमो |
+| `ui.demo_data` | Demo data | डेमो डेटा | डेमो डेटा |
+| `ui.footer` | Hack for Social Cause, independent concept. Demo data is synthetic and labelled. | Hack for Social Cause, स्वतंत्र कॉन्सेप्ट। डेमो डेटा काल्पनिक है और उस पर लेबल लगा है। | Hack for Social Cause, स्वतंत्र संकल्पना. डेमो डेटा काल्पनिक आहे आणि त्यावर लेबल आहे. |
+| `ui.home_label` | Saavdhan home | Saavdhan होम | Saavdhan मुख्यपृष्ठ |
+| `ui.institution_link` | Institution access | संस्था लॉगिन | संस्था लॉगिन |
+| `ui.language` | Language | भाषा | भाषा |
+| `ui.main_nav` | Main | मुख्य | मुख्य |
+| `ui.main_nav_mobile` | Main menu | मुख्य मेनू | मुख्य मेनू |
+| `ui.new_tab` | opens in a new tab | नए टैब में खुलेगा | नवीन टॅबमध्ये उघडेल |
+| `ui.yes` | Yes | हाँ | हो |
+| `ui.no` | No | नहीं | नाही |
+| `ui.skip` | Skip to content | सीधे सामग्री पर जाएँ | थेट मजकुराकडे जा |
+| `nav2.check` | Check | जाँच | तपासणी |
+| `nav2.checkins` | Check-ins | चेक-इन | चेक-इन |
+| `nav2.help` | Help | मदद | मदत |
+| `demo.bangkok_hint` | Chat with several warning signs | कई चेतावनी संकेतों वाली चैट | अनेक धोक्याच्या खुणा असलेली चॅट |
+| `demo.dubai_hint` | Offer with a few gaps | कुछ अधूरी बातों वाला ऑफ़र | काही अपूर्ण गोष्टी असलेली ऑफर |
+| `home.title` | Before you pay. Before you fly. | पैसे देने से पहले। उड़ान से पहले। | पैसे देण्याआधी. विमान पकडण्याआधी. |
+| `home.sub` | Check overseas job offers. Keep family close. | विदेश की नौकरी के ऑफ़र जाँचें। परिवार को साथ रखें। | परदेशातील नोकरीच्या ऑफर तपासा. कुटुंबाला सोबत ठेवा. |
+| `home.hindi_line` | विदेश की नौकरी? पहले जाँच। | विदेश की नौकरी? पहले जाँच। | विदेश की नौकरी? पहले जाँच। |
+| `home.cta` | Check my offer | मेरा ऑफ़र जाँचें | माझी ऑफर तपासा |
+| `home.steps_label` | How it works | यह कैसे काम करता है | हे कसे काम करते |
+| `home.step_add` | Add offer | ऑफ़र जोड़ें | ऑफर जोडा |
+| `home.step_evidence` | See evidence | सबूत देखें | पुरावा पहा |
+| `home.step_checkins` | Plan check-ins | चेक-इन तय करें | चेक-इन ठरवा |
+| `illo.job_offer` | Job Offer | नौकरी ऑफ़र | नोकरी ऑफर |
+| `illo.visa_type` | VISA TYPE | वीज़ा प्रकार | व्हिसा प्रकार |
+| `illo.tourist_visa` | Tourist visa | टूरिस्ट वीज़ा | टुरिस्ट व्हिसा |
+| `steps.label` | Progress | प्रगति | प्रगती |
+| `steps.add` | Add | जोड़ें | जोडा |
+| `steps.review` | Review | देखें | तपासा |
+| `steps.result` | Result | नतीजा | निकाल |
+| `steps.done` | done | पूरा | पूर्ण |
+| `submit.title` | Let's check your offer. | चलिए, आपका ऑफ़र जाँचें। | चला, तुमची ऑफर तपासू. |
+| `submit.sub` | Paste a chat or upload a document. | चैट चिपकाएँ या दस्तावेज़ अपलोड करें। | चॅट पेस्ट करा किंवा कागदपत्र अपलोड करा. |
+| `submit.tabs_label` | How to add the offer | ऑफ़र कैसे जोड़ें | ऑफर कशी जोडायची |
+| `submit.tab_paste` | Paste chat | चैट चिपकाएँ | चॅट पेस्ट करा |
+| `submit.tab_upload` | Upload file | फ़ाइल अपलोड करें | फाइल अपलोड करा |
+| `submit.paste_placeholder` | Paste the offer here... | ऑफ़र यहाँ चिपकाएँ... | ऑफर इथे पेस्ट करा... |
+| `submit.paste_hint` | You can paste text and attach files. Both are checked together. | आप टेक्स्ट चिपका सकते हैं और फ़ाइलें भी जोड़ सकते हैं। दोनों की जाँच साथ होती है। | तुम्ही मजकूर पेस्ट करू शकता आणि फाइलीही जोडू शकता. दोन्हींची तपासणी एकत्र होते. |
+| `submit.drop_title` | Choose files or drop them here | फ़ाइलें चुनें या यहाँ छोड़ें | फाइली निवडा किंवा इथे टाका |
+| `submit.drop_types` | PDF, JPG, PNG or TXT, up to 10 files | PDF, JPG, PNG या TXT, ज़्यादा से ज़्यादा 10 फ़ाइलें | PDF, JPG, PNG किंवा TXT, जास्तीत जास्त 10 फाइली |
+| `submit.files_label` | Attached files | जोड़ी गई फ़ाइलें | जोडलेल्या फाइली |
+| `submit.remove_file` | Remove {name} | {name} हटाएँ | {name} काढा |
+| `submit.has_text` | Text added | टेक्स्ट जोड़ा गया | मजकूर जोडला |
+| `submit.try_demo` | Try demo | डेमो आज़माएँ | डेमो वापरून पहा |
+| `submit.cta` | Review details | जानकारी देखें | माहिती तपासा |
+| `review.title` | Does this look right? | क्या यह सही लगता है? | हे बरोबर वाटते का? |
+| `review.sub` | Tap a detail to see where it came from. | कोई जानकारी दबाएँ और देखें कि वह कहाँ से आई। | माहितीवर टॅप करा आणि ती कुठून आली ते पहा. |
+| `review.flagged` | Flagged | चिह्नित | खूण केलेले |
+| `review.source_quote` | Source quote | मूल उद्धरण | मूळ उतारा |
+| `review.no_quote` | The offer does not say this. Ask for it in writing. | ऑफ़र में यह नहीं लिखा है। इसे लिखित में माँगें। | ऑफरमध्ये हे लिहिलेले नाही. ते लेखी मागा. |
+| `review.more` | More details from the offer ({count}) | ऑफ़र की और जानकारी ({count}) | ऑफरमधील आणखी माहिती ({count}) |
+| `review.cta` | See result | नतीजा देखें | निकाल पहा |
+| `review.edit` | Edit details | जानकारी बदलें | माहिती बदला |
+| `review.not_analyzed` | This offer has not been checked yet. | यह ऑफ़र अभी जाँचा नहीं गया है। | ही ऑफर अजून तपासलेली नाही. |
+| `fact.agent` | Agent | एजेंट | एजंट |
+| `fact.country` | Country | देश | देश |
+| `fact.visa` | Visa | वीज़ा | व्हिसा |
+| `fact.salary` | Salary | वेतन | पगार |
+| `fact.fee` | Fee | फ़ीस | फी |
+| `fact.contract` | Contract | अनुबंध | करार |
+| `fact.role` | Job | नौकरी | नोकरी |
+| `fact.employer` | Employer | नियोक्ता | नियोक्ता |
+| `fact.rc` | Agent RC number | एजेंट RC नंबर | एजंट RC नंबर |
+| `fact.payment` | Payment mode | भुगतान का तरीका | पैसे देण्याची पद्धत |
+| `fact.channel` | Contact channel | संपर्क का तरीका | संपर्काची पद्धत |
+| `fact.transit` | Transit countries | बीच के देश | मधले देश |
+| `fact.receipt` | Receipt promised | रसीद का वादा | पावतीचे आश्वासन |
+| `fact.pbby` | PBBY insurance | PBBY बीमा | PBBY विमा |
+| `fact.passport` | Passport handover | पासपोर्ट सौंपना | पासपोर्ट देणे |
+| `value.visa.employment` | Employment | रोज़गार | रोजगार |
+| `value.visa.work` | Work | काम | काम |
+| `value.visa.tourist` | Tourist | टूरिस्ट | टुरिस्ट |
+| `value.visa.visit` | Visit | विज़िट | व्हिजिट |
+| `value.visa.unknown` | Unclear | साफ़ नहीं | स्पष्ट नाही |
+| `result.word.STOP` | STOP | रुकें | थांबा |
+| `result.word.VERIFY` | VERIFY | पहले | आधी |
+| `result.word.FIRST` | FIRST | जाँचें | तपासा |
+| `result.word.NO_RED_FLAGS_FOUND` | No red flags found. | कोई चेतावनी संकेत नहीं मिला। | धोक्याची खूण आढळली नाही. |
+| `result.sub.STOP` | Pause payment and travel. Verify the offer first. | भुगतान और यात्रा रोकें। पहले ऑफ़र की जाँच करें। | पैसे देणे आणि प्रवास थांबवा. आधी ऑफर तपासा. |
+| `result.sub.VERIFY_FIRST` | A few details need confirmation. | कुछ बातों की पुष्टि ज़रूरी है। | काही गोष्टींची खात्री करणे गरजेचे आहे. |
+| `result.sub.NO_RED_FLAGS_FOUND` | Confirm with the Protector of Emigrants before paying. | पैसे देने से पहले Protector of Emigrants (प्रवासी संरक्षक) से पुष्टि करें। | पैसे देण्याआधी Protector of Emigrants (प्रवासी संरक्षक) यांच्याकडून खात्री करा. |
+| `result.tag.STOP` | STOP | रुकें | थांबा |
+| `result.tag.VERIFY_FIRST` | VERIFY FIRST | पहले जाँचें | आधी तपासा |
+| `result.tag.NO_RED_FLAGS_FOUND` | NO RED FLAGS FOUND | कोई चेतावनी संकेत नहीं | धोक्याची खूण नाही |
+| `result.points_heading` | Points from this check | इस जाँच के बिंदु | या तपासणीतील मुद्दे |
+| `result.passed` | Checks that passed ({count}) | जिन जाँचों में कुछ नहीं मिला ({count}) | ज्या तपासण्यांत काही आढळले नाही ({count}) |
+| `result.severity` | Severity | गंभीरता | गांभीर्य |
+| `result.not_clearance` | This is a check, not a clearance. Still verify independently. | यह एक जाँच है, मंज़ूरी नहीं। फिर भी खुद अलग से जाँच करें। | ही एक तपासणी आहे, मंजुरी नाही. तरीही स्वतः वेगळी तपासणी करा. |
+| `result.cta_evidence` | See the evidence | सबूत देखें | पुरावा पहा |
+| `result.cta_report` | View report | रिपोर्ट देखें | अहवाल पहा |
+| `result.get_help` | Get reporting help | शिकायत में मदद लें | तक्रारीसाठी मदत घ्या |
+| `result.plan_checkins` | Plan check-ins | चेक-इन तय करें | चेक-इन ठरवा |
+| `result.foot_confirm` | Confirm with the Protector of Emigrants before paying. | पैसे देने से पहले Protector of Emigrants से पुष्टि करें। | पैसे देण्याआधी Protector of Emigrants यांच्याकडून खात्री करा. |
+| `result.foot_quotes` | Show source quotes + list date | मूल उद्धरण और सूची की तारीख़ देखें | मूळ उतारे आणि यादीची तारीख पहा |
+| `evidence.title` | See why it was flagged. | देखें, इसे क्यों चिह्नित किया गया। | याला खूण का केली ते पहा. |
+| `evidence.offer_text` | Offer text | ऑफ़र का टेक्स्ट | ऑफरचा मजकूर |
+| `evidence.quoted_line` | Quoted line | उद्धृत पंक्ति | उद्धृत ओळ |
+| `evidence.counter` | Flag {n} of {total} | {total} में से {n}वाँ बिंदु | {total} पैकी {n} वा मुद्दा |
+| `evidence.prev` | Previous flag | पिछला बिंदु | मागचा मुद्दा |
+| `evidence.next` | Next flag | अगला बिंदु | पुढचा मुद्दा |
+| `evidence.no_quote` | No quote: this point is about something the offer does not say. | कोई उद्धरण नहीं: यह बिंदु उस बात के बारे में है जो ऑफ़र में नहीं लिखी। | उतारा नाही: हा मुद्दा ऑफरमध्ये न लिहिलेल्या गोष्टीबद्दल आहे. |
+| `evidence.rule_reference` | Rule reference | नियम का स्रोत | नियमाचा स्रोत |
+| `evidence.heuristic_note` | Warning sign, not a rule. No official rule is linked. | चेतावनी संकेत, नियम नहीं। कोई सरकारी नियम जुड़ा नहीं है। | धोक्याची खूण, नियम नाही. कोणताही सरकारी नियम जोडलेला नाही. |
+| `evidence.ask_next` | What to ask next | आगे क्या पूछें | पुढे काय विचारायचे |
+| `evidence.none` | Nothing was flagged in this check. | इस जाँच में कुछ भी चिह्नित नहीं हुआ। | या तपासणीत कशावरही खूण झाली नाही. |
+| `evidence.download` | Download report | रिपोर्ट डाउनलोड करें | अहवाल डाउनलोड करा |
+| `evidence.back` | Back to result | नतीजे पर वापस | निकालाकडे परत |
+| `plan.demo_only` | Demo alerts only | सिर्फ़ डेमो अलर्ट | फक्त डेमो अलर्ट |
+| `plan.title` | Keep family close. | परिवार को साथ रखें। | कुटुंबाला सोबत ठेवा. |
+| `plan.sub` | Add up to two trusted contacts and a check-in time. | दो भरोसेमंद संपर्क और चेक-इन का समय जोड़ें। | दोन विश्वासू संपर्क आणि चेक-इनची वेळ जोडा. |
+| `plan.you` | You | आप | तुम्ही |
+| `plan.contact_n` | Contact {n} | संपर्क {n} | संपर्क {n} |
+| `plan.optional` | optional | वैकल्पिक | ऐच्छिक |
+| `plan.name_placeholder` | Name or alias | नाम या उपनाम | नाव किंवा टोपणनाव |
+| `plan.channel_placeholder` | How to reach them | उनसे संपर्क कैसे करें | संपर्क कसा करायचा |
+| `plan.half_contact` | Fill in both the name and how to reach each contact, or leave both empty. | हर संपर्क का नाम और संपर्क का तरीका दोनों भरें, या दोनों खाली छोड़ें। | प्रत्येक संपर्काचे नाव आणि संपर्काची पद्धत दोन्ही भरा, किंवा दोन्ही रिकामे ठेवा. |
+| `plan.permission` | I have their permission. | मेरे पास उनकी अनुमति है। | माझ्याकडे त्यांची परवानगी आहे. |
+| `plan.cta` | Create check-in plan | चेक-इन योजना बनाएँ | चेक-इन योजना तयार करा |
+| `plan.interval_label` | Check-in time | चेक-इन का समय | चेक-इनची वेळ |
+| `plan.ring_label` | Check in every {hours} hours | हर {hours} घंटे में चेक-इन | दर {hours} तासांनी चेक-इन |
+| `plan.hours_short` | {hours}h | {hours} घं | {hours} ता |
+| `plan.every` | Check in every | चेक-इन हर | चेक-इन दर |
+| `plan.hours_option` | {hours} hours | {hours} घंटे | {hours} तास |
+| `plan.trip` | Add trip details | यात्रा की जानकारी जोड़ें | प्रवासाची माहिती जोडा |
+| `plan.need_title` | Check an offer first. | पहले एक ऑफ़र जाँचें। | आधी एक ऑफर तपासा. |
+| `plan.need_body` | Check-ins are linked to a checked offer. Check one, then make a plan. | चेक-इन एक जाँचे गए ऑफ़र से जुड़े होते हैं। पहले जाँच करें, फिर योजना बनाएँ। | चेक-इन तपासलेल्या ऑफरशी जोडलेले असतात. आधी तपासा, मग योजना करा. |
+| `checkin.title_ok` | Time to check in. | चेक-इन का समय। | चेक-इनची वेळ. |
+| `checkin.title_due` | Check in now. | अभी चेक-इन करें। | आता चेक-इन करा. |
+| `checkin.title_missed` | Check-in missed. | चेक-इन छूट गया। | चेक-इन चुकले. |
+| `checkin.simulated` | Simulated | सिमुलेटेड | सिम्युलेटेड |
+| `checkin.missed_note` | Your contacts got a simulated alert. | आपके संपर्कों को सिमुलेटेड अलर्ट गया। | तुमच्या संपर्कांना सिम्युलेटेड अलर्ट गेला. |
+| `checkin.see_family` | See the family view | परिवार का दृश्य देखें | कुटुंबाचे दृश्य पहा |
+| `checkin.today` | Today | आज | आज |
+| `checkin.tomorrow` | Tomorrow | कल | उद्या |
+| `checkin.yesterday` | Yesterday | बीता कल | काल |
+| `checkin.contacts` | {count} family contacts | {count} परिवार संपर्क | {count} कुटुंबीय संपर्क |
+| `checkin.cta` | I'm okay | मैं ठीक हूँ | मी ठीक आहे |
+| `checkin.done` | Checked in. Your next check-in time has moved. | चेक-इन हो गया। अगले चेक-इन का समय आगे बढ़ गया। | चेक-इन झाले. पुढच्या चेक-इनची वेळ पुढे गेली. |
+| `checkin.trip` | Trip details | यात्रा की जानकारी | प्रवासाची माहिती |
+| `checkin.change_time` | Change time | समय बदलें | वेळ बदला |
+| `checkin.get_help` | Get help | मदद लें | मदत घ्या |
+| `checkin.no_trip` | No trip details added. | यात्रा की कोई जानकारी नहीं जोड़ी गई। | प्रवासाची माहिती जोडलेली नाही. |
+| `checkin.contacts_list` | Contacts: {names} | संपर्क: {names} | संपर्क: {names} |
+| `checkin.timeline` | Check-in timeline | चेक-इन समयरेखा | चेक-इन कालरेषा |
+| `checkin.previous` | Previous check-in | पिछला चेक-इन | मागचे चेक-इन |
+| `checkin.next` | Next check-in | अगला चेक-इन | पुढचे चेक-इन |
+| `checkin.no_plan_title` | No check-in plan yet. | अभी कोई चेक-इन योजना नहीं। | अजून चेक-इन योजना नाही. |
+| `checkin.no_plan_body` | Add up to two contacts and choose how often you will check in. | दो संपर्क जोड़ें और चुनें कि कितनी बार चेक-इन करेंगे। | दोन संपर्क जोडा आणि किती वेळा चेक-इन कराल ते निवडा. |
+| `family2.simulated` | Simulated alert | सिमुलेटेड अलर्ट | सिम्युलेटेड अलर्ट |
+| `family2.phone_view` | Family phone view | परिवार के फ़ोन का दृश्य | कुटुंबाच्या फोनचे दृश्य |
+| `family2.title` | Check-in missed. | चेक-इन छूट गया। | चेक-इन चुकले. |
+| `family2.title_none` | No alerts yet. | अभी कोई अलर्ट नहीं। | अजून अलर्ट नाही. |
+| `family2.sub` | Try contacting them first. | पहले उनसे संपर्क करने की कोशिश करें। | आधी त्यांच्याशी संपर्क करून पहा. |
+| `family2.sub_none` | If a check-in is missed, a simulated alert shows here. | चेक-इन छूटने पर यहाँ सिमुलेटेड अलर्ट दिखेगा। | चेक-इन चुकल्यास इथे सिम्युलेटेड अलर्ट दिसेल. |
+| `family2.cta_report` | View trip & report | यात्रा और रिपोर्ट देखें | प्रवास आणि अहवाल पहा |
+| `family2.back_checkin` | Back to check-in | चेक-इन पर वापस | चेक-इनकडे परत |
+| `family2.reporting` | Reporting options | शिकायत के विकल्प | तक्रारीचे पर्याय |
+| `family2.to` | To {alias} via {channel} | {alias} को, {channel} से | {alias} यांना, {channel} द्वारे |
+| `help.demo_directory` | Demo directory | डेमो सूची | डेमो यादी |
+| `help.title` | Find the right help. | सही मदद पाएँ। | योग्य मदत शोधा. |
+| `help.verify` | Verify on the official site before use | इस्तेमाल से पहले सरकारी साइट पर जाँचें | वापरण्याआधी सरकारी साइटवर तपासा |
+| `help.mea.name` | MEA | MEA | MEA |
+| `help.mea.what` | Agent complaints helpline | एजेंट शिकायत हेल्पलाइन | एजंट तक्रार हेल्पलाइन |
+| `help.madad.name` | MADAD | MADAD | MADAD |
+| `help.madad.what` | Consular help | कांसुलर मदद | कॉन्सुलर मदत |
+| `help.embassy.name` | Embassy | दूतावास | दूतावास |
+| `help.embassy.what` | Indian mission overseas | विदेश में भारतीय मिशन | परदेशातील भारतीय मिशन |
+| `help.cyber.name` | 1930 | 1930 | 1930 |
+| `help.cyber.what` | Cyber crime and lost money | साइबर अपराध, ऑनलाइन पैसे का नुकसान | सायबर गुन्हा, ऑनलाइन पैशांचे नुकसान |
+| `help.police.name` | Police | पुलिस | पोलीस |
+| `help.police.what` | Report a crime locally | स्थानीय पुलिस में शिकायत | स्थानिक पोलिसांकडे तक्रार |
+| `help.emigrate.name` | eMigrate | eMigrate | eMigrate |
+| `help.emigrate.what` | Check an agent's RC number | एजेंट का RC नंबर जाँचें | एजंटचा RC नंबर तपासा |
+| `help.report_zip` | Get report ZIP | रिपोर्ट ZIP पाएँ | अहवाल ZIP मिळवा |
+| `help.zip_note` | The ZIP has the offer, quotes and rule results. Nothing is sent anywhere. | ZIP में ऑफ़र, उद्धरण और नियमों के नतीजे हैं। कुछ भी कहीं नहीं भेजा जाता। | ZIP मध्ये ऑफर, उतारे आणि नियमांचे निकाल आहेत. काहीही कुठेही पाठवले जात नाही. |
+| `help.zip_none` | Check an offer to make a report ZIP. | रिपोर्ट ZIP के लिए पहले ऑफ़र जाँचें। | अहवाल ZIP साठी आधी ऑफर तपासा. |
+| `help.limit_legal` | Not legal advice | कानूनी सलाह नहीं | कायदेशीर सल्ला नाही |
+| `help.limit_report` | No automatic reporting | अपने-आप कोई शिकायत नहीं | आपोआप तक्रार नाही |
+| `help.limit_demo` | Demo data is synthetic | डेमो डेटा काल्पनिक है | डेमो डेटा काल्पनिक आहे |
+| `help.limit_wrong` | It can be wrong | यह गलत हो सकता है | हे चुकू शकते |
+| `login.hero` | See patterns. Respect privacy. | पैटर्न देखें। निजता का सम्मान करें। | पॅटर्न पहा. गोपनीयतेचा आदर करा. |
+| `login.restricted` | Restricted access | सीमित पहुँच | मर्यादित प्रवेश |
+| `login.title` | Institutional access | संस्थागत लॉगिन | संस्थात्मक लॉगिन |
+| `login.show_password` | Show password | पासवर्ड दिखाएँ | पासवर्ड दाखवा |
+| `login.cta` | Enter demo | डेमो में जाएँ | डेमोमध्ये जा |
+| `pmap.title` | Patterns, at a glance. | पैटर्न, एक नज़र में। | पॅटर्न, एका नजरेत. |
+| `pmap.synthetic` | Synthetic data | काल्पनिक डेटा | काल्पनिक डेटा |
+| `pmap.filter_label` | Highlight a district | ज़िला चुनें | जिल्हा निवडा |
+| `pmap.all_districts` | All districts | सभी ज़िले | सर्व जिल्हे |
+| `pmap.illustrative` | Illustrative map | उदाहरण नक्शा | उदाहरण नकाशा |
+| `pmap.demo` | Demo | डेमो | डेमो |
+| `pmap.repeated_hashes` | Repeated hashes | दोहराए गए हैश | पुन्हा आलेले हॅश |
+| `pmap.chips_label` | Highlighted districts | चुने गए ज़िले | निवडलेले जिल्हे |
+| `pmap.explore` | Explore patterns | पैटर्न देखें | पॅटर्न पहा |
+| `pmap.hash_note` | Hashes link reports; repetition alone does not establish wrongdoing. | हैश रिपोर्टों को जोड़ते हैं; सिर्फ़ दोहराव से गलत काम साबित नहीं होता। | हॅश अहवाल जोडतात; फक्त पुनरावृत्तीने चुकीचे काम सिद्ध होत नाही. |
+| `pmap.row` | {count} reports, {n} districts | {count} रिपोर्ट, {n} ज़िले | {count} अहवाल, {n} जिल्हे |
+| `pdetail.title_agent` | One contact. {n} districts. | एक संपर्क। {n} ज़िले। | एक संपर्क. {n} जिल्हे. |
+| `pdetail.title_template` | One template. {n} districts. | एक जैसा ऑफ़र। {n} ज़िले। | एकसारखी ऑफर. {n} जिल्हे. |
+| `pdetail.hash` | Hash | हैश | हॅश |
+| `pdetail.copy` | Copy full hash | पूरा हैश कॉपी करें | पूर्ण हॅश कॉपी करा |
+| `pdetail.copied` | Copied | कॉपी हुआ | कॉपी झाले |
+| `pdetail.graph_label` | Hash {hash} linked to {districts} | हैश {hash}, जुड़े ज़िले: {districts} | हॅश {hash}, जोडलेले जिल्हे: {districts} |
+| `pdetail.side_label` | Pattern details | पैटर्न की जानकारी | पॅटर्नची माहिती |
+| `pdetail.reports` | {count} demo reports | {count} डेमो रिपोर्ट | {count} डेमो अहवाल |
+| `pdetail.reports_body` | {count} synthetic reports share this hash across {n} districts. | {n} ज़िलों की {count} काल्पनिक रिपोर्टों में यही हैश है। | {n} जिल्ह्यांतील {count} काल्पनिक अहवालांत हाच हॅश आहे. |
+| `pdetail.districts` | {n} districts | {n} ज़िले | {n} जिल्हे |
+| `pdetail.district_total` | {count} reports in district | ज़िले में {count} रिपोर्ट | जिल्ह्यात {count} अहवाल |
+| `pdetail.full_hash` | Full hash | पूरा हैश | पूर्ण हॅश |
+| `pdetail.hash_explain` | A one-way hash. It links reports without showing the phone number or text. | एकतरफ़ा हैश। यह फ़ोन नंबर या टेक्स्ट दिखाए बिना रिपोर्टों को जोड़ता है। | एकतर्फी हॅश. फोन नंबर किंवा मजकूर न दाखवता तो अहवाल जोडतो. |
+| `pdetail.not_found` | This pattern is not in the current data. | यह पैटर्न मौजूदा डेटा में नहीं है। | हा पॅटर्न सध्याच्या डेटामध्ये नाही. |
+| `pdetail.back` | Back to map | नक्शे पर वापस | नकाशाकडे परत |
+| `value.token.upi` | UPI | UPI | UPI |
+| `value.token.cash` | Cash | नकद | रोख |
+| `value.token.bank_transfer` | Bank transfer | बैंक ट्रांसफ़र | बँक ट्रान्सफर |
+| `value.token.card` | Card | कार्ड | कार्ड |
+| `value.token.crypto` | Crypto | क्रिप्टो | क्रिप्टो |
+| `value.token.other` | Other | अन्य | इतर |
+| `value.token.whatsapp` | WhatsApp | WhatsApp | WhatsApp |
+| `value.token.telegram` | Telegram | Telegram | Telegram |
+| `value.token.instagram` | Instagram | Instagram | Instagram |
+| `value.token.facebook` | Facebook | Facebook | Facebook |
+| `value.token.email` | Email | ईमेल | ईमेल |
+| `value.token.website` | Website | वेबसाइट | वेबसाइट |
+| `value.token.phone` | Phone | फ़ोन | फोन |
+| `value.token.office_address` | Office address | दफ़्तर का पता | कार्यालयाचा पत्ता |
+| `value.token.employer` | Employer | नियोक्ता | नियोक्ता |
+| `value.token.agent` | Agent | एजेंट | एजंट |
+| `value.token.worker` | Worker | कामगार | कामगार |
+| `error.unavailable` | This feature is not available on the server yet. | यह सुविधा अभी सर्वर पर उपलब्ध नहीं है। | ही सुविधा अजून सर्व्हरवर उपलब्ध नाही. |

@@ -37,3 +37,16 @@
   .pattern-map__panel { border-top: 0; border-left: 1px solid #d5dfe3; }
   .pattern-map__header { padding: 20px; }
 }
+
+/* Brand paper mode (no basemap, mock 13): grey districts on paper, red emphasis. */
+.pattern-map--paper { color: #111; background: transparent; border: 0; border-radius: 0; }
+.pattern-map--paper .leaflet-container { background: #f7f7f3; border-radius: 22px; }
+.pattern-map--paper .pattern-map__legend, .pattern-map--paper .pattern-map__note, .pattern-map--paper .pattern-map__counts { border-top: 0; padding-inline: 4px; color: #55554f; }
+.pattern-map--paper .pattern-map__legend i { border-color: #b9b9b2; border-radius: 4px; }
+.pattern-map--paper button:focus-visible, .pattern-map--paper summary:focus-visible { outline-color: #111; }
+.pattern-map--paper .leaflet-tooltip { font-family: inherit; border-radius: 10px; border: 0; box-shadow: 0 8px 24px -10px rgb(17 17 17 / .35); padding: 6px 10px; }
+.pattern-map--paper .leaflet-control-attribution { background: rgb(247 247 243 / .9); color: #55554f; border-radius: 8px 0 0 0; }
+.pattern-map--paper .leaflet-control-attribution a { color: #111; }
+.pattern-map--canvas .pattern-map__layout { grid-template-columns: minmax(0, 1fr); }
+.pattern-map--canvas .pattern-map__canvas { height: clamp(320px, 50vw, 540px); }
+.pattern-map__sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; padding: 0; border: 0; }

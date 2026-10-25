@@ -1,6 +1,6 @@
 import { useEffect, useId, useMemo, useState } from 'react';
 import { geoJSON as leafletGeoJSON } from 'leaflet';
-import { GeoJSON, MapContainer, TileLayer, useMap } from 'react-leaflet';
+import { CircleMarker, GeoJSON, MapContainer, TileLayer, useMap } from 'react-leaflet';
 import type { Feature } from 'geojson';
 import { normalizeDistrict } from './districtNames';
 import { parseDistrictGeoJSON } from './geoData';
@@ -39,9 +39,17 @@ const bins = [
   { min: 26, label: '26–50', color: '#30858f' },
   { min: 51, label: '51+', color: '#15515e' },
 ];
+// Paper palette for the no-basemap brand look: grey districts, red emphasis (mock 13).
+const paperBins = [
+  { min: 0, label: '0', color: '#efefea' },
+  { min: 1, label: '1–10', color: '#dfdfd9' },
+  { min: 11, label: '11–25', color: '#cfcfc8' },
+  { min: 26, label: '26–50', color: '#bdbdb5' },
+  { min: 51, label: '51+', color: '#a6a69e' },
+];
 const noDataColor = '#e5e7eb';
-const fillColor = (count: number | undefined) => count === undefined ? noDataColor
-  : bins.reduce((color, bin) => count >= bin.min ? bin.color : color, bins[0].color);
+const fillColor = (count: number | undefined, scale = bins) => count === undefined ? noDataColor
+  : scale.reduce((color, bin) => count >= bin.min ? bin.color : color, scale[0].color);
 const shortHash = (hash: string) => hash.slice(0, 12) + '…' + hash.slice(-6);
 
 function MapViewport({ geo }: { geo: DistrictGeoJSON | null }) {
@@ -57,7 +65,18 @@ function MapViewport({ geo }: { geo: DistrictGeoJSON | null }) {
   return null;
 }
 
-export function PatternMap({ data, labels }: { data: MapData; labels?: Partial<Record<string, string>> }) {
+type MapProps = {
+  data: MapData;
+  labels?: Partial<Record<string, string>>;
+  /** false = no background tiles (brand paper look; no third-party requests). */
+  basemap?: boolean;
+  /** 'canvas' renders only the map, legend and count list; the caller supplies headings and panels. */
+  variant?: 'full' | 'canvas';
+  /** Districts to emphasise; overrides the internal agent selection when given. */
+  highlight?: string[];
+};
+
+export function PatternMap({ data, labels, basemap = true, variant = 'full', highlight }: MapProps) {
   const t = { ...defaults };
   for (const [key, value] of Object.entries(labels ?? {})) {
     if (value !== undefined) t[key] = value;
@@ -68,7 +87,10 @@ export function PatternMap({ data, labels }: { data: MapData; labels?: Partial<R
   const [attempt, setAttempt] = useState(0);
   const [selectedHash, setSelectedHash] = useState<string | null>(null);
   const selectedAgent = data.repeated_agents.find(agent => agent.agent_phone_hash === selectedHash);
-  const highlighted = new Set(selectedAgent?.districts.map(normalizeDistrict));
+  const paper = !basemap;
+  const scale = paper ? paperBins : bins;
+  const highlighted = new Set((highlight ?? selectedAgent?.districts ?? []).map(normalizeDistrict));
+  const dimOthers = highlight ? highlight.length > 0 : !!selectedAgent;
   const counts = useMemo(() => {
     const result = new Map<string, number>();
     for (const item of data.districts) {
@@ -95,9 +117,14 @@ export function PatternMap({ data, labels }: { data: MapData; labels?: Partial<R
   const boundaryAttribution = 'District boundaries: <a href="https://www.geoboundaries.org/">geoBoundaries</a> / Pathways Data, '
     + '<a href="https://opendatacommons.org/licenses/odbl/1-0/">ODbL 1.0</a> (simplified)';
 
+  const markers = paper && geo ? geo.features
+    .filter(feature => highlighted.has(normalizeDistrict(feature.properties.district)))
+    .map(feature => ({ name: feature.properties.district, at: leafletGeoJSON(feature).getBounds().getCenter() })) : [];
+  const canvasOnly = variant === 'canvas';
+
   return (
-    <section className="pattern-map" aria-labelledby={headingId}>
-      <header className="pattern-map__header">
+    <section className={`pattern-map${paper ? ' pattern-map--paper' : ''}${canvasOnly ? ' pattern-map--canvas' : ''}`} aria-labelledby={headingId}>
+      <header className={canvasOnly ? 'pattern-map__header pattern-map__sr' : 'pattern-map__header'}>
         <h2 id={headingId}>{t.title}</h2>
         {data.synthetic && <strong className="pattern-map__badge">{t.syntheticData}</strong>}
         <p>{t.generatedAt}: <time dateTime={data.generated_at}>{data.generated_at}</time></p>
@@ -105,23 +132,29 @@ export function PatternMap({ data, labels }: { data: MapData; labels?: Partial<R
       <div className="pattern-map__layout">
         <div className="pattern-map__visual">
           <div className="pattern-map__canvas" role="region" aria-label={t.mapLabel}>
-            <MapContainer center={[19, 76.5]} zoom={6} minZoom={5} scrollWheelZoom={false}>
-              <TileLayer
+            <MapContainer center={[19, 76.5]} zoom={6} minZoom={5} scrollWheelZoom={false} zoomControl={!canvasOnly} zoomSnap={0.25}>
+              {basemap && <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution={'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'}
                 maxZoom={19}
                 referrerPolicy="strict-origin-when-cross-origin"
-              />
+              />}
               <MapViewport geo={geo} />
               {geo && <GeoJSON
-                key={JSON.stringify([data.districts, t.reports, t.noData])}
+                key={JSON.stringify([data.districts, t.reports, t.noData, paper])}
                 data={geo}
                 attribution={boundaryAttribution}
                 style={feature => {
                   const active = highlighted.has(normalizeDistrict(String(feature?.properties?.district ?? '')));
-                  return {
+                  return paper ? {
+                    fillColor: feature ? fillColor(districtCount(feature), scale) : noDataColor,
+                    fillOpacity: dimOthers && !active ? 0.75 : 1,
+                    color: active ? '#c62828' : '#ffffff',
+                    weight: active ? 2.5 : 1.2,
+                    opacity: 1,
+                  } : {
                     fillColor: feature ? fillColor(districtCount(feature)) : noDataColor,
-                    fillOpacity: selectedAgent && !active ? 0.3 : 0.8,
+                    fillOpacity: dimOthers && !active ? 0.3 : 0.8,
                     color: active ? '#9a3412' : '#ffffff',
                     weight: active ? 3 : 1,
                     opacity: 1,
@@ -135,6 +168,10 @@ export function PatternMap({ data, labels }: { data: MapData; labels?: Partial<R
                   layer.bindTooltip(tooltip, { sticky: true });
                 }}
               />}
+              {markers.map(marker => <CircleMarker key={marker.name + 'halo'} center={marker.at} radius={20} interactive={false}
+                pathOptions={{ stroke: false, fillColor: '#c62828', fillOpacity: 0.16 }} />)}
+              {markers.map(marker => <CircleMarker key={marker.name} center={marker.at} radius={8} interactive={false}
+                pathOptions={{ color: '#ffffff', weight: 2, fillColor: '#c62828', fillOpacity: 1 }} />)}
             </MapContainer>
           </div>
           {!geo && <div className="pattern-map__status" role={failed ? 'alert' : 'status'}>
@@ -145,7 +182,7 @@ export function PatternMap({ data, labels }: { data: MapData; labels?: Partial<R
             <strong>{t.legend}</strong>
             <ul>
               <li><i style={{ backgroundColor: noDataColor }} aria-hidden="true" />{t.noData}</li>
-              {bins.map(bin => <li key={bin.min}><i style={{ backgroundColor: bin.color }} aria-hidden="true" />{bin.label}</li>)}
+              {scale.map(bin => <li key={bin.min}><i style={{ backgroundColor: bin.color }} aria-hidden="true" />{bin.label}</li>)}
             </ul>
           </div>
           <p className="pattern-map__note">{t.boundaryNote}</p>
@@ -154,7 +191,7 @@ export function PatternMap({ data, labels }: { data: MapData; labels?: Partial<R
             <ul>{data.districts.map((item, index) => <li key={index}>{item.district}: {item.count} {t.reports}</li>)}</ul>
           </details>
         </div>
-        <aside className="pattern-map__panel" aria-label={t.repeatedAgents}>
+        {!canvasOnly && <aside className="pattern-map__panel" aria-label={t.repeatedAgents}>
           <h3>{t.repeatedAgents}</h3>
           <p>{t.hashNote}</p>
           <p>{t.selectAgent}</p>
@@ -184,7 +221,7 @@ export function PatternMap({ data, labels }: { data: MapData; labels?: Partial<R
               <span>{template.districts.join(', ')}</span>
             </li>)}
           </ul>
-        </aside>
+        </aside>}
       </div>
     </section>
   );

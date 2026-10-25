@@ -1,164 +1,232 @@
 {
   "results": [
     {
-      "filename": "01-check-mobile.png",
-      "bytes": 162105,
+      "filename": "01-home-mobile.png",
+      "bytes": 331257,
       "width": 780,
-      "height": 2050,
+      "height": 2644,
       "scale": "device"
     },
     {
-      "filename": "02-verdict-stop-mobile.png",
-      "bytes": 893783,
+      "filename": "02-submit-mobile.png",
+      "bytes": 172834,
       "width": 780,
-      "height": 9588,
+      "height": 2522,
       "scale": "device"
     },
     {
-      "filename": "03-rule-quote-mobile.png",
-      "bytes": 61576,
-      "width": 716,
-      "height": 662,
-      "scale": "device"
-    },
-    {
-      "filename": "04-near-miss-mobile.png",
-      "bytes": 923232,
+      "filename": "03-review-mobile.png",
+      "bytes": 232272,
       "width": 780,
-      "height": 10220,
+      "height": 2884,
       "scale": "device"
     },
     {
-      "filename": "05-checkin-plan-mobile.png",
-      "bytes": 205702,
+      "filename": "04-result-stop-mobile.png",
+      "bytes": 542182,
       "width": 780,
-      "height": 2894,
+      "height": 5942,
       "scale": "device"
     },
     {
-      "filename": "06-missed-mobile.png",
-      "bytes": 206267,
+      "filename": "05-evidence-mobile.png",
+      "bytes": 289197,
       "width": 780,
-      "height": 2894,
+      "height": 3154,
       "scale": "device"
     },
     {
-      "filename": "07-family-mobile.png",
-      "bytes": 125325,
+      "filename": "06-result-verify-mobile.png",
+      "bytes": 331360,
       "width": 780,
-      "height": 1688,
+      "height": 4000,
       "scale": "device"
     },
     {
-      "filename": "08-map-mobile.png",
-      "bytes": 744361,
+      "filename": "07-safety-setup-mobile.png",
+      "bytes": 380874,
       "width": 780,
-      "height": 4812,
+      "height": 4588,
       "scale": "device"
     },
     {
-      "filename": "09-hindi-mobile.png",
-      "bytes": 843709,
+      "filename": "08-checkin-mobile.png",
+      "bytes": 308050,
       "width": 780,
-      "height": 9338,
+      "height": 3492,
       "scale": "device"
     },
     {
-      "filename": "10-marathi-mobile.png",
-      "bytes": 864011,
+      "filename": "09-missed-mobile.png",
+      "bytes": 314279,
       "width": 780,
-      "height": 9502,
+      "height": 3692,
       "scale": "device"
     },
     {
-      "filename": "11-limits-mobile.png",
-      "bytes": 357164,
+      "filename": "10-family-mobile.png",
+      "bytes": 310292,
       "width": 780,
-      "height": 3180,
+      "height": 3488,
       "scale": "device"
     },
     {
-      "filename": "01-check-desktop.png",
-      "bytes": 75550,
+      "filename": "11-help-mobile.png",
+      "bytes": 475892,
+      "width": 780,
+      "height": 5826,
+      "scale": "device"
+    },
+    {
+      "filename": "12-login-mobile.png",
+      "bytes": 180412,
+      "width": 780,
+      "height": 2450,
+      "scale": "device"
+    },
+    {
+      "filename": "13-map-mobile.png",
+      "bytes": 478694,
+      "width": 780,
+      "height": 5666,
+      "scale": "device"
+    },
+    {
+      "filename": "14-pattern-mobile.png",
+      "bytes": 247737,
+      "width": 780,
+      "height": 2864,
+      "scale": "device"
+    },
+    {
+      "filename": "15-hindi-mobile.png",
+      "bytes": 463386,
+      "width": 780,
+      "height": 4844,
+      "scale": "device"
+    },
+    {
+      "filename": "16-marathi-mobile.png",
+      "bytes": 480260,
+      "width": 780,
+      "height": 5048,
+      "scale": "device"
+    },
+    {
+      "filename": "01-home-desktop.png",
+      "bytes": 216742,
       "width": 1366,
-      "height": 900,
+      "height": 1158,
       "scale": "device"
     },
     {
-      "filename": "02-verdict-stop-desktop.png",
-      "bytes": 404119,
+      "filename": "02-submit-desktop.png",
+      "bytes": 149604,
       "width": 1366,
-      "height": 3898,
+      "height": 1033,
       "scale": "device"
     },
     {
-      "filename": "03-rule-quote-desktop.png",
-      "bytes": 26018,
-      "width": 728,
-      "height": 253,
-      "scale": "device"
-    },
-    {
-      "filename": "04-near-miss-desktop.png",
-      "bytes": 419382,
+      "filename": "03-review-desktop.png",
+      "bytes": 193378,
       "width": 1366,
-      "height": 4100,
+      "height": 1112,
       "scale": "device"
     },
     {
-      "filename": "05-checkin-plan-desktop.png",
-      "bytes": 95453,
+      "filename": "04-result-stop-desktop.png",
+      "bytes": 364956,
       "width": 1366,
-      "height": 1255,
+      "height": 2596,
       "scale": "device"
     },
     {
-      "filename": "06-missed-desktop.png",
-      "bytes": 95431,
+      "filename": "05-evidence-desktop.png",
+      "bytes": 178535,
       "width": 1366,
-      "height": 1255,
+      "height": 1056,
       "scale": "device"
     },
     {
-      "filename": "07-family-desktop.png",
-      "bytes": 61932,
+      "filename": "06-result-verify-desktop.png",
+      "bytes": 213301,
       "width": 1366,
-      "height": 900,
+      "height": 1510,
       "scale": "device"
     },
     {
-      "filename": "08-map-desktop.png",
-      "bytes": 488956,
+      "filename": "07-safety-setup-desktop.png",
+      "bytes": 200069,
       "width": 1366,
-      "height": 1706,
+      "height": 1186,
       "scale": "device"
     },
     {
-      "filename": "09-hindi-desktop.png",
-      "bytes": 340926,
+      "filename": "08-checkin-desktop.png",
+      "bytes": 163491,
       "width": 1366,
-      "height": 3797,
+      "height": 1292,
       "scale": "device"
     },
     {
-      "filename": "10-marathi-desktop.png",
-      "bytes": 345625,
+      "filename": "09-missed-desktop.png",
+      "bytes": 169505,
       "width": 1366,
-      "height": 3822,
+      "height": 1368,
       "scale": "device"
     },
     {
-      "filename": "11-limits-desktop.png",
-      "bytes": 169307,
+      "filename": "10-family-desktop.png",
+      "bytes": 165215,
       "width": 1366,
-      "height": 1038,
+      "height": 1273,
+      "scale": "device"
+    },
+    {
+      "filename": "11-help-desktop.png",
+      "bytes": 243694,
+      "width": 1366,
+      "height": 1774,
+      "scale": "device"
+    },
+    {
+      "filename": "12-login-desktop.png",
+      "bytes": 116917,
+      "width": 1366,
+      "height": 953,
+      "scale": "device"
+    },
+    {
+      "filename": "13-map-desktop.png",
+      "bytes": 277388,
+      "width": 1366,
+      "height": 2272,
+      "scale": "device"
+    },
+    {
+      "filename": "14-pattern-desktop.png",
+      "bytes": 169127,
+      "width": 1366,
+      "height": 1161,
+      "scale": "device"
+    },
+    {
+      "filename": "15-hindi-desktop.png",
+      "bytes": 332457,
+      "width": 1366,
+      "height": 2241,
+      "scale": "device"
+    },
+    {
+      "filename": "16-marathi-desktop.png",
+      "bytes": 341218,
+      "width": 1366,
+      "height": 2263,
       "scale": "device"
     }
   ],
   "warnings": [
     "mobile: Recruiter-list date unavailable in the app: Agent list not checked yet.",
-    "mobile: Untranslated app copy on Limits: limits.what_it_does_body, limits.what_it_does_not_body",
-    "desktop: Recruiter-list date unavailable in the app: Agent list not checked yet.",
-    "desktop: Untranslated app copy on Limits: limits.what_it_does_body, limits.what_it_does_not_body"
+    "desktop: Recruiter-list date unavailable in the app: Agent list not checked yet."
   ]
 }
