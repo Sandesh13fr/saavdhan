@@ -1,0 +1,39 @@
+.pattern-map { color: #172d36; background: #fff; border: 1px solid #d5dfe3; border-radius: 12px; overflow: hidden; }
+.pattern-map, .pattern-map * { box-sizing: border-box; }
+.pattern-map__header { padding: 16px; border-bottom: 1px solid #d5dfe3; }
+.pattern-map h2 { margin: 0 0 12px; font-size: 1.25rem; line-height: 1.4; }
+.pattern-map h3 { margin: 0 0 12px; font-size: 1.05rem; }
+.pattern-map p { margin: 10px 0; line-height: 1.5; }
+.pattern-map__header p, .pattern-map__note { font-size: .8rem; overflow-wrap: anywhere; }
+.pattern-map__badge { display: inline-block; padding: 5px 10px; border: 1px solid #854d0e; border-radius: 4px; background: #fef3c7; color: #713f12; font-size: .8rem; letter-spacing: .05em; }
+.pattern-map__layout { display: grid; grid-template-columns: minmax(0, 1fr); }
+.pattern-map__visual { min-width: 0; }
+.pattern-map__canvas { height: 420px; height: clamp(320px, 60svh, 560px); isolation: isolate; }
+.pattern-map .leaflet-container { width: 100%; height: 100%; font: inherit; background: #eef2f4; }
+.pattern-map .leaflet-control-attribution { font-size: 11px; line-height: 1.5; }
+.pattern-map__legend, .pattern-map__note, .pattern-map__counts { margin: 0; padding: 12px 16px; }
+.pattern-map__legend { border-top: 1px solid #d5dfe3; font-size: .85rem; }
+.pattern-map__legend ul { display: flex; flex-wrap: wrap; gap: 10px 16px; padding: 0; margin: 10px 0 0; list-style: none; }
+.pattern-map__legend li { display: flex; align-items: center; gap: 6px; }
+.pattern-map__legend i { width: 16px; height: 16px; border: 1px solid #627984; border-radius: 2px; }
+.pattern-map__counts summary { cursor: pointer; }
+.pattern-map__counts ul { padding-left: 20px; line-height: 1.7; }
+.pattern-map__panel { min-width: 0; padding: 16px; border-top: 1px solid #d5dfe3; background: #f8fafb; }
+.pattern-map__panel p { font-size: .85rem; }
+.pattern-map__items { list-style: none; margin: 12px 0 20px; padding: 0; display: grid; gap: 10px; }
+.pattern-map button { font: inherit; cursor: pointer; border: 1px solid #70838d; border-radius: 6px; padding: 10px 12px; background: #fff; color: #172d36; min-height: 44px; }
+.pattern-map__items button { width: 100%; text-align: left; }
+.pattern-map__items button:hover { background: #edf6f7; }
+.pattern-map__items button[aria-pressed="true"] { border: 2px solid #9a3412; padding: 9px 11px; background: #fff7ed; }
+.pattern-map button:focus-visible, .pattern-map summary:focus-visible { outline: 3px solid #15515e; outline-offset: 3px; }
+.pattern-map__items code, .pattern-map__items span { display: block; overflow-wrap: anywhere; line-height: 1.5; }
+.pattern-map__items code { font-size: .8rem; }
+.pattern-map__items span { margin-top: 5px; font-size: .85rem; }
+.pattern-map__templates li { padding: 10px 12px; border: 1px solid #d5dfe3; border-radius: 6px; background: #fff; }
+.pattern-map__status { padding: 12px 16px; display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.pattern-map__selection { margin-bottom: 20px; }
+@media (min-width: 768px) {
+  .pattern-map__layout { grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr); }
+  .pattern-map__panel { border-top: 0; border-left: 1px solid #d5dfe3; }
+  .pattern-map__header { padding: 20px; }
+}

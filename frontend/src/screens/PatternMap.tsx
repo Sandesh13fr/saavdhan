@@ -2,13 +2,14 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { ErrorNote, SyntheticBadge } from '../components/small';
 import { api, setCsrf } from '../lib/api';
 import { useI18n } from '../lib/i18n';
+import { PatternMap as MapView, type MapData } from '../features/map';
 
 export default function PatternMap() {
   const { t, err } = useI18n();
   const [authed, setAuthed] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [data, setData] = useState<unknown>(null);
+  const [data, setData] = useState<MapData | null>(null);
   const [error, setError] = useState('');
 
   const load = async () => {
@@ -48,8 +49,7 @@ export default function PatternMap() {
       ) : (
         <>
           <button className="btn" type="button" onClick={() => void logout()}>{t('map.sign_out')}</button>
-          {/* The lead mounts the map component from src/features/map into this slot. */}
-          <div id="pattern-map-slot" data-loaded={data ? 'true' : 'false'} />
+          {data && <MapView data={data} labels={{ title: t('map.title'), syntheticData: t('map.synthetic_badge'), repeatedAgents: t('map.repeated_agents'), repeatedTemplates: t('map.repeated_templates'), reports: t('map.reports') }} />}
         </>
       )}
       <ErrorNote message={error} />
