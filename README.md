@@ -1,102 +1,129 @@
-# Bakaya
+# Saavdhan
 
-**Turn invoice, payment and TDS evidence into a claim packet a person can review.**
+**Saavdhan** (सावधान, "alert") checks an overseas job offer against India's emigration rules before a young person pays an agent or travels. If they still go, it runs a family check-in net and gives authorities an anonymised pattern map of reported offers.
 
-Bakaya helps Indian micro and small suppliers prepare delayed-payment documentation. A bounded agent organizes evidence and asks for missing decisions; Python checks the money; a person approves the current revision before export. Nothing is sent or filed automatically.
+Tagline: **Check the job before you board.**
 
-[Try the authenticated synthetic demo](https://bakayaai-sandesh.vercel.app) · [Input guide](docs/INPUTS.md) · [Verification evidence](docs/JUDGING-EVIDENCE.md)
+Status: prototype for Hack for Social Cause 2027 (theme 8, Digital Safety & Cyber Fraud Awareness, state framing Maharashtra). Demo data is synthetic.
 
-![Bakaya synthetic claim workspace: invoice ledger, linked source evidence, provisional totals and an unresolved payment allocation](docs/assets/synthetic-workspace.png)
+## Provenance
 
-*Captured local synthetic workspace. Fictional records and provisional totals illustrate the workflow; this is not a real claim or a current production screenshot.*
+Saavdhan reuses the evidence engine (ingest, OCR, quote-validated extraction, audit log, ZIP packet) from **Bakaya**, an open-source project by the same author: https://github.com/Sandesh13fr/Bakaya. The reused parts are listed in [docs/REUSE-MAP.md](docs/REUSE-MAP.md). The rest (offer schema, rules, verdict, check-in net, pattern map, UI) was written for this project.
 
-[Watch the recorded local lifecycle](docs/assets/agent-lifecycle.webm) · [Inspect its evidence](docs/evidence/agent-lifecycle.json) · [Full Neatlogs lifecycle and paired replays](docs/evidence/PAIRED-AGENT-REPLAY.md)
+## The problem
 
-The recording follows one synthetic goal and run ID through ten checkpoints: reviewer pause, scripted human corrections (revision 1→2), approval pause, packet completion and ZIP download. It uses zero paid calls. It is a deterministic local workflow, separate from the live model and injected-failure tests; it is not a Neatlogs trace or the final narrated three-minute presentation.
+Fake overseas job offers move young people into scam compounds and forced labour. Reports cited here are summarised as reported by the named outlets; they have not been independently re-verified in this repository.
 
-## From evidence to reviewed export
+- As reported by Scroll: Maharashtra police rescued over 60 Indians from cyber scam centres in Myanmar; they had been lured through social media and sent to Thailand on tourist visas. https://scroll.in/latest/1081252/over-60-indians-rescued-from-cyber-scam-centres-in-myanmar-five-agents-arrested
+- As reported by EastMojo, an MEA advisory warned about fake Thailand data-entry jobs that led into Myanmar. https://www.eastmojo.com/national/2022/09/25/verify-credentials-of-foreign-employers-mea-advisory-following-fake-job-offers-in-myanmar/
+- As reported by Deccan Chronicle, MEA guidance says: a work visa, not a tourist visa, is needed for work; the contract is signed by employer, agent and worker; agents must be registered on eMigrate; and the agent fee is capped at Rs 30,000 plus 18% GST. https://deccanchronicle.com/nation/in-other-news/141223/centre-cautions-foreign-job-seekers.html
+- As reported by Greater Kashmir, unregistered agents overcharge Rs 2 to 5 lakh, mostly through WhatsApp. https://greaterkashmir.com/national-2/govt-advisory-cautions-against-fraudulent-overseas-job-offers
+- As reported by ThePrint, Karnataka Cyber Command in July 2026 flagged IT, customer-support and data-entry roles in Thailand, Myanmar, Laos and Cambodia. https://theprint.in/india/two-karnataka-youth-rescued-from-chinese-operated-scam-compound-in-myanmar/2993049/
+- As reported by Deccan Herald, a youth from Belagavi paid Rs 2.5 lakh for Singapore data-entry jobs in January 2026 and ended up in Cambodia. https://www.deccanherald.com/amp/story/india%2Fkarnataka%2F3-belagavi-youth-forced-into-cyber-slavery-in-cambodia-rescued-3862439
+- MEA publishes the overseas employment guidance and the active recruiting agent (RA) lists: https://www.mea.gov.in/overseas-employment.htm
 
-```mermaid
-flowchart LR
-    A[Original evidence] --> B[Bounded agent tools]
-    B --> C[Python reconciliation]
-    C --> D{Missing or ambiguous facts?}
-    D -->|Yes| E[Human correction]
-    E --> C
-    D -->|Resolved| F[Approve this revision]
-    F --> G[Download evidence packet]
-```
+## What it does
 
-- **Follow the source:** proposed facts retain quotes, file hashes and page/line references. Hashes verify stored bytes, not document authenticity.
-- **Keep calculations separate:** Decimal arithmetic reconciles invoices, cash and evidenced TDS; unresolved allocations block approval.
-- **Resume safely:** saved steps retain progress and failures. Corrections invalidate earlier approval.
-- **Control the release:** authenticated review and tenant-scoped access protect cases, evidence and exports.
+Three modules:
 
-## What is verified
+- **M1, offer check.** Paste WhatsApp text or upload an offer letter, job ad or screenshot (PDF, TXT, PNG, JPG, WEBP, TIFF; up to 10 files). Saavdhan extracts the facts, runs 12 rules and shows a verdict with the quoted line and the rule source for every point. See [docs/RULES.md](docs/RULES.md).
+- **M2, check-in net.** The traveller picks up to two contacts (aliases only), a travel plan and a check-in interval. A missed check-in produces a **simulated** alert with the report packet. Nothing is sent to anyone.
+- **M3, pattern map.** A login-only view of anonymised reports by district (Maharashtra, 36 districts). Phone numbers are salted and hashed before aggregation. The current data is synthetic.
 
-| Area | Evidence and boundary |
-| --- | --- |
-| Application | 99 Python tests passed on 11 October; frontend build; local desktop/mobile approval and ZIP export; tablet overflow checks. See dated [evidence](docs/JUDGING-EVIDENCE.md). |
-| Agent | Live synthetic extraction/planning and separate injected local recovery passed. The 20-fixture comparison is a deliberately flawed baseline (14/20) against the corrected matcher (20/20), not production accuracy. |
-| Neatlogs | Two controlled full-lifecycle traces each contain 27 verified spans, review/approval pauses, export and simulated recovery. Actual revisions show redundant packet writes 1→0 with identical totals. Zero model calls in this comparison; the earlier model trace is separate. |
-| Entire | Saved/pushed checkpoints and linked-file attribution verified. Git-assisted rollback passed in an isolated clone; native session resume did not restore code. |
-| cfo.ai | Editable pricing, delivery-cost, monthly revenue and conditional runway model read back with zero formula errors. Owner-provided cash ₹30,000 and fixed costs ₹20,000/month give 1.5 months runway at zero assumed sales; illustrative stress demand gives 2.83 months. Read-only judge sharing enabled; public CSV fallback available. [Model status](docs/market/cfo-integration.md). |
-| Crustdata | Administrator-only consented, cached buyer enrichment; local 500-credit ceiling. Company data does not establish legal identity or eligibility. |
-| Authentication | Server-provisioned roles, tenant authorization, revocable sessions, CSRF and login throttling tested. No self-signup, MFA or email recovery. |
-| Deployment/backups | Authenticated synthetic Vercel/AWS deployment and HTTPS checks recorded. Encrypted daily backups active; one downloaded off-host archive restored. Automated off-host transfer remains pending. |
-| OCR | Clean synthetic PNG/scanned-PDF checks passed. A difficult public CORD receipt recovered 0/5 expected amounts; manual review remains essential. |
+## How it decides
 
-## Run locally
+- **Models extract, Python decides.** An optional LLM only reads the offer and must quote its evidence verbatim; the deterministic extractor always runs. Rules run on both extractions and the stricter result per rule is kept. An LLM never sets a verdict.
+- **Verdict levels:**
+  - `STOP`: any critical rule hit.
+  - `VERIFY_FIRST`: any high-severity hit, three or more unknowns on the key rules, or no valid recruiter-list date.
+  - `NO_RED_FLAGS_FOUND`: none of the above. The only text shown is: "No red flags found. Confirm with the Protector of Emigrants before paying anything."
+- Unknown is never treated as clear. Every verdict shows the date of the MEA recruiter list it was checked against.
+- Saavdhan never gives an all-clear for an offer and never calls a named person or agency a fraud. It states verifiable facts, such as "not found on MEA's active recruiting agent list dated X".
 
-Windows PowerShell, Python 3.12+ and Node.js 22+:
+## Screenshots
+
+`docs/screenshots/` (synthetic data): to be added before submission. Each image must be labelled synthetic.
+
+## Quick start (Windows PowerShell)
+
+Requires Python 3.12 and Node.js 22.
 
 ```powershell
-.\scripts\start.ps1
-```
+python -m venv .venv
+.\.venv\Scripts\python -m pip install -r requirements.lock.txt
 
-Open <http://127.0.0.1:8000>. The script installs dependencies, builds React and serves FastAPI. The local synthetic demo needs no API key. Choose **Explore a demo**, or upload the fictional CSVs in `samples/`; see the [input guide](docs/INPUTS.md).
-
-Live model extraction/planning needs an OpenAI-compatible key. Optional buyer enrichment uses Crustdata. Keep credentials and private evidence out of Git; configure from [`.env.example`](.env.example) and follow [manual steps](docs/MANUAL-STEPS.md).
-
-<details>
-<summary>Development and checks</summary>
-
-Run the backend:
-
-```powershell
-.\.venv\Scripts\python.exe -m uvicorn backend.main:app --host 127.0.0.1 --port 8000 --reload
-```
-
-Run the interface in another terminal:
-
-```powershell
 cd frontend
-npm.cmd ci
-npm.cmd run dev
+npm ci
+npm run build
+cd ..
+
+.\.venv\Scripts\python -m uvicorn backend.main:app --reload
 ```
 
-Check changes:
+Open http://localhost:8000 and choose a demo offer.
+
+Optional steps:
+
+- **Configuration.** Copy `.env.example` to `.env` and edit it. `.env` is gitignored; never commit it.
+- **OCR for image offers.** Install Tesseract. For Hindi and Marathi screenshots add the `hin` and `mar` tessdata, then set `SAAVDHAN_OCR_LANGS=eng+hin+mar`. Set `SAAVDHAN_OCR_ENABLED=true` and `TESSERACT_CMD` if Tesseract is not on PATH.
+- **LLM extraction (off by default).** Set `SAAVDHAN_ENABLE_LLM=true`, `SAAVDHAN_LLM_BASE_URL` (any OpenAI-compatible gateway, for example TokenRouter), `SAAVDHAN_OPENAI_MODEL` and an API key. Offer text is then sent to that gateway. See [docs/PRIVACY.md](docs/PRIVACY.md). The live LLM path was not verified in this build.
+- **Pattern map (M3).** Run `.\.venv\Scripts\python scripts\seed_demo_officer.py` once. It creates a local demo officer account, and the password is written to `.env` as `SAAVDHAN_DEMO_OFFICER_PASSWORD`. Local use only.
+
+## Tests and evaluation
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest tests -q
-cd frontend
-npm.cmd run build
+.\.venv\Scripts\python -m pytest tests -q
+.\.venv\Scripts\python eval\run_eval.py
 ```
 
-</details>
+CI (`.github/workflows/validate.yml`) runs pytest, the frontend build, the i18n check and a grep that fails on the word "safe" in app code.
 
-## Deployment and real-document limits
+Evaluation headline (from [eval/REPORT.md](eval/REPORT.md)): on 40 synthetic offers, verdict accuracy 1.000, macro rule F1 0.948, field accuracy 0.880, median analysis time 2.3 ms. **Caveat:** the set is synthetic and was written for this project. The fallback extractor was tuned on the same set after a first run that scored 27/40, so these numbers are optimistic. A held-out set is needed for an honest estimate. The eval also stubs the recruiter-list lookup; it does not use the real MEA list.
 
-The demo at [bakayaai-sandesh.vercel.app](https://bakayaai-sandesh.vercel.app) uses a public shared reviewer account and synthetic records only; the login page shows its demonstration credentials. AWS default-encrypted provisioning failed; the owner explicitly approved unencrypted EBS for this temporary synthetic demonstration. **Do not upload real financial records.** Read the [deployment evidence and operating limits](docs/PRODUCTION.md#live-synthetic-deployment--11-october-2026) and [AWS usage rules](docs/AWS-USAGE.md).
+## Deployment
 
-Docker build/run, tenant rejection, secure-cookie/CSRF checks, OCR uploads and encrypted backup/restore were tested locally. Deployed visual QA, automated off-host backups, retention/deletion, monitoring, malware controls, privacy policy and independent security review still need completion before sensitive customer use.
+See [docs/DEPLOY.md](docs/DEPLOY.md). That file is written by the lead and may not exist yet in this branch.
 
-No customer or qualified professional has validated a real claim. Eligibility, acceptance/registration dates, TDS treatment, historical RBI rates and portal requirements need independent confirmation. Invoice dates alone do not establish eligibility; current rates must not be applied retroactively. The [production guide](docs/PRODUCTION.md) contains the consented real-document and professional validation protocol.
+## Architecture
 
-## Project and submission material
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): components, data flow, trust boundaries, storage and security controls.
 
-Python/FastAPI/Pydantic/SQLite with Decimal calculations; React/TypeScript/Vite with Radix dialogs; local Tesseract OCR. Dependency lockfiles support reproducible installs.
+## Limits
 
-[Release package](docs/RELEASE-PACKAGE.md) · [Milestones](docs/HACKATHON-MILESTONES.md) · [Tracing](docs/TRACING.md) · [Market research and pricing hypotheses](docs/market/README.md)
+- **Family alerts are simulated.** No SMS, WhatsApp or call is sent. The demo clock can be moved forward to show a missed check-in.
+- **Pattern map data is synthetic.** It is not a record of real reports.
+- **Recruiter list not loaded.** The MEA RA list is not parsed in this build. R2 shows "Agent list not checked yet", and because the list date is missing, the app cannot show `NO_RED_FLAGS_FOUND`. Offers without a critical or high hit show `VERIFY_FIRST`.
+- **Fee cap to verify.** The Rs 30,000 + 18% GST figure is as reported by MEA advice. Check the current official figure before use.
+- **Not legal advice.** It can be wrong. Ask the Protector of Emigrants or a lawyer for legal questions.
+- **No automated reporting.** Saavdhan never reports anyone to an authority. The user decides who to tell.
+- **Language.** Hindi and Marathi copy is pending native review (see [frontend/src/i18n/REVIEW.md](frontend/src/i18n/REVIEW.md)).
+- **Single-user demo limits.** Production needs per-client limits and a proxy configuration review; see the known gaps in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
-The public repository is engineering evidence, not proof of demand or recovery outcomes. Narrated demo, public progress post and submission remain manual. Original supplied material is preserved in [the PRD](docs/original-prd.md) and [message](docs/original-message.txt).
+## Hack for Social Cause 2027
+
+- Theme 8 (Digital Safety & Cyber Fraud Awareness), sub-theme 8a: a scam detection and reporting assistant for job-offer scams. State framing: Maharashtra.
+- Aligned with UN SDG 8.7 (forced labour and trafficking) and SDG 16.2 (ending abuse, exploitation, trafficking).
+- Submission components and where they live:
+  - Deck and speaker notes: `docs/DECK-OUTLINE.md` (the final PDF is built from it on the IIT Bombay template).
+  - Demo video script: `docs/DEMO-SCRIPT.md`.
+  - Architecture and data flow: `docs/ARCHITECTURE.md`.
+  - Rules with sources: `docs/RULES.md`.
+  - Privacy and DPDP notes: `docs/PRIVACY.md`.
+  - Sample data and test cases: `eval/offers/` (synthetic), `tests/`, `eval/REPORT.md`.
+  - Licence: `LICENSE` (MIT). Third-party licences: `docs/THIRD-PARTY.md`.
+  - AI disclosure: `AI_USAGE.md`.
+- Team: to be added. Team members are not listed in this repository.
+
+## Licence
+
+MIT. See [LICENSE](LICENSE).
+
+## Credits
+
+Team: to be added.
+
+Saavdhan builds on Bakaya by the same author (see Provenance). Map boundaries are from geoBoundaries (ODbL) and base tiles are from OpenStreetMap contributors (ODbL); see [docs/THIRD-PARTY.md](docs/THIRD-PARTY.md).
+
+## AI usage
+
+This project was built with AI coding tools under human direction and review. See [AI_USAGE.md](AI_USAGE.md) for the tools, the work each one did and the estimated share of AI-produced code.

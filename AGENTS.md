@@ -19,6 +19,45 @@ log, ZIP packet).
    clearly labelled.
 7. No scraping of WhatsApp/Telegram/social platforms. No automated reporting to any authority.
 
+## Hack for Social Cause 2027 (VBYLD 2027) — competition rules that bind this repo
+
+Source: HSC 2027 Participant Guidelines (MoYAS, knowledge partner IIT Bombay GISE Hub & SJMSOM).
+Updates: https://mybharat.gov.in/vbyld-2027. Support: https://mybharat.gov.in/support.
+
+- Theme 8, Digital Safety & Cyber Fraud Awareness (8a: scam detection and reporting assistant for
+  job-offer scams). State framing: Maharashtra. Align with UN SDGs where relevant (e.g. 8.7, 16.2).
+- Timeline in the guidelines: Stage 1 uploads by **15 Oct 2026**; state screening 16–25 Oct; state online
+  demo/pitch 26 Oct–30 Nov (3 winners per State/UT); national screening 1–15 Dec; mentorship
+  16 Dec–9 Jan; VBYLD showcase New Delhi 10–12 Jan 2027 (stall + 3-minute pitch). Confirm the
+  live deadline on the MY Bharat portal; the guidelines and the build plan disagree.
+- Submission package (uploaded by the Team Lead on MY Bharat; editable until the deadline, last
+  version is final):
+  1. Deck: 6–7 slides, PPT/PDF, max 10 MB, IIT Bombay template. Slides 1–2 problem (state-specific,
+     beneficiaries, gaps); 3–4 solution (approach, stack, architecture, features); 5 impact &
+     scalability (outcomes, KPIs, regions/languages, sustainability); 6–7 team & implementation
+     (roles, roadmap, resources) **plus the AI-usage disclosure**.
+  2. Demo video (preferred, not mandatory): MP4/MOV, 3–5 min strict, min 720p, max 80 MB. Cover team
+     intro, real-world problem, prototype walkthrough, user interaction, impact.
+  3. Public GitHub repo: complete open-source code, detailed README with setup, architecture docs,
+     sample data/test cases, license (MIT here).
+  4. Annexure 1 (humans only, never in this repo): member details, signed self-certification,
+     self-attested student IDs, government ID details.
+  5. File names: `<State>_<TeamName>_<Document Name>.pdf` (e.g. `Maharashtra_<TeamName>_Deck.pdf`).
+- **AI disclosure is mandatory**: describe how AI tools were used and estimate the share of the work
+  they produced, in the deck. Undisclosed AI-generated content means disqualification. Keep
+  `AI_USAGE.md` accurate.
+- Originality: work must be the team's own; reuse of the author's earlier Bakaya project must be
+  disclosed (README). Prior publication/awards elsewhere must be disclosed. No unlicensed content;
+  record third-party licenses in `docs/THIRD-PARTY.md`.
+- Judging: Relevance, Technical Strength (prototype robustness, code and docs quality), Functionality
+  (working prototype, scale across regions/languages), Creativity/Innovation, Social Cause Impact
+  (measurable KPIs, clear proposal/video), Presentation & Team Synergy.
+- Team: up to 3 students, aged 18–29 on 17 Aug 2026, Indian citizens, AISHE-registered institutions;
+  interdisciplinary encouraged (a female member and a non-technology member). Team name must be
+  respectful and not a person's, place's or community's name; it cannot be changed after registration.
+- Organisers get a non-exclusive licence to display/publish the submission; IP stays with the team.
+- Agents never handle registration, signatures, IDs or the final upload. These are human-only.
+
 ## Layout
 
 - `backend/` FastAPI app (Python 3.12). Entry: `backend/main.py`.

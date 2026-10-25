@@ -1,0 +1,28 @@
+# Render Blueprint: one Docker web service (FastAPI serving the built React app).
+# Free plan disk is ephemeral: cases and the demo officer reset on every restart/deploy.
+services:
+  - type: web
+    name: saavdhan
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: SAAVDHAN_ENV
+        value: production
+      # SAAVDHAN_PUBLIC_ORIGIN / SAAVDHAN_ALLOWED_HOSTS default to Render's own URL.
+      - key: SAAVDHAN_HASH_SALT
+        generateValue: true
+      - key: SAAVDHAN_DEMO_OFFICER_PASSWORD
+        generateValue: true
+      - key: SAAVDHAN_ENABLE_LLM
+        value: "false"
+      # To enable the optional LLM, set these in the dashboard (never commit the key):
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: SAAVDHAN_LLM_BASE_URL
+        value: https://api.tokenrouter.com/v1
+      - key: SAAVDHAN_OPENAI_MODEL
+        value: nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free

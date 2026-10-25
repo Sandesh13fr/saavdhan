@@ -29,6 +29,26 @@ try:
 except ImportError:
     pass
 
+# Render provides its public URL; use it unless the operator set one explicitly.
+if os.getenv("RENDER_EXTERNAL_URL"):
+    os.environ.setdefault("SAAVDHAN_PUBLIC_ORIGIN", os.environ["RENDER_EXTERNAL_URL"].rstrip("/"))
+    os.environ.setdefault("SAAVDHAN_ALLOWED_HOSTS", os.getenv("RENDER_EXTERNAL_HOSTNAME", ""))
+
+
+def bootstrap_demo_officer():
+    """Read-only demo account for the synthetic pattern map, from env (hosted demo disks are ephemeral)."""
+    password = os.getenv("SAAVDHAN_DEMO_OFFICER_PASSWORD", "")
+    if len(password) < 12:
+        return
+    email = "officer@saavdhan.example"
+    with auth.database() as conn:
+        exists = conn.execute("SELECT 1 FROM users WHERE email=?", (email,)).fetchone()
+    if exists:
+        auth.reset_password(email, password)
+    else:
+        auth.provision(email, "Demo officer (synthetic)", "demo-authority", "viewer", password)
+
+
 @asynccontextmanager
 async def lifespan(app):
     if os.getenv("SAAVDHAN_ENV", "local") not in {"local","production"}:
@@ -37,6 +57,7 @@ async def lifespan(app):
         raise RuntimeError("Production requires SAAVDHAN_PUBLIC_ORIGIN with HTTPS")
     if auth.production() and len(os.getenv("SAAVDHAN_HASH_SALT", ""))<16:
         raise RuntimeError("Production requires SAAVDHAN_HASH_SALT (16+ characters)")
+    bootstrap_demo_officer()
     yield
 
 

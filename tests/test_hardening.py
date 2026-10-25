@@ -79,3 +79,13 @@ def test_anonymous_upload_budget_is_freed_by_purge(tmp_path, monkeypatch):
         storage.reserve_upload_bytes(200_000)
     storage.purge_anonymous(24, 100)
     storage.reserve_upload_bytes(200_000)  # space is back
+
+
+def test_demo_officer_bootstrap_from_env(tmp_path, monkeypatch):
+    from backend import auth
+    monkeypatch.setattr(storage, "DATA_DIR", tmp_path)
+    monkeypatch.setenv("SAAVDHAN_DEMO_OFFICER_PASSWORD", "a demo password 123")
+    main.bootstrap_demo_officer()
+    main.bootstrap_demo_officer()  # idempotent
+    token, identity = auth.login("officer@saavdhan.example", "a demo password 123")
+    assert identity["user"]["role"] == "viewer"
