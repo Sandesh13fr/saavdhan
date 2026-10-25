@@ -18,9 +18,10 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
       - name: No "safe" wording in app code or copy
         run: |
-          if grep -rniwE 'safe|सुरक्षित|सुरक्षीत' backend frontend/src --include=*.py --include=*.ts --include=*.tsx --include=*.json; then
+          if grep -rniwE 'safe|सुरक्षित|सुरक्षीत' backend frontend/src --include=*.py --include=*.ts --include=*.tsx --include=*.json --exclude=check_i18n.py; then
             echo "Product rule: never say 'safe'"; exit 1
           fi
+      - run: python frontend/src/i18n/check_i18n.py
       - run: pip install -r requirements.lock.txt
       - run: python -m pytest tests -q
       - run: npm ci
