@@ -33,6 +33,7 @@ def test_session_csrf_logout_and_cookie(secure):
     result = login(secure, 'a@example.com', 'a long password 123')
     cookie = result.headers['set-cookie']
     assert 'HttpOnly' in cookie and 'Secure' in cookie and 'SameSite=strict' in cookie
+    assert secure.get(MAP).json()['synthetic'] is True
     secure.headers.pop('X-CSRF-Token')
     assert secure.post('/api/demo/offers/bangkok-data-entry').status_code == 403
     secure.headers['X-CSRF-Token'] = result.json()['csrf_token']

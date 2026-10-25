@@ -19,6 +19,7 @@ from .fixtures import DEMO_OFFERS
 from .ingest import ingest_bytes, MAX_FILE_BYTES, ocr_available
 from .providers import provider_available
 from .rules import FEE_CAP_INR, RULES
+from .reports import aggregate, synthetic_reports
 
 try:
     from dotenv import load_dotenv
@@ -81,7 +82,7 @@ async def security_headers(request: Request, call_next):
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["Referrer-Policy"] = "no-referrer"
     response.headers["X-Frame-Options"] = "DENY"
-    response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
+    response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.tile.openstreetmap.org; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
     if auth.production():
         response.headers["Strict-Transport-Security"] = "max-age=31536000"
     return response
@@ -159,6 +160,12 @@ def health():
 def meta():
     return {"app":"Saavdhan","version":app.version,"ra_list_date":RA_LIST_DATE,"fee_cap_inr":FEE_CAP_INR,
             "rules":[{"id":r["id"],"severity":r["severity"],"source":r["source"],"heuristic":r.get("heuristic",False)} for r in RULES]}
+
+
+@app.get("/api/reports/map")
+def reports_map():
+    # ponytail: synthetic reports only; real reports need consent, retention and a DPDP review first
+    return aggregate(synthetic_reports())
 
 
 @app.post("/api/offers")
