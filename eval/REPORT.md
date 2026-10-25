@@ -1,88 +1,74 @@
 # Saavdhan fallback extraction evaluation
 
-> **Synthetic evaluation set of 40 offers written for this project. Not real-world accuracy.**
+> **Synthetic evaluation set of 40 offers written for this project. Not real-world accuracy. The fallback extractor was tuned on this same set after the first run (27/40), so these scores are optimistic; a held-out set is needed for an honest estimate.**
 
 - Date: 2026-10-25
-- Git commit: `2409519`
+- Git commit: `cf35ce7`
 - Extractor mode: `fallback`
 - Offers: 40; LLM fallbacks on ValueError: 0
 
 ## Headline
 
-- Verdict accuracy: 0.675
-- Macro rule F1: 0.794
-- Field accuracy: 0.720
-- Median analysis time: 2.41 ms (p95 3.41 ms)
+- Verdict accuracy: 1.000
+- Macro rule F1: 0.948
+- Field accuracy: 0.880
+- Median analysis time: 2.29 ms (p95 2.87 ms)
 
 ## Verdict confusion matrix (rows expected, columns predicted)
 
 | expected \ predicted | STOP | VERIFY_FIRST | NO_RED_FLAGS_FOUND |
 |---|---|---|---|
-| STOP | 10 | 10 | 0 |
-| VERIFY_FIRST | 0 | 4 | 1 |
-| NO_RED_FLAGS_FOUND | 0 | 2 | 13 |
+| STOP | 20 | 0 | 0 |
+| VERIFY_FIRST | 0 | 5 | 0 |
+| NO_RED_FLAGS_FOUND | 0 | 0 | 15 |
 
 ## Per-rule precision, recall and F1
 
 | rule | TP | FP | FN | TN | precision | recall | F1 |
 |---|---|---|---|---|---|---|---|
 | R1_TOURIST_VISA | 7 | 0 | 0 | 33 | 1.000 | 1.000 | 1.000 |
-| R2_RA_NOT_LISTED | 8 | 2 | 6 | 24 | 0.800 | 0.571 | 0.667 |
-| R3_NO_RC_NUMBER | 14 | 5 | 0 | 21 | 0.737 | 1.000 | 0.848 |
-| R4_FEE_OVER_CAP | 12 | 0 | 3 | 25 | 1.000 | 0.800 | 0.889 |
-| R5_NO_TRIPARTITE_CONTRACT | 14 | 5 | 0 | 21 | 0.737 | 1.000 | 0.848 |
-| R6_HIGH_RISK_CORRIDOR | 8 | 0 | 12 | 20 | 1.000 | 0.400 | 0.571 |
-| R7_INFORMAL_CHANNEL_ONLY | 3 | 0 | 8 | 29 | 1.000 | 0.273 | 0.429 |
-| R8_NO_RECEIPT | 10 | 6 | 0 | 24 | 0.625 | 1.000 | 0.769 |
-| R9_PBBY_MISSING | 14 | 5 | 0 | 21 | 0.737 | 1.000 | 0.848 |
+| R2_RA_NOT_LISTED | 9 | 0 | 5 | 26 | 1.000 | 0.643 | 0.783 |
+| R3_NO_RC_NUMBER | 14 | 0 | 0 | 26 | 1.000 | 1.000 | 1.000 |
+| R4_FEE_OVER_CAP | 15 | 0 | 0 | 25 | 1.000 | 1.000 | 1.000 |
+| R5_NO_TRIPARTITE_CONTRACT | 14 | 0 | 0 | 26 | 1.000 | 1.000 | 1.000 |
+| R6_HIGH_RISK_CORRIDOR | 19 | 0 | 1 | 20 | 1.000 | 0.950 | 0.974 |
+| R7_INFORMAL_CHANNEL_ONLY | 11 | 0 | 0 | 29 | 1.000 | 1.000 | 1.000 |
+| R8_NO_RECEIPT | 10 | 0 | 0 | 30 | 1.000 | 1.000 | 1.000 |
+| R9_PBBY_MISSING | 13 | 0 | 1 | 26 | 1.000 | 0.929 | 0.963 |
 | H1_SALARY_ANOMALY | 5 | 0 | 0 | 35 | 1.000 | 1.000 | 1.000 |
 | H2_PASSPORT_HANDOVER | 4 | 0 | 2 | 34 | 1.000 | 0.667 | 0.800 |
 | H3_PRESSURE | 6 | 0 | 2 | 32 | 1.000 | 0.750 | 0.857 |
 
-Macro F1 (rules with any truth or prediction): 0.794
+Macro F1 (rules with any truth or prediction): 0.948
 
 ## Extraction field accuracy
 
 | field | correct | total | accuracy |
 |---|---|---|---|
-| agent_rc_number | 35 | 40 | 0.875 |
+| agent_rc_number | 40 | 40 | 1.000 |
 | destination_country | 34 | 40 | 0.850 |
-| fees_demanded_inr | 21 | 40 | 0.525 |
-| role_title | 14 | 40 | 0.350 |
+| fees_demanded_inr | 39 | 40 | 0.975 |
+| role_title | 23 | 40 | 0.575 |
 | visa_type | 40 | 40 | 1.000 |
-| **overall** | 144 | 200 | 0.720 |
+| **overall** | 176 | 200 | 0.880 |
 
 | language | correct | total | accuracy |
 |---|---|---|---|
-| en | 40 | 50 | 0.800 |
-| hi | 40 | 60 | 0.667 |
-| hinglish | 36 | 50 | 0.720 |
-| mr | 28 | 40 | 0.700 |
+| en | 46 | 50 | 0.920 |
+| hi | 53 | 60 | 0.883 |
+| hinglish | 43 | 50 | 0.860 |
+| mr | 34 | 40 | 0.850 |
 
 ## Analysis time
 
-- Median: 2.41 ms
-- p95: 3.41 ms
+- Median: 2.29 ms
+- p95: 2.87 ms
 
 Time covers extraction, rules and verdict; ingest is excluded.
 
 ## Misclassified offers
 
-| id | language | label | expected | predicted | rules that differ (expected hit / predicted status) |
-|---|---|---|---|---|---|
-| 004 | en | scam_pattern | STOP | VERIFY_FIRST | R6_HIGH_RISK_CORRIDOR (hit / unknown) |
-| 005 | en | scam_pattern | STOP | VERIFY_FIRST | R2_RA_NOT_LISTED (not hit / hit), R6_HIGH_RISK_CORRIDOR (hit / unknown), R7_INFORMAL_CHANNEL_ONLY (hit / clear) |
-| 008 | hinglish | scam_pattern | STOP | VERIFY_FIRST | R6_HIGH_RISK_CORRIDOR (hit / clear) |
-| 010 | hinglish | scam_pattern | STOP | VERIFY_FIRST | R4_FEE_OVER_CAP (hit / clear), R6_HIGH_RISK_CORRIDOR (hit / unknown) |
-| 012 | hi | scam_pattern | STOP | VERIFY_FIRST | R5_NO_TRIPARTITE_CONTRACT (not hit / hit), R6_HIGH_RISK_CORRIDOR (hit / unknown), R8_NO_RECEIPT (not hit / hit) |
-| 013 | hi | scam_pattern | STOP | VERIFY_FIRST | R6_HIGH_RISK_CORRIDOR (hit / unknown), R7_INFORMAL_CHANNEL_ONLY (hit / clear) |
-| 014 | hi | scam_pattern | STOP | VERIFY_FIRST | R6_HIGH_RISK_CORRIDOR (hit / unknown), R7_INFORMAL_CHANNEL_ONLY (hit / clear) |
-| 015 | hi | scam_pattern | STOP | VERIFY_FIRST | R2_RA_NOT_LISTED (hit / unknown), R3_NO_RC_NUMBER (not hit / hit), R6_HIGH_RISK_CORRIDOR (hit / clear) |
-| 018 | mr | scam_pattern | STOP | VERIFY_FIRST | R5_NO_TRIPARTITE_CONTRACT (not hit / hit), R6_HIGH_RISK_CORRIDOR (hit / unknown), R8_NO_RECEIPT (not hit / hit), R9_PBBY_MISSING (not hit / hit) |
-| 020 | mr | scam_pattern | STOP | VERIFY_FIRST | R4_FEE_OVER_CAP (hit / unknown), R6_HIGH_RISK_CORRIDOR (hit / unknown) |
-| 025 | en | legit_style | VERIFY_FIRST | NO_RED_FLAGS_FOUND | R4_FEE_OVER_CAP (hit / clear) |
-| 032 | hi | legit_style | NO_RED_FLAGS_FOUND | VERIFY_FIRST | R3_NO_RC_NUMBER (not hit / hit) |
-| 034 | hi | legit_style | NO_RED_FLAGS_FOUND | VERIFY_FIRST | R3_NO_RC_NUMBER (not hit / hit) |
+None.
 
 ## Definitions
 

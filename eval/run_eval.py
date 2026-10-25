@@ -36,7 +36,9 @@ REPORT_PATH = ROOT / "eval" / "REPORT.md"
 RULE_IDS = [r["id"] for r in RULES]
 VERDICTS = ["STOP", "VERIFY_FIRST", "NO_RED_FLAGS_FOUND"]
 NUMERIC_FIELDS = {"fees_demanded_inr", "salary_amount"}
-SYNTHETIC_NOTICE = "Synthetic evaluation set of 40 offers written for this project. Not real-world accuracy."
+SYNTHETIC_NOTICE = ("Synthetic evaluation set of 40 offers written for this project. Not real-world accuracy. "
+                    "The fallback extractor was tuned on this same set after the first run (27/40), so these scores are "
+                    "optimistic; a held-out set is needed for an honest estimate.")
 LIKELY_CAUSES_HEADING = "## Likely causes"
 
 

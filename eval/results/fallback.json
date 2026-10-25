@@ -1,31 +1,31 @@
 {
   "meta": {
     "date": "2026-10-25",
-    "commit": "2409519",
+    "commit": "cf35ce7",
     "extractor_mode": "fallback",
     "n_offers": 40,
     "llm_failures": 0,
-    "notice": "Synthetic evaluation set of 40 offers written for this project. Not real-world accuracy."
+    "notice": "Synthetic evaluation set of 40 offers written for this project. Not real-world accuracy. The fallback extractor was tuned on this same set after the first run (27/40), so these scores are optimistic; a held-out set is needed for an honest estimate."
   },
   "verdict": {
     "confusion": {
       "STOP": {
-        "STOP": 10,
-        "VERIFY_FIRST": 10,
+        "STOP": 20,
+        "VERIFY_FIRST": 0,
         "NO_RED_FLAGS_FOUND": 0
       },
       "VERIFY_FIRST": {
         "STOP": 0,
-        "VERIFY_FIRST": 4,
-        "NO_RED_FLAGS_FOUND": 1
+        "VERIFY_FIRST": 5,
+        "NO_RED_FLAGS_FOUND": 0
       },
       "NO_RED_FLAGS_FOUND": {
         "STOP": 0,
-        "VERIFY_FIRST": 2,
-        "NO_RED_FLAGS_FOUND": 13
+        "VERIFY_FIRST": 0,
+        "NO_RED_FLAGS_FOUND": 15
       }
     },
-    "accuracy": 0.675,
+    "accuracy": 1.0,
     "n": 40
   },
   "rules": {
@@ -40,76 +40,76 @@
         "f1": 1.0
       },
       "R2_RA_NOT_LISTED": {
-        "tp": 8,
-        "fp": 2,
-        "fn": 6,
-        "tn": 24,
-        "precision": 0.8,
-        "recall": 0.5714285714285714,
-        "f1": 0.6666666666666666
+        "tp": 9,
+        "fp": 0,
+        "fn": 5,
+        "tn": 26,
+        "precision": 1.0,
+        "recall": 0.6428571428571429,
+        "f1": 0.782608695652174
       },
       "R3_NO_RC_NUMBER": {
         "tp": 14,
-        "fp": 5,
+        "fp": 0,
         "fn": 0,
-        "tn": 21,
-        "precision": 0.7368421052631579,
+        "tn": 26,
+        "precision": 1.0,
         "recall": 1.0,
-        "f1": 0.8484848484848485
+        "f1": 1.0
       },
       "R4_FEE_OVER_CAP": {
-        "tp": 12,
+        "tp": 15,
         "fp": 0,
-        "fn": 3,
+        "fn": 0,
         "tn": 25,
         "precision": 1.0,
-        "recall": 0.8,
-        "f1": 0.8888888888888888
+        "recall": 1.0,
+        "f1": 1.0
       },
       "R5_NO_TRIPARTITE_CONTRACT": {
         "tp": 14,
-        "fp": 5,
+        "fp": 0,
         "fn": 0,
-        "tn": 21,
-        "precision": 0.7368421052631579,
+        "tn": 26,
+        "precision": 1.0,
         "recall": 1.0,
-        "f1": 0.8484848484848485
+        "f1": 1.0
       },
       "R6_HIGH_RISK_CORRIDOR": {
-        "tp": 8,
+        "tp": 19,
         "fp": 0,
-        "fn": 12,
+        "fn": 1,
         "tn": 20,
         "precision": 1.0,
-        "recall": 0.4,
-        "f1": 0.5714285714285714
+        "recall": 0.95,
+        "f1": 0.9743589743589743
       },
       "R7_INFORMAL_CHANNEL_ONLY": {
-        "tp": 3,
+        "tp": 11,
         "fp": 0,
-        "fn": 8,
+        "fn": 0,
         "tn": 29,
         "precision": 1.0,
-        "recall": 0.2727272727272727,
-        "f1": 0.42857142857142855
+        "recall": 1.0,
+        "f1": 1.0
       },
       "R8_NO_RECEIPT": {
         "tp": 10,
-        "fp": 6,
+        "fp": 0,
         "fn": 0,
-        "tn": 24,
-        "precision": 0.625,
+        "tn": 30,
+        "precision": 1.0,
         "recall": 1.0,
-        "f1": 0.7692307692307693
+        "f1": 1.0
       },
       "R9_PBBY_MISSING": {
-        "tp": 14,
-        "fp": 5,
-        "fn": 0,
-        "tn": 21,
-        "precision": 0.7368421052631579,
-        "recall": 1.0,
-        "f1": 0.8484848484848485
+        "tp": 13,
+        "fp": 0,
+        "fn": 1,
+        "tn": 26,
+        "precision": 1.0,
+        "recall": 0.9285714285714286,
+        "f1": 0.9629629629629629
       },
       "H1_SALARY_ANOMALY": {
         "tp": 5,
@@ -139,20 +139,20 @@
         "f1": 0.8571428571428571
       }
     },
-    "macro_f1": 0.793948643948644
+    "macro_f1": 0.9480894575097474
   },
-  "macro_rule_f1": 0.793948643948644,
+  "macro_rule_f1": 0.9480894575097474,
   "fields": {
     "overall": {
-      "correct": 144,
+      "correct": 176,
       "total": 200,
-      "accuracy": 0.72
+      "accuracy": 0.88
     },
     "by_field": {
       "agent_rc_number": {
-        "correct": 35,
+        "correct": 40,
         "total": 40,
-        "accuracy": 0.875
+        "accuracy": 1.0
       },
       "destination_country": {
         "correct": 34,
@@ -160,14 +160,14 @@
         "accuracy": 0.85
       },
       "fees_demanded_inr": {
-        "correct": 21,
+        "correct": 39,
         "total": 40,
-        "accuracy": 0.525
+        "accuracy": 0.975
       },
       "role_title": {
-        "correct": 14,
+        "correct": 23,
         "total": 40,
-        "accuracy": 0.35
+        "accuracy": 0.575
       },
       "visa_type": {
         "correct": 40,
@@ -177,287 +177,39 @@
     },
     "by_language": {
       "en": {
-        "correct": 40,
+        "correct": 46,
         "total": 50,
-        "accuracy": 0.8
+        "accuracy": 0.92
       },
       "hi": {
-        "correct": 40,
+        "correct": 53,
         "total": 60,
-        "accuracy": 0.6666666666666666
+        "accuracy": 0.8833333333333333
       },
       "hinglish": {
-        "correct": 36,
+        "correct": 43,
         "total": 50,
-        "accuracy": 0.72
+        "accuracy": 0.86
       },
       "mr": {
-        "correct": 28,
+        "correct": 34,
         "total": 40,
-        "accuracy": 0.7
+        "accuracy": 0.85
       }
     }
   },
   "timing_ms": {
-    "median_ms": 2.4107499998535786,
-    "p95_ms": 3.4051000002364162
+    "median_ms": 2.2923999995327904,
+    "p95_ms": 2.8708999998343643
   },
-  "misclassified": [
-    {
-      "id": "004",
-      "language": "en",
-      "label": "scam_pattern",
-      "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
-      "differing_rules": [
-        {
-          "rule": "R6_HIGH_RISK_CORRIDOR",
-          "expected_hit": true,
-          "predicted_status": "unknown"
-        }
-      ]
-    },
-    {
-      "id": "005",
-      "language": "en",
-      "label": "scam_pattern",
-      "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
-      "differing_rules": [
-        {
-          "rule": "R2_RA_NOT_LISTED",
-          "expected_hit": false,
-          "predicted_status": "hit"
-        },
-        {
-          "rule": "R6_HIGH_RISK_CORRIDOR",
-          "expected_hit": true,
-          "predicted_status": "unknown"
-        },
-        {
-          "rule": "R7_INFORMAL_CHANNEL_ONLY",
-          "expected_hit": true,
-          "predicted_status": "clear"
-        }
-      ]
-    },
-    {
-      "id": "008",
-      "language": "hinglish",
-      "label": "scam_pattern",
-      "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
-      "differing_rules": [
-        {
-          "rule": "R6_HIGH_RISK_CORRIDOR",
-          "expected_hit": true,
-          "predicted_status": "clear"
-        }
-      ]
-    },
-    {
-      "id": "010",
-      "language": "hinglish",
-      "label": "scam_pattern",
-      "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
-      "differing_rules": [
-        {
-          "rule": "R4_FEE_OVER_CAP",
-          "expected_hit": true,
-          "predicted_status": "clear"
-        },
-        {
-          "rule": "R6_HIGH_RISK_CORRIDOR",
-          "expected_hit": true,
-          "predicted_status": "unknown"
-        }
-      ]
-    },
-    {
-      "id": "012",
-      "language": "hi",
-      "label": "scam_pattern",
-      "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
-      "differing_rules": [
-        {
-          "rule": "R5_NO_TRIPARTITE_CONTRACT",
-          "expected_hit": false,
-          "predicted_status": "hit"
-        },
-        {
-          "rule": "R6_HIGH_RISK_CORRIDOR",
-          "expected_hit": true,
-          "predicted_status": "unknown"
-        },
-        {
-          "rule": "R8_NO_RECEIPT",
-          "expected_hit": false,
-          "predicted_status": "hit"
-        }
-      ]
-    },
-    {
-      "id": "013",
-      "language": "hi",
-      "label": "scam_pattern",
-      "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
-      "differing_rules": [
-        {
-          "rule": "R6_HIGH_RISK_CORRIDOR",
-          "expected_hit": true,
-          "predicted_status": "unknown"
-        },
-        {
-          "rule": "R7_INFORMAL_CHANNEL_ONLY",
-          "expected_hit": true,
-          "predicted_status": "clear"
-        }
-      ]
-    },
-    {
-      "id": "014",
-      "language": "hi",
-      "label": "scam_pattern",
-      "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
-      "differing_rules": [
-        {
-          "rule": "R6_HIGH_RISK_CORRIDOR",
-          "expected_hit": true,
-          "predicted_status": "unknown"
-        },
-        {
-          "rule": "R7_INFORMAL_CHANNEL_ONLY",
-          "expected_hit": true,
-          "predicted_status": "clear"
-        }
-      ]
-    },
-    {
-      "id": "015",
-      "language": "hi",
-      "label": "scam_pattern",
-      "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
-      "differing_rules": [
-        {
-          "rule": "R2_RA_NOT_LISTED",
-          "expected_hit": true,
-          "predicted_status": "unknown"
-        },
-        {
-          "rule": "R3_NO_RC_NUMBER",
-          "expected_hit": false,
-          "predicted_status": "hit"
-        },
-        {
-          "rule": "R6_HIGH_RISK_CORRIDOR",
-          "expected_hit": true,
-          "predicted_status": "clear"
-        }
-      ]
-    },
-    {
-      "id": "018",
-      "language": "mr",
-      "label": "scam_pattern",
-      "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
-      "differing_rules": [
-        {
-          "rule": "R5_NO_TRIPARTITE_CONTRACT",
-          "expected_hit": false,
-          "predicted_status": "hit"
-        },
-        {
-          "rule": "R6_HIGH_RISK_CORRIDOR",
-          "expected_hit": true,
-          "predicted_status": "unknown"
-        },
-        {
-          "rule": "R8_NO_RECEIPT",
-          "expected_hit": false,
-          "predicted_status": "hit"
-        },
-        {
-          "rule": "R9_PBBY_MISSING",
-          "expected_hit": false,
-          "predicted_status": "hit"
-        }
-      ]
-    },
-    {
-      "id": "020",
-      "language": "mr",
-      "label": "scam_pattern",
-      "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
-      "differing_rules": [
-        {
-          "rule": "R4_FEE_OVER_CAP",
-          "expected_hit": true,
-          "predicted_status": "unknown"
-        },
-        {
-          "rule": "R6_HIGH_RISK_CORRIDOR",
-          "expected_hit": true,
-          "predicted_status": "unknown"
-        }
-      ]
-    },
-    {
-      "id": "025",
-      "language": "en",
-      "label": "legit_style",
-      "expected_verdict": "VERIFY_FIRST",
-      "predicted_verdict": "NO_RED_FLAGS_FOUND",
-      "differing_rules": [
-        {
-          "rule": "R4_FEE_OVER_CAP",
-          "expected_hit": true,
-          "predicted_status": "clear"
-        }
-      ]
-    },
-    {
-      "id": "032",
-      "language": "hi",
-      "label": "legit_style",
-      "expected_verdict": "NO_RED_FLAGS_FOUND",
-      "predicted_verdict": "VERIFY_FIRST",
-      "differing_rules": [
-        {
-          "rule": "R3_NO_RC_NUMBER",
-          "expected_hit": false,
-          "predicted_status": "hit"
-        }
-      ]
-    },
-    {
-      "id": "034",
-      "language": "hi",
-      "label": "legit_style",
-      "expected_verdict": "NO_RED_FLAGS_FOUND",
-      "predicted_verdict": "VERIFY_FIRST",
-      "differing_rules": [
-        {
-          "rule": "R3_NO_RC_NUMBER",
-          "expected_hit": false,
-          "predicted_status": "hit"
-        }
-      ]
-    }
-  ],
+  "misclassified": [],
   "per_offer": [
     {
       "id": "001",
       "language": "en",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 9.217900000294321,
+      "time_ms": 9.660199999416363,
       "expected_verdict": "STOP",
       "predicted_verdict": "STOP",
       "expected_rule_hits": [
@@ -508,7 +260,7 @@
       "language": "en",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 2.3039999996399274,
+      "time_ms": 2.3003999995125923,
       "expected_verdict": "STOP",
       "predicted_verdict": "STOP",
       "expected_rule_hits": [
@@ -517,14 +269,14 @@
       ],
       "rule_statuses": {
         "R1_TOURIST_VISA": "clear",
-        "R2_RA_NOT_LISTED": "hit",
+        "R2_RA_NOT_LISTED": "unknown",
         "R3_NO_RC_NUMBER": "hit",
         "R4_FEE_OVER_CAP": "clear",
-        "R5_NO_TRIPARTITE_CONTRACT": "hit",
+        "R5_NO_TRIPARTITE_CONTRACT": "clear",
         "R6_HIGH_RISK_CORRIDOR": "hit",
         "R7_INFORMAL_CHANNEL_ONLY": "unknown",
-        "R8_NO_RECEIPT": "hit",
-        "R9_PBBY_MISSING": "hit",
+        "R8_NO_RECEIPT": "clear",
+        "R9_PBBY_MISSING": "clear",
         "H1_SALARY_ANOMALY": "clear",
         "H2_PASSPORT_HANDOVER": "unknown",
         "H3_PRESSURE": "clear"
@@ -549,7 +301,7 @@
       "language": "en",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 2.445300000545103,
+      "time_ms": 2.2492999996757135,
       "expected_verdict": "STOP",
       "predicted_verdict": "STOP",
       "expected_rule_hits": [
@@ -570,7 +322,7 @@
         "R6_HIGH_RISK_CORRIDOR": "hit",
         "R7_INFORMAL_CHANNEL_ONLY": "unknown",
         "R8_NO_RECEIPT": "hit",
-        "R9_PBBY_MISSING": "hit",
+        "R9_PBBY_MISSING": "clear",
         "H1_SALARY_ANOMALY": "unknown",
         "H2_PASSPORT_HANDOVER": "unknown",
         "H3_PRESSURE": "clear"
@@ -595,9 +347,9 @@
       "language": "en",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 2.391400000306021,
+      "time_ms": 2.513399999770627,
       "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
+      "predicted_verdict": "STOP",
       "expected_rule_hits": [
         "R2_RA_NOT_LISTED",
         "R6_HIGH_RISK_CORRIDOR"
@@ -608,7 +360,7 @@
         "R3_NO_RC_NUMBER": "clear",
         "R4_FEE_OVER_CAP": "clear",
         "R5_NO_TRIPARTITE_CONTRACT": "clear",
-        "R6_HIGH_RISK_CORRIDOR": "unknown",
+        "R6_HIGH_RISK_CORRIDOR": "hit",
         "R7_INFORMAL_CHANNEL_ONLY": "clear",
         "R8_NO_RECEIPT": "clear",
         "R9_PBBY_MISSING": "clear",
@@ -626,8 +378,8 @@
       "predicted_facts": {
         "visa_type": "employment",
         "destination_country": "Laos",
-        "fees_demanded_inr": "30000",
-        "role_title": null,
+        "fees_demanded_inr": "35400",
+        "role_title": "it",
         "agent_rc_number": "DEMO-RA-004"
       }
     },
@@ -636,9 +388,9 @@
       "language": "en",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 1.6047999997681472,
+      "time_ms": 1.6201000007640687,
       "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
+      "predicted_verdict": "STOP",
       "expected_rule_hits": [
         "R3_NO_RC_NUMBER",
         "R5_NO_TRIPARTITE_CONTRACT",
@@ -648,12 +400,12 @@
       ],
       "rule_statuses": {
         "R1_TOURIST_VISA": "clear",
-        "R2_RA_NOT_LISTED": "hit",
+        "R2_RA_NOT_LISTED": "unknown",
         "R3_NO_RC_NUMBER": "hit",
         "R4_FEE_OVER_CAP": "unknown",
         "R5_NO_TRIPARTITE_CONTRACT": "hit",
-        "R6_HIGH_RISK_CORRIDOR": "unknown",
-        "R7_INFORMAL_CHANNEL_ONLY": "clear",
+        "R6_HIGH_RISK_CORRIDOR": "hit",
+        "R7_INFORMAL_CHANNEL_ONLY": "hit",
         "R8_NO_RECEIPT": "clear",
         "R9_PBBY_MISSING": "hit",
         "H1_SALARY_ANOMALY": "unknown",
@@ -671,7 +423,7 @@
         "visa_type": "employment",
         "destination_country": "Thailand",
         "fees_demanded_inr": null,
-        "role_title": null,
+        "role_title": "chat support",
         "agent_rc_number": null
       }
     },
@@ -680,7 +432,7 @@
       "language": "hinglish",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 1.6980999998850166,
+      "time_ms": 1.4648000005763606,
       "expected_verdict": "STOP",
       "predicted_verdict": "STOP",
       "expected_rule_hits": [
@@ -730,7 +482,7 @@
       "language": "hinglish",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 2.35049999992043,
+      "time_ms": 1.603100000465929,
       "expected_verdict": "STOP",
       "predicted_verdict": "STOP",
       "expected_rule_hits": [
@@ -750,7 +502,7 @@
         "R4_FEE_OVER_CAP": "hit",
         "R5_NO_TRIPARTITE_CONTRACT": "hit",
         "R6_HIGH_RISK_CORRIDOR": "hit",
-        "R7_INFORMAL_CHANNEL_ONLY": "clear",
+        "R7_INFORMAL_CHANNEL_ONLY": "hit",
         "R8_NO_RECEIPT": "hit",
         "R9_PBBY_MISSING": "hit",
         "H1_SALARY_ANOMALY": "hit",
@@ -777,9 +529,9 @@
       "language": "hinglish",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 3.0883999997968203,
+      "time_ms": 2.1669999996447586,
       "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
+      "predicted_verdict": "STOP",
       "expected_rule_hits": [
         "H2_PASSPORT_HANDOVER",
         "R2_RA_NOT_LISTED",
@@ -791,7 +543,7 @@
         "R3_NO_RC_NUMBER": "clear",
         "R4_FEE_OVER_CAP": "clear",
         "R5_NO_TRIPARTITE_CONTRACT": "clear",
-        "R6_HIGH_RISK_CORRIDOR": "clear",
+        "R6_HIGH_RISK_CORRIDOR": "hit",
         "R7_INFORMAL_CHANNEL_ONLY": "clear",
         "R8_NO_RECEIPT": "clear",
         "R9_PBBY_MISSING": "clear",
@@ -810,7 +562,7 @@
         "visa_type": "employment",
         "destination_country": "Thailand",
         "fees_demanded_inr": "30000",
-        "role_title": "technician",
+        "role_title": "it technician",
         "agent_rc_number": "DEMO-RA-008"
       }
     },
@@ -819,7 +571,7 @@
       "language": "hinglish",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 1.9105000001218286,
+      "time_ms": 1.3530000005630427,
       "expected_verdict": "STOP",
       "predicted_verdict": "STOP",
       "expected_rule_hits": [
@@ -839,7 +591,7 @@
         "R3_NO_RC_NUMBER": "clear",
         "R4_FEE_OVER_CAP": "hit",
         "R5_NO_TRIPARTITE_CONTRACT": "hit",
-        "R6_HIGH_RISK_CORRIDOR": "unknown",
+        "R6_HIGH_RISK_CORRIDOR": "hit",
         "R7_INFORMAL_CHANNEL_ONLY": "hit",
         "R8_NO_RECEIPT": "hit",
         "R9_PBBY_MISSING": "hit",
@@ -858,7 +610,7 @@
         "visa_type": "visit",
         "destination_country": "Myanmar",
         "fees_demanded_inr": "250000",
-        "role_title": null,
+        "role_title": "online marketing",
         "agent_rc_number": "DEMO-RA-009"
       }
     },
@@ -867,9 +619,9 @@
       "language": "hinglish",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 2.1827999999004533,
+      "time_ms": 1.895899999908579,
       "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
+      "predicted_verdict": "STOP",
       "expected_rule_hits": [
         "R2_RA_NOT_LISTED",
         "R4_FEE_OVER_CAP",
@@ -879,9 +631,9 @@
         "R1_TOURIST_VISA": "clear",
         "R2_RA_NOT_LISTED": "hit",
         "R3_NO_RC_NUMBER": "clear",
-        "R4_FEE_OVER_CAP": "clear",
+        "R4_FEE_OVER_CAP": "hit",
         "R5_NO_TRIPARTITE_CONTRACT": "clear",
-        "R6_HIGH_RISK_CORRIDOR": "unknown",
+        "R6_HIGH_RISK_CORRIDOR": "hit",
         "R7_INFORMAL_CHANNEL_ONLY": "unknown",
         "R8_NO_RECEIPT": "clear",
         "R9_PBBY_MISSING": "clear",
@@ -899,8 +651,8 @@
       "predicted_facts": {
         "visa_type": "employment",
         "destination_country": "Cambodia",
-        "fees_demanded_inr": "30001",
-        "role_title": null,
+        "fees_demanded_inr": "35401",
+        "role_title": "chat support",
         "agent_rc_number": "DEMO-RA-010"
       }
     },
@@ -909,7 +661,7 @@
       "language": "hi",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 1.6092999994725687,
+      "time_ms": 1.6316000001097564,
       "expected_verdict": "STOP",
       "predicted_verdict": "STOP",
       "expected_rule_hits": [
@@ -932,7 +684,7 @@
         "R4_FEE_OVER_CAP": "hit",
         "R5_NO_TRIPARTITE_CONTRACT": "hit",
         "R6_HIGH_RISK_CORRIDOR": "hit",
-        "R7_INFORMAL_CHANNEL_ONLY": "clear",
+        "R7_INFORMAL_CHANNEL_ONLY": "hit",
         "R8_NO_RECEIPT": "hit",
         "R9_PBBY_MISSING": "hit",
         "H1_SALARY_ANOMALY": "hit",
@@ -959,9 +711,9 @@
       "language": "hi",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 2.6634000005287817,
+      "time_ms": 2.4818000001687324,
       "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
+      "predicted_verdict": "STOP",
       "expected_rule_hits": [
         "R2_RA_NOT_LISTED",
         "R6_HIGH_RISK_CORRIDOR",
@@ -972,10 +724,10 @@
         "R2_RA_NOT_LISTED": "hit",
         "R3_NO_RC_NUMBER": "clear",
         "R4_FEE_OVER_CAP": "clear",
-        "R5_NO_TRIPARTITE_CONTRACT": "hit",
-        "R6_HIGH_RISK_CORRIDOR": "unknown",
+        "R5_NO_TRIPARTITE_CONTRACT": "clear",
+        "R6_HIGH_RISK_CORRIDOR": "hit",
         "R7_INFORMAL_CHANNEL_ONLY": "clear",
-        "R8_NO_RECEIPT": "hit",
+        "R8_NO_RECEIPT": "clear",
         "R9_PBBY_MISSING": "hit",
         "H1_SALARY_ANOMALY": "unknown",
         "H2_PASSPORT_HANDOVER": "unknown",
@@ -992,7 +744,7 @@
         "visa_type": "employment",
         "destination_country": "Cambodia",
         "fees_demanded_inr": "30000",
-        "role_title": null,
+        "role_title": "customer support",
         "agent_rc_number": "DEMO-RA-012"
       }
     },
@@ -1001,9 +753,9 @@
       "language": "hi",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 2.316399999472196,
+      "time_ms": 1.8284000007042778,
       "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
+      "predicted_verdict": "STOP",
       "expected_rule_hits": [
         "H2_PASSPORT_HANDOVER",
         "R3_NO_RC_NUMBER",
@@ -1020,8 +772,8 @@
         "R3_NO_RC_NUMBER": "hit",
         "R4_FEE_OVER_CAP": "hit",
         "R5_NO_TRIPARTITE_CONTRACT": "hit",
-        "R6_HIGH_RISK_CORRIDOR": "unknown",
-        "R7_INFORMAL_CHANNEL_ONLY": "clear",
+        "R6_HIGH_RISK_CORRIDOR": "hit",
+        "R7_INFORMAL_CHANNEL_ONLY": "hit",
         "R8_NO_RECEIPT": "hit",
         "R9_PBBY_MISSING": "hit",
         "H1_SALARY_ANOMALY": "unknown",
@@ -1038,8 +790,8 @@
       "predicted_facts": {
         "visa_type": null,
         "destination_country": "Myanmar",
-        "fees_demanded_inr": "400000",
-        "role_title": null,
+        "fees_demanded_inr": "450000",
+        "role_title": "it",
         "agent_rc_number": null
       }
     },
@@ -1048,9 +800,9 @@
       "language": "hi",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 1.7166999996334198,
+      "time_ms": 1.4884000001984532,
       "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
+      "predicted_verdict": "STOP",
       "expected_rule_hits": [
         "H3_PRESSURE",
         "R3_NO_RC_NUMBER",
@@ -1066,8 +818,8 @@
         "R3_NO_RC_NUMBER": "hit",
         "R4_FEE_OVER_CAP": "hit",
         "R5_NO_TRIPARTITE_CONTRACT": "hit",
-        "R6_HIGH_RISK_CORRIDOR": "unknown",
-        "R7_INFORMAL_CHANNEL_ONLY": "clear",
+        "R6_HIGH_RISK_CORRIDOR": "hit",
+        "R7_INFORMAL_CHANNEL_ONLY": "hit",
         "R8_NO_RECEIPT": "clear",
         "R9_PBBY_MISSING": "hit",
         "H1_SALARY_ANOMALY": "unknown",
@@ -1085,7 +837,7 @@
         "visa_type": "employment",
         "destination_country": "Laos",
         "fees_demanded_inr": "150000",
-        "role_title": null,
+        "role_title": "digital marketing",
         "agent_rc_number": null
       }
     },
@@ -1094,20 +846,20 @@
       "language": "hi",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 2.599999999802094,
+      "time_ms": 2.127499999915017,
       "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
+      "predicted_verdict": "STOP",
       "expected_rule_hits": [
         "R2_RA_NOT_LISTED",
         "R6_HIGH_RISK_CORRIDOR"
       ],
       "rule_statuses": {
         "R1_TOURIST_VISA": "clear",
-        "R2_RA_NOT_LISTED": "unknown",
-        "R3_NO_RC_NUMBER": "hit",
+        "R2_RA_NOT_LISTED": "hit",
+        "R3_NO_RC_NUMBER": "clear",
         "R4_FEE_OVER_CAP": "clear",
         "R5_NO_TRIPARTITE_CONTRACT": "clear",
-        "R6_HIGH_RISK_CORRIDOR": "clear",
+        "R6_HIGH_RISK_CORRIDOR": "hit",
         "R7_INFORMAL_CHANNEL_ONLY": "clear",
         "R8_NO_RECEIPT": "clear",
         "R9_PBBY_MISSING": "clear",
@@ -1126,8 +878,8 @@
         "visa_type": "employment",
         "destination_country": "Thailand",
         "fees_demanded_inr": "35000",
-        "role_title": "आईटी तकनीशियन। रोजगार वीज़ा प्रस्थान से",
-        "agent_rc_number": null
+        "role_title": "it technician",
+        "agent_rc_number": "DEMO-RA-015"
       }
     },
     {
@@ -1135,7 +887,7 @@
       "language": "hi",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 2.1993999998812797,
+      "time_ms": 2.0918000000165193,
       "expected_verdict": "STOP",
       "predicted_verdict": "STOP",
       "expected_rule_hits": [
@@ -1159,7 +911,7 @@
         "R4_FEE_OVER_CAP": "hit",
         "R5_NO_TRIPARTITE_CONTRACT": "hit",
         "R6_HIGH_RISK_CORRIDOR": "hit",
-        "R7_INFORMAL_CHANNEL_ONLY": "clear",
+        "R7_INFORMAL_CHANNEL_ONLY": "hit",
         "R8_NO_RECEIPT": "hit",
         "R9_PBBY_MISSING": "hit",
         "H1_SALARY_ANOMALY": "hit",
@@ -1186,7 +938,7 @@
       "language": "mr",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 1.8125999995390885,
+      "time_ms": 2.2355000000970904,
       "expected_verdict": "STOP",
       "predicted_verdict": "STOP",
       "expected_rule_hits": [
@@ -1208,7 +960,7 @@
         "R4_FEE_OVER_CAP": "hit",
         "R5_NO_TRIPARTITE_CONTRACT": "hit",
         "R6_HIGH_RISK_CORRIDOR": "unknown",
-        "R7_INFORMAL_CHANNEL_ONLY": "clear",
+        "R7_INFORMAL_CHANNEL_ONLY": "hit",
         "R8_NO_RECEIPT": "hit",
         "R9_PBBY_MISSING": "hit",
         "H1_SALARY_ANOMALY": "unknown",
@@ -1235,9 +987,9 @@
       "language": "mr",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 2.5028999998539803,
+      "time_ms": 2.2568000003957422,
       "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
+      "predicted_verdict": "STOP",
       "expected_rule_hits": [
         "R3_NO_RC_NUMBER",
         "R6_HIGH_RISK_CORRIDOR"
@@ -1247,11 +999,11 @@
         "R2_RA_NOT_LISTED": "unknown",
         "R3_NO_RC_NUMBER": "hit",
         "R4_FEE_OVER_CAP": "clear",
-        "R5_NO_TRIPARTITE_CONTRACT": "hit",
-        "R6_HIGH_RISK_CORRIDOR": "unknown",
+        "R5_NO_TRIPARTITE_CONTRACT": "clear",
+        "R6_HIGH_RISK_CORRIDOR": "hit",
         "R7_INFORMAL_CHANNEL_ONLY": "clear",
-        "R8_NO_RECEIPT": "hit",
-        "R9_PBBY_MISSING": "hit",
+        "R8_NO_RECEIPT": "clear",
+        "R9_PBBY_MISSING": "clear",
         "H1_SALARY_ANOMALY": "unknown",
         "H2_PASSPORT_HANDOVER": "unknown",
         "H3_PRESSURE": "clear"
@@ -1267,7 +1019,7 @@
         "visa_type": "employment",
         "destination_country": "Myanmar",
         "fees_demanded_inr": "30000",
-        "role_title": null,
+        "role_title": "online marketing",
         "agent_rc_number": null
       }
     },
@@ -1276,7 +1028,7 @@
       "language": "mr",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 1.783400000022084,
+      "time_ms": 1.8118999996659113,
       "expected_verdict": "STOP",
       "predicted_verdict": "STOP",
       "expected_rule_hits": [
@@ -1298,7 +1050,7 @@
         "R4_FEE_OVER_CAP": "hit",
         "R5_NO_TRIPARTITE_CONTRACT": "hit",
         "R6_HIGH_RISK_CORRIDOR": "hit",
-        "R7_INFORMAL_CHANNEL_ONLY": "clear",
+        "R7_INFORMAL_CHANNEL_ONLY": "hit",
         "R8_NO_RECEIPT": "hit",
         "R9_PBBY_MISSING": "hit",
         "H1_SALARY_ANOMALY": "hit",
@@ -1325,9 +1077,9 @@
       "language": "mr",
       "label": "scam_pattern",
       "extraction_method": "fallback",
-      "time_ms": 1.4897000000928529,
+      "time_ms": 1.3873000007151859,
       "expected_verdict": "STOP",
-      "predicted_verdict": "VERIFY_FIRST",
+      "predicted_verdict": "STOP",
       "expected_rule_hits": [
         "H3_PRESSURE",
         "R2_RA_NOT_LISTED",
@@ -1340,9 +1092,9 @@
         "R1_TOURIST_VISA": "clear",
         "R2_RA_NOT_LISTED": "hit",
         "R3_NO_RC_NUMBER": "clear",
-        "R4_FEE_OVER_CAP": "unknown",
+        "R4_FEE_OVER_CAP": "hit",
         "R5_NO_TRIPARTITE_CONTRACT": "hit",
-        "R6_HIGH_RISK_CORRIDOR": "unknown",
+        "R6_HIGH_RISK_CORRIDOR": "hit",
         "R7_INFORMAL_CHANNEL_ONLY": "clear",
         "R8_NO_RECEIPT": "clear",
         "R9_PBBY_MISSING": "hit",
@@ -1360,8 +1112,8 @@
       "predicted_facts": {
         "visa_type": "employment",
         "destination_country": "Cambodia",
-        "fees_demanded_inr": null,
-        "role_title": null,
+        "fees_demanded_inr": "200000",
+        "role_title": "it",
         "agent_rc_number": "DEMO-RA-020"
       }
     },
@@ -1370,7 +1122,7 @@
       "language": "en",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 4.414799999722163,
+      "time_ms": 3.359199999977136,
       "expected_verdict": "NO_RED_FLAGS_FOUND",
       "predicted_verdict": "NO_RED_FLAGS_FOUND",
       "expected_rule_hits": [],
@@ -1398,7 +1150,7 @@
       "predicted_facts": {
         "visa_type": "employment",
         "destination_country": "United Arab Emirates",
-        "fees_demanded_inr": "30000",
+        "fees_demanded_inr": "35400",
         "role_title": "electrician",
         "agent_rc_number": "DEMO-RA-021"
       }
@@ -1408,7 +1160,7 @@
       "language": "en",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 2.342300000236719,
+      "time_ms": 2.776100000119186,
       "expected_verdict": "NO_RED_FLAGS_FOUND",
       "predicted_verdict": "NO_RED_FLAGS_FOUND",
       "expected_rule_hits": [],
@@ -1436,7 +1188,7 @@
       "predicted_facts": {
         "visa_type": "employment",
         "destination_country": "Saudi Arabia",
-        "fees_demanded_inr": "25000",
+        "fees_demanded_inr": "29500",
         "role_title": "welder",
         "agent_rc_number": "DEMO-RA-022"
       }
@@ -1446,7 +1198,7 @@
       "language": "en",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 3.4051000002364162,
+      "time_ms": 2.3118999997677747,
       "expected_verdict": "NO_RED_FLAGS_FOUND",
       "predicted_verdict": "NO_RED_FLAGS_FOUND",
       "expected_rule_hits": [],
@@ -1484,7 +1236,7 @@
       "language": "en",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 2.3211999996419763,
+      "time_ms": 2.2843999995529884,
       "expected_verdict": "NO_RED_FLAGS_FOUND",
       "predicted_verdict": "NO_RED_FLAGS_FOUND",
       "expected_rule_hits": [],
@@ -1522,9 +1274,9 @@
       "language": "en",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 2.3521000002801884,
+      "time_ms": 2.3770999996486353,
       "expected_verdict": "VERIFY_FIRST",
-      "predicted_verdict": "NO_RED_FLAGS_FOUND",
+      "predicted_verdict": "VERIFY_FIRST",
       "expected_rule_hits": [
         "R4_FEE_OVER_CAP"
       ],
@@ -1532,7 +1284,7 @@
         "R1_TOURIST_VISA": "clear",
         "R2_RA_NOT_LISTED": "clear",
         "R3_NO_RC_NUMBER": "clear",
-        "R4_FEE_OVER_CAP": "clear",
+        "R4_FEE_OVER_CAP": "hit",
         "R5_NO_TRIPARTITE_CONTRACT": "clear",
         "R6_HIGH_RISK_CORRIDOR": "clear",
         "R7_INFORMAL_CHANNEL_ONLY": "clear",
@@ -1552,7 +1304,7 @@
       "predicted_facts": {
         "visa_type": "employment",
         "destination_country": "Kuwait",
-        "fees_demanded_inr": "30001",
+        "fees_demanded_inr": "35401",
         "role_title": "technician",
         "agent_rc_number": "DEMO-RA-025"
       }
@@ -1562,7 +1314,7 @@
       "language": "hinglish",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 3.1200000003082096,
+      "time_ms": 2.6286000002073706,
       "expected_verdict": "NO_RED_FLAGS_FOUND",
       "predicted_verdict": "NO_RED_FLAGS_FOUND",
       "expected_rule_hits": [],
@@ -1590,7 +1342,7 @@
       "predicted_facts": {
         "visa_type": "employment",
         "destination_country": null,
-        "fees_demanded_inr": "30000",
+        "fees_demanded_inr": "35400",
         "role_title": null,
         "agent_rc_number": "DEMO-RA-026"
       }
@@ -1600,7 +1352,7 @@
       "language": "hinglish",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 2.425799999400624,
+      "time_ms": 2.2638000000370084,
       "expected_verdict": "NO_RED_FLAGS_FOUND",
       "predicted_verdict": "NO_RED_FLAGS_FOUND",
       "expected_rule_hits": [],
@@ -1638,7 +1390,7 @@
       "language": "hinglish",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 2.663600000232691,
+      "time_ms": 2.358300000196323,
       "expected_verdict": "VERIFY_FIRST",
       "predicted_verdict": "VERIFY_FIRST",
       "expected_rule_hits": [
@@ -1649,11 +1401,11 @@
         "R2_RA_NOT_LISTED": "clear",
         "R3_NO_RC_NUMBER": "hit",
         "R4_FEE_OVER_CAP": "clear",
-        "R5_NO_TRIPARTITE_CONTRACT": "hit",
+        "R5_NO_TRIPARTITE_CONTRACT": "clear",
         "R6_HIGH_RISK_CORRIDOR": "clear",
         "R7_INFORMAL_CHANNEL_ONLY": "unknown",
-        "R8_NO_RECEIPT": "hit",
-        "R9_PBBY_MISSING": "hit",
+        "R8_NO_RECEIPT": "clear",
+        "R9_PBBY_MISSING": "clear",
         "H1_SALARY_ANOMALY": "unknown",
         "H2_PASSPORT_HANDOVER": "unknown",
         "H3_PRESSURE": "clear"
@@ -1668,7 +1420,7 @@
       "predicted_facts": {
         "visa_type": "employment",
         "destination_country": "Israel",
-        "fees_demanded_inr": "10000",
+        "fees_demanded_inr": "11800",
         "role_title": "construction worker",
         "agent_rc_number": null
       }
@@ -1678,7 +1430,7 @@
       "language": "hinglish",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 2.0045999999638298,
+      "time_ms": 1.8900999994002632,
       "expected_verdict": "NO_RED_FLAGS_FOUND",
       "predicted_verdict": "NO_RED_FLAGS_FOUND",
       "expected_rule_hits": [],
@@ -1706,7 +1458,7 @@
       "predicted_facts": {
         "visa_type": "employment",
         "destination_country": "Malaysia",
-        "fees_demanded_inr": "15000",
+        "fees_demanded_inr": "17700",
         "role_title": "warehouse worker",
         "agent_rc_number": "DEMO-RA-029"
       }
@@ -1716,7 +1468,7 @@
       "language": "hinglish",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 2.7233000000705943,
+      "time_ms": 2.6397999999971944,
       "expected_verdict": "NO_RED_FLAGS_FOUND",
       "predicted_verdict": "NO_RED_FLAGS_FOUND",
       "expected_rule_hits": [],
@@ -1744,7 +1496,7 @@
       "predicted_facts": {
         "visa_type": "employment",
         "destination_country": "Singapore",
-        "fees_demanded_inr": "30000",
+        "fees_demanded_inr": "35400",
         "role_title": "technician",
         "agent_rc_number": "DEMO-RA-030"
       }
@@ -1754,7 +1506,7 @@
       "language": "hi",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 3.0067999996390427,
+      "time_ms": 2.363300000070012,
       "expected_verdict": "VERIFY_FIRST",
       "predicted_verdict": "VERIFY_FIRST",
       "expected_rule_hits": [
@@ -1762,14 +1514,14 @@
       ],
       "rule_statuses": {
         "R1_TOURIST_VISA": "clear",
-        "R2_RA_NOT_LISTED": "unknown",
-        "R3_NO_RC_NUMBER": "hit",
+        "R2_RA_NOT_LISTED": "clear",
+        "R3_NO_RC_NUMBER": "clear",
         "R4_FEE_OVER_CAP": "clear",
         "R5_NO_TRIPARTITE_CONTRACT": "hit",
         "R6_HIGH_RISK_CORRIDOR": "clear",
         "R7_INFORMAL_CHANNEL_ONLY": "clear",
-        "R8_NO_RECEIPT": "hit",
-        "R9_PBBY_MISSING": "hit",
+        "R8_NO_RECEIPT": "clear",
+        "R9_PBBY_MISSING": "clear",
         "H1_SALARY_ANOMALY": "unknown",
         "H2_PASSPORT_HANDOVER": "unknown",
         "H3_PRESSURE": "clear"
@@ -1784,9 +1536,9 @@
       "predicted_facts": {
         "visa_type": "employment",
         "destination_country": "United Arab Emirates",
-        "fees_demanded_inr": "30000",
+        "fees_demanded_inr": "35400",
         "role_title": "housekeeping",
-        "agent_rc_number": null
+        "agent_rc_number": "DEMO-RA-031"
       }
     },
     {
@@ -1794,14 +1546,14 @@
       "language": "hi",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 2.5372000000061234,
+      "time_ms": 2.402799999799754,
       "expected_verdict": "NO_RED_FLAGS_FOUND",
-      "predicted_verdict": "VERIFY_FIRST",
+      "predicted_verdict": "NO_RED_FLAGS_FOUND",
       "expected_rule_hits": [],
       "rule_statuses": {
         "R1_TOURIST_VISA": "clear",
-        "R2_RA_NOT_LISTED": "unknown",
-        "R3_NO_RC_NUMBER": "hit",
+        "R2_RA_NOT_LISTED": "clear",
+        "R3_NO_RC_NUMBER": "clear",
         "R4_FEE_OVER_CAP": "clear",
         "R5_NO_TRIPARTITE_CONTRACT": "clear",
         "R6_HIGH_RISK_CORRIDOR": "clear",
@@ -1822,9 +1574,9 @@
       "predicted_facts": {
         "visa_type": "employment",
         "destination_country": "Saudi Arabia",
-        "fees_demanded_inr": "20000",
+        "fees_demanded_inr": "23600",
         "role_title": null,
-        "agent_rc_number": null
+        "agent_rc_number": "DEMO-RA-032"
       }
     },
     {
@@ -1832,7 +1584,7 @@
       "language": "hi",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 3.270399999564688,
+      "time_ms": 2.6673000002119807,
       "expected_verdict": "NO_RED_FLAGS_FOUND",
       "predicted_verdict": "NO_RED_FLAGS_FOUND",
       "expected_rule_hits": [],
@@ -1860,7 +1612,7 @@
       "predicted_facts": {
         "visa_type": "employment",
         "destination_country": "Qatar",
-        "fees_demanded_inr": "30000",
+        "fees_demanded_inr": "35400",
         "role_title": null,
         "agent_rc_number": "DEMO-RA-033"
       }
@@ -1870,14 +1622,14 @@
       "language": "hi",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 3.217600000425591,
+      "time_ms": 2.535900000111724,
       "expected_verdict": "NO_RED_FLAGS_FOUND",
-      "predicted_verdict": "VERIFY_FIRST",
+      "predicted_verdict": "NO_RED_FLAGS_FOUND",
       "expected_rule_hits": [],
       "rule_statuses": {
         "R1_TOURIST_VISA": "clear",
-        "R2_RA_NOT_LISTED": "unknown",
-        "R3_NO_RC_NUMBER": "hit",
+        "R2_RA_NOT_LISTED": "clear",
+        "R3_NO_RC_NUMBER": "clear",
         "R4_FEE_OVER_CAP": "clear",
         "R5_NO_TRIPARTITE_CONTRACT": "clear",
         "R6_HIGH_RISK_CORRIDOR": "clear",
@@ -1900,7 +1652,7 @@
         "destination_country": "Oman",
         "fees_demanded_inr": "30000",
         "role_title": "electrician",
-        "agent_rc_number": null
+        "agent_rc_number": "DEMO-RA-034"
       }
     },
     {
@@ -1908,7 +1660,7 @@
       "language": "hi",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 2.0840000006501214,
+      "time_ms": 2.0404000006237766,
       "expected_verdict": "VERIFY_FIRST",
       "predicted_verdict": "VERIFY_FIRST",
       "expected_rule_hits": [
@@ -1916,8 +1668,8 @@
       ],
       "rule_statuses": {
         "R1_TOURIST_VISA": "clear",
-        "R2_RA_NOT_LISTED": "unknown",
-        "R3_NO_RC_NUMBER": "hit",
+        "R2_RA_NOT_LISTED": "clear",
+        "R3_NO_RC_NUMBER": "clear",
         "R4_FEE_OVER_CAP": "hit",
         "R5_NO_TRIPARTITE_CONTRACT": "clear",
         "R6_HIGH_RISK_CORRIDOR": "clear",
@@ -1940,7 +1692,7 @@
         "destination_country": "Kuwait",
         "fees_demanded_inr": "36000",
         "role_title": "driver",
-        "agent_rc_number": null
+        "agent_rc_number": "DEMO-RA-035"
       }
     },
     {
@@ -1948,7 +1700,7 @@
       "language": "hi",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 3.108799999608891,
+      "time_ms": 2.6881999992838246,
       "expected_verdict": "NO_RED_FLAGS_FOUND",
       "predicted_verdict": "NO_RED_FLAGS_FOUND",
       "expected_rule_hits": [],
@@ -1976,7 +1728,7 @@
       "predicted_facts": {
         "visa_type": "employment",
         "destination_country": null,
-        "fees_demanded_inr": "10000",
+        "fees_demanded_inr": "11800",
         "role_title": null,
         "agent_rc_number": "DEMO-RA-036"
       }
@@ -1986,7 +1738,7 @@
       "language": "mr",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 2.7829999999084976,
+      "time_ms": 2.6582000000416883,
       "expected_verdict": "NO_RED_FLAGS_FOUND",
       "predicted_verdict": "NO_RED_FLAGS_FOUND",
       "expected_rule_hits": [],
@@ -2014,7 +1766,7 @@
       "predicted_facts": {
         "visa_type": "employment",
         "destination_country": null,
-        "fees_demanded_inr": "25000",
+        "fees_demanded_inr": "29500",
         "role_title": "mechanic",
         "agent_rc_number": "DEMO-RA-037"
       }
@@ -2024,7 +1776,7 @@
       "language": "mr",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 2.395700000306533,
+      "time_ms": 2.5253000003431225,
       "expected_verdict": "NO_RED_FLAGS_FOUND",
       "predicted_verdict": "NO_RED_FLAGS_FOUND",
       "expected_rule_hits": [],
@@ -2052,7 +1804,7 @@
       "predicted_facts": {
         "visa_type": "employment",
         "destination_country": "Israel",
-        "fees_demanded_inr": "30000",
+        "fees_demanded_inr": "35400",
         "role_title": null,
         "agent_rc_number": "DEMO-RA-038"
       }
@@ -2062,7 +1814,7 @@
       "language": "mr",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 2.661699999407574,
+      "time_ms": 2.823499999976775,
       "expected_verdict": "VERIFY_FIRST",
       "predicted_verdict": "VERIFY_FIRST",
       "expected_rule_hits": [
@@ -2073,11 +1825,11 @@
         "R2_RA_NOT_LISTED": "unknown",
         "R3_NO_RC_NUMBER": "hit",
         "R4_FEE_OVER_CAP": "clear",
-        "R5_NO_TRIPARTITE_CONTRACT": "hit",
+        "R5_NO_TRIPARTITE_CONTRACT": "clear",
         "R6_HIGH_RISK_CORRIDOR": "clear",
         "R7_INFORMAL_CHANNEL_ONLY": "clear",
-        "R8_NO_RECEIPT": "hit",
-        "R9_PBBY_MISSING": "hit",
+        "R8_NO_RECEIPT": "clear",
+        "R9_PBBY_MISSING": "clear",
         "H1_SALARY_ANOMALY": "unknown",
         "H2_PASSPORT_HANDOVER": "unknown",
         "H3_PRESSURE": "clear"
@@ -2092,7 +1844,7 @@
       "predicted_facts": {
         "visa_type": "employment",
         "destination_country": "Malaysia",
-        "fees_demanded_inr": "20000",
+        "fees_demanded_inr": "23600",
         "role_title": null,
         "agent_rc_number": null
       }
@@ -2102,7 +1854,7 @@
       "language": "mr",
       "label": "legit_style",
       "extraction_method": "fallback",
-      "time_ms": 2.8904000000693486,
+      "time_ms": 2.8708999998343643,
       "expected_verdict": "NO_RED_FLAGS_FOUND",
       "predicted_verdict": "NO_RED_FLAGS_FOUND",
       "expected_rule_hits": [],
