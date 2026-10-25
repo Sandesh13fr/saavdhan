@@ -45,3 +45,12 @@ def test_duplicate_scalar_rejected_list_appends():
         validate_extraction({"fields": [{"name": "visa_type", "value": "tourist", "quote": "Tourist visa"}] * 2}, SRC)
     offer = validate_extraction({"fields": [{"name": "urgency_language", "value": "x", "quote": "Bangkok job"}] * 2}, SRC)
     assert len(offer.urgency_language) == 2
+
+
+def test_llm_numeric_guard_rejects_mismatch_accepts_match():
+    src = [SourceRef(id="S1", file="c.txt", kind="message_export", text="Processing fee Rs 2,50,000 only")]
+    ok = validate_extraction({"fields": [{"name": "fees_demanded_inr", "value": "250000", "quote": "Rs 2,50,000"}]}, src)
+    assert ok.fees_demanded_inr.value == "250000"
+    for bad in ("25000", "2500000", "lots"):
+        with pytest.raises(ValueError, match="numeric"):
+            validate_extraction({"fields": [{"name": "fees_demanded_inr", "value": bad, "quote": "Rs 2,50,000"}]}, src)
