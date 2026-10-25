@@ -1,0 +1,6414 @@
+[
+  {
+    "id": "EVAL-01",
+    "kind": "clean",
+    "input": {
+      "name": "EVAL-01 clean",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "manufacturing",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2023-01-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ],
+            "reference": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-08-01",
+          "amount": "100000",
+          "reference": "INV-001",
+          "invoice_ids": [
+            "INV-001"
+          ],
+          "allocations": [],
+          "tds_amount": "0",
+          "tds_evidence_source": null,
+          "tds_section": null
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2027-01-01",
+          "bank_rate": "6.5",
+          "source": "Synthetic6.5%",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "100000"
+    },
+    "expected_matches": [
+      [
+        "P1",
+        "INV-001",
+        "100000.00",
+        "0.00"
+      ]
+    ],
+    "expected_due": {
+      "INV-001": "2026-06-01"
+    },
+    "expected_block": null
+  },
+  {
+    "id": "EVAL-02",
+    "kind": "clean",
+    "input": {
+      "name": "EVAL-02 clean",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "manufacturing",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2023-01-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ],
+            "reference": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-08-01",
+          "amount": "100000",
+          "reference": "INV-001",
+          "invoice_ids": [
+            "INV-001"
+          ],
+          "allocations": [],
+          "tds_amount": "0",
+          "tds_evidence_source": null,
+          "tds_section": null
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2027-01-01",
+          "bank_rate": "6.5",
+          "source": "Synthetic6.5%",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "100000"
+    },
+    "expected_matches": [
+      [
+        "P1",
+        "INV-001",
+        "100000.00",
+        "0.00"
+      ]
+    ],
+    "expected_due": {
+      "INV-001": "2026-06-01"
+    },
+    "expected_block": null
+  },
+  {
+    "id": "EVAL-03",
+    "kind": "clean",
+    "input": {
+      "name": "EVAL-03 clean",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "manufacturing",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2023-01-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ],
+            "reference": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-08-01",
+          "amount": "100000",
+          "reference": "INV-001",
+          "invoice_ids": [
+            "INV-001"
+          ],
+          "allocations": [],
+          "tds_amount": "0",
+          "tds_evidence_source": null,
+          "tds_section": null
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2027-01-01",
+          "bank_rate": "6.5",
+          "source": "Synthetic6.5%",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "100000"
+    },
+    "expected_matches": [
+      [
+        "P1",
+        "INV-001",
+        "100000.00",
+        "0.00"
+      ]
+    ],
+    "expected_due": {
+      "INV-001": "2026-06-01"
+    },
+    "expected_block": null
+  },
+  {
+    "id": "EVAL-04",
+    "kind": "tds",
+    "input": {
+      "name": "EVAL-04 tds",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "manufacturing",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2023-01-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ],
+            "reference": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-08-01",
+          "amount": "98000",
+          "reference": "INV-001",
+          "invoice_ids": [
+            "INV-001"
+          ],
+          "allocations": [],
+          "tds_amount": "2000",
+          "tds_evidence_source": "TDS-001",
+          "tds_section": "194C"
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2027-01-01",
+          "bank_rate": "6.5",
+          "source": "Synthetic6.5%",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "98000"
+    },
+    "expected_matches": [
+      [
+        "P1",
+        "INV-001",
+        "98000.00",
+        "2000.00"
+      ]
+    ],
+    "expected_due": {
+      "INV-001": "2026-06-01"
+    },
+    "expected_block": null
+  },
+  {
+    "id": "EVAL-05",
+    "kind": "tds",
+    "input": {
+      "name": "EVAL-05 tds",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "manufacturing",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2023-01-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ],
+            "reference": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-08-01",
+          "amount": "98000",
+          "reference": "INV-001",
+          "invoice_ids": [
+            "INV-001"
+          ],
+          "allocations": [],
+          "tds_amount": "2000",
+          "tds_evidence_source": "TDS-001",
+          "tds_section": "194C"
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2027-01-01",
+          "bank_rate": "6.5",
+          "source": "Synthetic6.5%",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "98000"
+    },
+    "expected_matches": [
+      [
+        "P1",
+        "INV-001",
+        "98000.00",
+        "2000.00"
+      ]
+    ],
+    "expected_due": {
+      "INV-001": "2026-06-01"
+    },
+    "expected_block": null
+  },
+  {
+    "id": "EVAL-06",
+    "kind": "tds",
+    "input": {
+      "name": "EVAL-06 tds",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "manufacturing",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2023-01-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ],
+            "reference": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-08-01",
+          "amount": "98000",
+          "reference": "INV-001",
+          "invoice_ids": [
+            "INV-001"
+          ],
+          "allocations": [],
+          "tds_amount": "2000",
+          "tds_evidence_source": "TDS-001",
+          "tds_section": "194C"
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2027-01-01",
+          "bank_rate": "6.5",
+          "source": "Synthetic6.5%",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "98000"
+    },
+    "expected_matches": [
+      [
+        "P1",
+        "INV-001",
+        "98000.00",
+        "2000.00"
+      ]
+    ],
+    "expected_due": {
+      "INV-001": "2026-06-01"
+    },
+    "expected_block": null
+  },
+  {
+    "id": "EVAL-07",
+    "kind": "tds",
+    "input": {
+      "name": "EVAL-07 tds",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "manufacturing",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2023-01-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ],
+            "reference": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-08-01",
+          "amount": "98000",
+          "reference": "INV-001",
+          "invoice_ids": [
+            "INV-001"
+          ],
+          "allocations": [],
+          "tds_amount": "2000",
+          "tds_evidence_source": "TDS-001",
+          "tds_section": "194C"
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2027-01-01",
+          "bank_rate": "6.5",
+          "source": "Synthetic6.5%",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "98000"
+    },
+    "expected_matches": [
+      [
+        "P1",
+        "INV-001",
+        "98000.00",
+        "2000.00"
+      ]
+    ],
+    "expected_due": {
+      "INV-001": "2026-06-01"
+    },
+    "expected_block": null
+  },
+  {
+    "id": "EVAL-08",
+    "kind": "lump",
+    "input": {
+      "name": "EVAL-08 lump",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "manufacturing",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2023-01-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        },
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-002",
+          "number": "INV-002",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ],
+            "reference": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-08-01",
+          "amount": "200000",
+          "reference": "Buyer transfer",
+          "invoice_ids": [],
+          "allocations": [
+            {
+              "source_refs": [
+                "BANK"
+              ],
+              "field_sources": {
+                "invoice_id": [
+                  "BANK"
+                ],
+                "amount": [
+                  "BANK"
+                ]
+              },
+              "invoice_id": "INV-001",
+              "amount": "100000",
+              "tds_amount": "0"
+            },
+            {
+              "source_refs": [
+                "BANK"
+              ],
+              "field_sources": {
+                "invoice_id": [
+                  "BANK"
+                ],
+                "amount": [
+                  "BANK"
+                ]
+              },
+              "invoice_id": "INV-002",
+              "amount": "100000",
+              "tds_amount": "0"
+            }
+          ],
+          "tds_amount": "0",
+          "tds_evidence_source": null,
+          "tds_section": null
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2027-01-01",
+          "bank_rate": "6.5",
+          "source": "Synthetic6.5%",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "200000"
+    },
+    "expected_matches": [
+      [
+        "P1",
+        "INV-001",
+        "100000.00",
+        "0.00"
+      ],
+      [
+        "P1",
+        "INV-002",
+        "100000.00",
+        "0.00"
+      ]
+    ],
+    "expected_due": {
+      "INV-001": "2026-06-01",
+      "INV-002": "2026-06-01"
+    },
+    "expected_block": null
+  },
+  {
+    "id": "EVAL-09",
+    "kind": "lump",
+    "input": {
+      "name": "EVAL-09 lump",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "manufacturing",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2023-01-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        },
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-002",
+          "number": "INV-002",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ],
+            "reference": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-08-01",
+          "amount": "200000",
+          "reference": "Buyer transfer",
+          "invoice_ids": [],
+          "allocations": [
+            {
+              "source_refs": [
+                "BANK"
+              ],
+              "field_sources": {
+                "invoice_id": [
+                  "BANK"
+                ],
+                "amount": [
+                  "BANK"
+                ]
+              },
+              "invoice_id": "INV-001",
+              "amount": "100000",
+              "tds_amount": "0"
+            },
+            {
+              "source_refs": [
+                "BANK"
+              ],
+              "field_sources": {
+                "invoice_id": [
+                  "BANK"
+                ],
+                "amount": [
+                  "BANK"
+                ]
+              },
+              "invoice_id": "INV-002",
+              "amount": "100000",
+              "tds_amount": "0"
+            }
+          ],
+          "tds_amount": "0",
+          "tds_evidence_source": null,
+          "tds_section": null
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2027-01-01",
+          "bank_rate": "6.5",
+          "source": "Synthetic6.5%",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "200000"
+    },
+    "expected_matches": [
+      [
+        "P1",
+        "INV-001",
+        "100000.00",
+        "0.00"
+      ],
+      [
+        "P1",
+        "INV-002",
+        "100000.00",
+        "0.00"
+      ]
+    ],
+    "expected_due": {
+      "INV-001": "2026-06-01",
+      "INV-002": "2026-06-01"
+    },
+    "expected_block": null
+  },
+  {
+    "id": "EVAL-10",
+    "kind": "lump",
+    "input": {
+      "name": "EVAL-10 lump",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "manufacturing",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2023-01-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        },
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-002",
+          "number": "INV-002",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ],
+            "reference": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-08-01",
+          "amount": "200000",
+          "reference": "Buyer transfer",
+          "invoice_ids": [],
+          "allocations": [
+            {
+              "source_refs": [
+                "BANK"
+              ],
+              "field_sources": {
+                "invoice_id": [
+                  "BANK"
+                ],
+                "amount": [
+                  "BANK"
+                ]
+              },
+              "invoice_id": "INV-001",
+              "amount": "100000",
+              "tds_amount": "0"
+            },
+            {
+              "source_refs": [
+                "BANK"
+              ],
+              "field_sources": {
+                "invoice_id": [
+                  "BANK"
+                ],
+                "amount": [
+                  "BANK"
+                ]
+              },
+              "invoice_id": "INV-002",
+              "amount": "100000",
+              "tds_amount": "0"
+            }
+          ],
+          "tds_amount": "0",
+          "tds_evidence_source": null,
+          "tds_section": null
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2027-01-01",
+          "bank_rate": "6.5",
+          "source": "Synthetic6.5%",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "200000"
+    },
+    "expected_matches": [
+      [
+        "P1",
+        "INV-001",
+        "100000.00",
+        "0.00"
+      ],
+      [
+        "P1",
+        "INV-002",
+        "100000.00",
+        "0.00"
+      ]
+    ],
+    "expected_due": {
+      "INV-001": "2026-06-01",
+      "INV-002": "2026-06-01"
+    },
+    "expected_block": null
+  },
+  {
+    "id": "EVAL-11",
+    "kind": "partial",
+    "input": {
+      "name": "EVAL-11 partial",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "manufacturing",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2023-01-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-07-01",
+          "amount": "30000",
+          "reference": "",
+          "invoice_ids": [
+            "INV-001"
+          ],
+          "allocations": [],
+          "tds_amount": "0",
+          "tds_evidence_source": null,
+          "tds_section": null
+        },
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ]
+          },
+          "id": "P2",
+          "date": "2026-08-01",
+          "amount": "20000",
+          "reference": "",
+          "invoice_ids": [
+            "INV-001"
+          ],
+          "allocations": [],
+          "tds_amount": "0",
+          "tds_evidence_source": null,
+          "tds_section": null
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2027-01-01",
+          "bank_rate": "6.5",
+          "source": "Synthetic6.5%",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "50000"
+    },
+    "expected_matches": [
+      [
+        "P1",
+        "INV-001",
+        "30000.00",
+        "0.00"
+      ],
+      [
+        "P2",
+        "INV-001",
+        "20000.00",
+        "0.00"
+      ]
+    ],
+    "expected_due": {
+      "INV-001": "2026-06-01"
+    },
+    "expected_block": null
+  },
+  {
+    "id": "EVAL-12",
+    "kind": "partial",
+    "input": {
+      "name": "EVAL-12 partial",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "manufacturing",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2023-01-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-07-01",
+          "amount": "30000",
+          "reference": "",
+          "invoice_ids": [
+            "INV-001"
+          ],
+          "allocations": [],
+          "tds_amount": "0",
+          "tds_evidence_source": null,
+          "tds_section": null
+        },
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ]
+          },
+          "id": "P2",
+          "date": "2026-08-01",
+          "amount": "20000",
+          "reference": "",
+          "invoice_ids": [
+            "INV-001"
+          ],
+          "allocations": [],
+          "tds_amount": "0",
+          "tds_evidence_source": null,
+          "tds_section": null
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2027-01-01",
+          "bank_rate": "6.5",
+          "source": "Synthetic6.5%",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "50000"
+    },
+    "expected_matches": [
+      [
+        "P1",
+        "INV-001",
+        "30000.00",
+        "0.00"
+      ],
+      [
+        "P2",
+        "INV-001",
+        "20000.00",
+        "0.00"
+      ]
+    ],
+    "expected_due": {
+      "INV-001": "2026-06-01"
+    },
+    "expected_block": null
+  },
+  {
+    "id": "EVAL-13",
+    "kind": "partial",
+    "input": {
+      "name": "EVAL-13 partial",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "manufacturing",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2023-01-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-07-01",
+          "amount": "30000",
+          "reference": "",
+          "invoice_ids": [
+            "INV-001"
+          ],
+          "allocations": [],
+          "tds_amount": "0",
+          "tds_evidence_source": null,
+          "tds_section": null
+        },
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ]
+          },
+          "id": "P2",
+          "date": "2026-08-01",
+          "amount": "20000",
+          "reference": "",
+          "invoice_ids": [
+            "INV-001"
+          ],
+          "allocations": [],
+          "tds_amount": "0",
+          "tds_evidence_source": null,
+          "tds_section": null
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2027-01-01",
+          "bank_rate": "6.5",
+          "source": "Synthetic6.5%",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "50000"
+    },
+    "expected_matches": [
+      [
+        "P1",
+        "INV-001",
+        "30000.00",
+        "0.00"
+      ],
+      [
+        "P2",
+        "INV-001",
+        "20000.00",
+        "0.00"
+      ]
+    ],
+    "expected_due": {
+      "INV-001": "2026-06-01"
+    },
+    "expected_block": null
+  },
+  {
+    "id": "EVAL-14",
+    "kind": "ambiguous",
+    "input": {
+      "name": "EVAL-14 ambiguous",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "manufacturing",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2023-01-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        },
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-002",
+          "number": "INV-002",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ],
+            "reference": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-08-01",
+          "amount": "100000",
+          "reference": "Buyer transfer",
+          "invoice_ids": [],
+          "allocations": [],
+          "tds_amount": "0",
+          "tds_evidence_source": null,
+          "tds_section": null
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2027-01-01",
+          "bank_rate": "6.5",
+          "source": "Synthetic6.5%",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "100000"
+    },
+    "expected_matches": [],
+    "expected_due": {
+      "INV-001": "2026-06-01",
+      "INV-002": "2026-06-01"
+    },
+    "expected_block": "ambiguous_payment"
+  },
+  {
+    "id": "EVAL-15",
+    "kind": "ambiguous",
+    "input": {
+      "name": "EVAL-15 ambiguous",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "manufacturing",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2023-01-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        },
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-002",
+          "number": "INV-002",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ],
+            "reference": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-08-01",
+          "amount": "100000",
+          "reference": "Buyer transfer",
+          "invoice_ids": [],
+          "allocations": [],
+          "tds_amount": "0",
+          "tds_evidence_source": null,
+          "tds_section": null
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2027-01-01",
+          "bank_rate": "6.5",
+          "source": "Synthetic6.5%",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "100000"
+    },
+    "expected_matches": [],
+    "expected_due": {
+      "INV-001": "2026-06-01",
+      "INV-002": "2026-06-01"
+    },
+    "expected_block": "ambiguous_payment"
+  },
+  {
+    "id": "EVAL-16",
+    "kind": "objection",
+    "input": {
+      "name": "EVAL-16 objection",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "manufacturing",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2023-01-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ],
+            "objection_date": [
+              "DOC-001"
+            ],
+            "objection_resolved_date": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": "2026-06-10",
+          "objection_resolved_date": "2026-06-20"
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ],
+            "reference": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-08-01",
+          "amount": "100000",
+          "reference": "INV-001",
+          "invoice_ids": [
+            "INV-001"
+          ],
+          "allocations": [],
+          "tds_amount": "0",
+          "tds_evidence_source": null,
+          "tds_section": null
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2027-01-01",
+          "bank_rate": "6.5",
+          "source": "Synthetic6.5%",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "100000"
+    },
+    "expected_matches": [
+      [
+        "P1",
+        "INV-001",
+        "100000.00",
+        "0.00"
+      ]
+    ],
+    "expected_due": {
+      "INV-001": "2026-06-20"
+    },
+    "expected_block": null
+  },
+  {
+    "id": "EVAL-17",
+    "kind": "objection",
+    "input": {
+      "name": "EVAL-17 objection",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "manufacturing",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2023-01-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ],
+            "objection_date": [
+              "DOC-001"
+            ],
+            "objection_resolved_date": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": "2026-06-10",
+          "objection_resolved_date": "2026-06-20"
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ],
+            "reference": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-08-01",
+          "amount": "100000",
+          "reference": "INV-001",
+          "invoice_ids": [
+            "INV-001"
+          ],
+          "allocations": [],
+          "tds_amount": "0",
+          "tds_evidence_source": null,
+          "tds_section": null
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2027-01-01",
+          "bank_rate": "6.5",
+          "source": "Synthetic6.5%",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "100000"
+    },
+    "expected_matches": [
+      [
+        "P1",
+        "INV-001",
+        "100000.00",
+        "0.00"
+      ]
+    ],
+    "expected_due": {
+      "INV-001": "2026-06-20"
+    },
+    "expected_block": null
+  },
+  {
+    "id": "EVAL-18",
+    "kind": "post_registration",
+    "input": {
+      "name": "EVAL-18 post_registration",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "manufacturing",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2026-07-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ],
+            "reference": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-08-01",
+          "amount": "100000",
+          "reference": "INV-001",
+          "invoice_ids": [
+            "INV-001"
+          ],
+          "allocations": [],
+          "tds_amount": "0",
+          "tds_evidence_source": null,
+          "tds_section": null
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2027-01-01",
+          "bank_rate": "6.5",
+          "source": "Synthetic6.5%",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "100000"
+    },
+    "expected_matches": [
+      [
+        "P1",
+        "INV-001",
+        "100000.00",
+        "0.00"
+      ]
+    ],
+    "expected_due": {
+      "INV-001": "2026-06-01"
+    },
+    "expected_block": "registration_review"
+  },
+  {
+    "id": "EVAL-19",
+    "kind": "trader",
+    "input": {
+      "name": "EVAL-19 trader",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "trading",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2023-01-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ],
+            "reference": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-08-01",
+          "amount": "100000",
+          "reference": "INV-001",
+          "invoice_ids": [
+            "INV-001"
+          ],
+          "allocations": [],
+          "tds_amount": "0",
+          "tds_evidence_source": null,
+          "tds_section": null
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2027-01-01",
+          "bank_rate": "6.5",
+          "source": "Synthetic6.5%",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "100000"
+    },
+    "expected_matches": [
+      [
+        "P1",
+        "INV-001",
+        "100000.00",
+        "0.00"
+      ]
+    ],
+    "expected_due": {
+      "INV-001": "2026-06-01"
+    },
+    "expected_block": "ineligible"
+  },
+  {
+    "id": "EVAL-20",
+    "kind": "rate_change",
+    "input": {
+      "name": "EVAL-20 rate_change",
+      "supplier": {
+        "source_refs": [
+          "UDYAM"
+        ],
+        "field_sources": {
+          "name": [
+            "UDYAM"
+          ],
+          "category": [
+            "UDYAM"
+          ],
+          "activity": [
+            "UDYAM"
+          ],
+          "udyam_number": [
+            "UDYAM"
+          ],
+          "udyam_date": [
+            "UDYAM"
+          ],
+          "address": [
+            "UDYAM"
+          ]
+        },
+        "name": "Sahyadri Precision Works",
+        "category": "small",
+        "activity": "manufacturing",
+        "udyam_number": "UDYAM-DEMO-0001",
+        "udyam_date": "2023-01-01",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "buyer": {
+        "source_refs": [
+          "BUYER"
+        ],
+        "field_sources": {
+          "name": [
+            "BUYER"
+          ],
+          "address": [
+            "BUYER"
+          ]
+        },
+        "name": "Deccan Industrial Systems Pvt Ltd",
+        "address": "Pune, Maharashtra \u00b7 fictional"
+      },
+      "as_of": "2026-09-10",
+      "invoices": [
+        {
+          "source_refs": [
+            "DOC-001"
+          ],
+          "field_sources": {
+            "id": [
+              "DOC-001"
+            ],
+            "number": [
+              "DOC-001"
+            ],
+            "date": [
+              "DOC-001"
+            ],
+            "amount": [
+              "DOC-001"
+            ],
+            "contract_date": [
+              "DOC-001"
+            ],
+            "delivery_date": [
+              "DOC-001"
+            ],
+            "written_term_days": [
+              "DOC-001"
+            ]
+          },
+          "id": "INV-001",
+          "number": "INV-001",
+          "date": "2026-06-01",
+          "amount": "100000",
+          "buyer": "",
+          "delivery_date": "2026-06-01",
+          "acceptance_date": null,
+          "written_term_days": 0,
+          "contract_date": "2026-05-01",
+          "objection_date": null,
+          "objection_resolved_date": null
+        }
+      ],
+      "payments": [
+        {
+          "source_refs": [
+            "BANK"
+          ],
+          "field_sources": {
+            "id": [
+              "BANK"
+            ],
+            "date": [
+              "BANK"
+            ],
+            "amount": [
+              "BANK"
+            ],
+            "invoice_ids": [
+              "BANK"
+            ],
+            "reference": [
+              "BANK"
+            ]
+          },
+          "id": "P1",
+          "date": "2026-08-01",
+          "amount": "100000",
+          "reference": "INV-001",
+          "invoice_ids": [
+            "INV-001"
+          ],
+          "allocations": [],
+          "tds_amount": "0",
+          "tds_evidence_source": null,
+          "tds_section": null
+        }
+      ],
+      "purchase_orders": [],
+      "deliveries": [],
+      "messages": [],
+      "rates": [
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2024-01-01",
+          "end": "2026-07-01",
+          "bank_rate": "6.50",
+          "source": "synthetic-rates.csv (fictional, not RBI)",
+          "fetched_at": null,
+          "synthetic": true
+        },
+        {
+          "source_refs": [
+            "RATES"
+          ],
+          "field_sources": {
+            "start": [
+              "RATES"
+            ],
+            "end": [
+              "RATES"
+            ],
+            "bank_rate": [
+              "RATES"
+            ],
+            "source": [
+              "RATES"
+            ],
+            "synthetic": [
+              "RATES"
+            ]
+          },
+          "start": "2026-07-01",
+          "end": "2027-01-01",
+          "bank_rate": "5.75",
+          "source": "synthetic-rates.csv (fictional, not RBI)",
+          "fetched_at": null,
+          "synthetic": true
+        }
+      ],
+      "sources": [
+        {
+          "id": "UDYAM",
+          "file": "synthetic-udyam.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Sahyadri Precision Works, small, manufacturing, UDYAM-DEMO-0001; registered2023-01-01",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BUYER",
+          "file": "synthetic-buyer.txt",
+          "kind": "document",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL: Deccan Industrial Systems Pvt Ltd, Pune, Maharashtra",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "RATES",
+          "file": "synthetic-rates.csv",
+          "kind": "rate_table",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "DEMO RATES ONLY:2024-01-01 to2026-07-01 bank rate6.50%;2026-07-01 to2027-01-01 bank rate5.75%",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "BANK",
+          "file": "synthetic-bank.csv",
+          "kind": "bank_statement",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "PAY-001 2026-07-15 INR98000 INV-001; PAY-002 2026-08-01 INR80000 INV-002; PAY-003 2026-08-15 INR150000 no invoice reference; control total INR328000",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "TDS-001",
+          "file": "synthetic-tds-certificate.txt",
+          "kind": "tds_certificate",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "FICTIONAL TDS certificate: INV-001 gross100000, TDS2000 under194C, net98000, credited2026-07-15",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "REMIT-003",
+          "file": "synthetic-remittance-note.txt",
+          "kind": "remittance_note",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "Buyer remittance confirmation: PAY-003 of INR150000 on2026-08-15 is allocated to INV-004. Owner must confirm this linkage.",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-001",
+          "file": "synthetic-invoice-001.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-001; invoice2026-05-01 amount INR100000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-002",
+          "file": "synthetic-invoice-002.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-002; invoice2026-05-01 amount INR240000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-003",
+          "file": "synthetic-invoice-003.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-003; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-004",
+          "file": "synthetic-invoice-004.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-004; invoice2026-05-01 amount INR150000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        },
+        {
+          "id": "DOC-005",
+          "file": "synthetic-invoice-005.txt",
+          "kind": "invoice",
+          "status": "parsed",
+          "page": null,
+          "line": 1,
+          "text": "INV-005; invoice2026-05-01 amount INR160000; PO2026-04-20 terms30days; delivery accepted2026-05-03",
+          "sha256": "",
+          "stored_name": null
+        }
+      ],
+      "bank_total": "100000"
+    },
+    "expected_matches": [
+      [
+        "P1",
+        "INV-001",
+        "100000.00",
+        "0.00"
+      ]
+    ],
+    "expected_due": {
+      "INV-001": "2026-06-01"
+    },
+    "expected_block": null
+  }
+]

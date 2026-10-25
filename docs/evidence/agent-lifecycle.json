@@ -1,0 +1,837 @@
+{
+  "synthetic": true,
+  "paid_calls": 0,
+  "workflow": "real local tools; model planning disabled; scripted human review inputs",
+  "recovery": {
+    "label": "SIMULATED local failure, not provider outage",
+    "failed": {
+      "run_id": "6b64ae479cbf49baa8030a1f35965403",
+      "planner": "deterministic bounded tool planner; optional model extraction",
+      "status": "recoverable_failure",
+      "started_at": "2026-10-11T09:19:11.976998+00:00",
+      "updated_at": "2026-10-11T09:19:12.006896+00:00",
+      "input_revision": 1,
+      "next_tool": "verify_reconciliation",
+      "steps": [
+        {
+          "number": 1,
+          "tool": "inventory_evidence",
+          "status": "completed",
+          "summary": "Inventoried 11 evidence references; 11 readable, 0 require replacement. No missing facts inferred.",
+          "at": "2026-10-11T09:19:11.976998+00:00"
+        },
+        {
+          "number": 2,
+          "tool": "analyze_ledger",
+          "status": "completed",
+          "summary": "Deterministic tools produced 2 matches and 32 interest segments; 4 blockers. Rates, evidence and eligibility remain reviewable.",
+          "at": "2026-10-11T09:19:11.999540+00:00"
+        },
+        {
+          "number": 3,
+          "tool": "verify_reconciliation",
+          "status": "failed",
+          "summary": "SIMULATED local reconciliation tool failure; no external call made",
+          "at": "2026-10-11T09:19:12.006896+00:00"
+        }
+      ],
+      "checkpoints": [
+        {
+          "step": 1,
+          "revision": 1,
+          "at": "2026-10-11T09:19:11.976998+00:00",
+          "tool": "inventory_evidence",
+          "status": "completed"
+        },
+        {
+          "step": 2,
+          "revision": 1,
+          "at": "2026-10-11T09:19:11.999540+00:00",
+          "tool": "analyze_ledger",
+          "status": "completed"
+        },
+        {
+          "step": 3,
+          "revision": 1,
+          "at": "2026-10-11T09:19:12.006896+00:00",
+          "tool": "verify_reconciliation",
+          "status": "failed"
+        }
+      ],
+      "waiting_questions": [
+        {
+          "code": "tool_failure",
+          "question": "Resume once to retry this local tool from the saved checkpoint."
+        }
+      ],
+      "flags": {
+        "inventory": true,
+        "ledger": true,
+        "failure_injected": true
+      },
+      "attempts": {
+        "inventory_evidence": 1,
+        "analyze_ledger": 1,
+        "verify_reconciliation": 1
+      },
+      "max_total_steps": 30,
+      "model_attempts": 0,
+      "model_plans": 0,
+      "max_model_plans": 6,
+      "packet": null,
+      "failed_tool": "verify_reconciliation",
+      "trace_id": "1b58461bad95ab6de5c1f58efabfba33"
+    },
+    "resumed": {
+      "run_id": "6b64ae479cbf49baa8030a1f35965403",
+      "planner": "deterministic bounded tool planner; optional model extraction",
+      "status": "waiting_review",
+      "started_at": "2026-10-11T09:19:11.976998+00:00",
+      "updated_at": "2026-10-11T09:19:12.051308+00:00",
+      "input_revision": 1,
+      "next_tool": "request_review",
+      "steps": [
+        {
+          "number": 1,
+          "tool": "inventory_evidence",
+          "status": "completed",
+          "summary": "Inventoried 11 evidence references; 11 readable, 0 require replacement. No missing facts inferred.",
+          "at": "2026-10-11T09:19:11.976998+00:00"
+        },
+        {
+          "number": 2,
+          "tool": "analyze_ledger",
+          "status": "completed",
+          "summary": "Deterministic tools produced 2 matches and 32 interest segments; 4 blockers. Rates, evidence and eligibility remain reviewable.",
+          "at": "2026-10-11T09:19:11.999540+00:00"
+        },
+        {
+          "number": 3,
+          "tool": "verify_reconciliation",
+          "status": "failed",
+          "summary": "SIMULATED local reconciliation tool failure; no external call made",
+          "at": "2026-10-11T09:19:12.006896+00:00"
+        },
+        {
+          "number": 4,
+          "tool": "verify_reconciliation",
+          "status": "completed",
+          "summary": "Independent Decimal conservation checks pass. Unallocated bank receipts: INR 150000.00; unresolved allocation still blocks approval.",
+          "at": "2026-10-11T09:19:12.051308+00:00"
+        },
+        {
+          "number": 5,
+          "tool": "request_review",
+          "status": "completed",
+          "summary": "Stopped for 4 blocking reviewer decisions. No blocker waived and no approval issued.",
+          "at": "2026-10-11T09:19:12.051308+00:00"
+        }
+      ],
+      "checkpoints": [
+        {
+          "step": 1,
+          "revision": 1,
+          "at": "2026-10-11T09:19:11.976998+00:00",
+          "tool": "inventory_evidence",
+          "status": "completed"
+        },
+        {
+          "step": 2,
+          "revision": 1,
+          "at": "2026-10-11T09:19:11.999540+00:00",
+          "tool": "analyze_ledger",
+          "status": "completed"
+        },
+        {
+          "step": 3,
+          "revision": 1,
+          "at": "2026-10-11T09:19:12.006896+00:00",
+          "tool": "verify_reconciliation",
+          "status": "failed"
+        },
+        {
+          "step": 4,
+          "revision": 1,
+          "at": "2026-10-11T09:19:12.051308+00:00",
+          "tool": "verify_reconciliation",
+          "status": "completed"
+        },
+        {
+          "step": 5,
+          "revision": 1,
+          "at": "2026-10-11T09:19:12.051308+00:00",
+          "tool": "request_review",
+          "status": "completed"
+        }
+      ],
+      "waiting_questions": [
+        {
+          "id": "buyer_confirmation-1",
+          "code": "buyer_confirmation",
+          "question": "Confirm the buyer's legal name and address before approval.",
+          "source_id": null,
+          "payment_id": null,
+          "candidates": []
+        },
+        {
+          "id": "rate_confirmation-2",
+          "code": "rate_confirmation",
+          "question": "Confirm dated rates and the interest/payment convention. Synthetic rates produce a DEMO packet only.",
+          "source_id": null,
+          "payment_id": null,
+          "candidates": []
+        },
+        {
+          "id": "ambiguous_payment-3",
+          "code": "ambiguous_payment",
+          "question": "PAY-003: choose invoices and amounts from remittance evidence; no allocation guessed.",
+          "source_id": null,
+          "payment_id": "PAY-003",
+          "candidates": [
+            "INV-003",
+            "INV-004"
+          ]
+        },
+        {
+          "id": "reconciliation-4",
+          "code": "reconciliation",
+          "question": "Unallocated bank credits remain. Resolve payment matches before export.",
+          "source_id": null,
+          "payment_id": null,
+          "candidates": []
+        }
+      ],
+      "flags": {
+        "inventory": true,
+        "ledger": true,
+        "failure_injected": true,
+        "reconciliation": true
+      },
+      "attempts": {
+        "inventory_evidence": 1,
+        "analyze_ledger": 1,
+        "verify_reconciliation": 2,
+        "request_review": 1
+      },
+      "max_total_steps": 30,
+      "model_attempts": 0,
+      "model_plans": 0,
+      "max_model_plans": 6,
+      "packet": null,
+      "trace_id": "10e1ff928f404f276ef5257dd09193a1"
+    }
+  },
+  "packet_bytes": 18377,
+  "browser_errors": [],
+  "stages": {
+    "waiting_review": {
+      "case_id": "fdedbc2109cd4a5fad500e71dae74104",
+      "revision": 1,
+      "status": "waiting_review",
+      "run_id": "43d7e28e499643ee91c8bbcb876ee472",
+      "checkpoints": [
+        {
+          "step": 1,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.427462+00:00",
+          "tool": "inventory_evidence",
+          "status": "completed"
+        },
+        {
+          "step": 2,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.488528+00:00",
+          "tool": "analyze_ledger",
+          "status": "completed"
+        },
+        {
+          "step": 3,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.517224+00:00",
+          "tool": "verify_reconciliation",
+          "status": "completed"
+        },
+        {
+          "step": 4,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.557925+00:00",
+          "tool": "request_review",
+          "status": "completed"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "tool": "inventory_evidence",
+          "status": "completed",
+          "summary": "Inventoried 11 evidence references; 11 readable, 0 require replacement. No missing facts inferred.",
+          "at": "2026-10-11T09:19:01.427462+00:00"
+        },
+        {
+          "number": 2,
+          "tool": "analyze_ledger",
+          "status": "completed",
+          "summary": "Deterministic tools produced 2 matches and 32 interest segments; 4 blockers. Rates, evidence and eligibility remain reviewable.",
+          "at": "2026-10-11T09:19:01.488528+00:00"
+        },
+        {
+          "number": 3,
+          "tool": "verify_reconciliation",
+          "status": "completed",
+          "summary": "Independent Decimal conservation checks pass. Unallocated bank receipts: INR 150000.00; unresolved allocation still blocks approval.",
+          "at": "2026-10-11T09:19:01.517224+00:00"
+        },
+        {
+          "number": 4,
+          "tool": "request_review",
+          "status": "completed",
+          "summary": "Stopped for 4 blocking reviewer decisions. No blocker waived and no approval issued.",
+          "at": "2026-10-11T09:19:01.557925+00:00"
+        }
+      ],
+      "totals": {
+        "invoiced": "800000.00",
+        "bank_received": "328000.00",
+        "allocated_bank": "178000.00",
+        "tds_recognized": "2000.00",
+        "principal": "620000.00",
+        "interest": "44850.42",
+        "total": "664850.42",
+        "unallocated": "150000.00",
+        "reconciliation_difference": "0.00"
+      }
+    },
+    "reviewed": {
+      "case_id": "fdedbc2109cd4a5fad500e71dae74104",
+      "revision": 2,
+      "status": "waiting_review",
+      "run_id": "43d7e28e499643ee91c8bbcb876ee472",
+      "checkpoints": [
+        {
+          "step": 1,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.427462+00:00",
+          "tool": "inventory_evidence",
+          "status": "completed"
+        },
+        {
+          "step": 2,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.488528+00:00",
+          "tool": "analyze_ledger",
+          "status": "completed"
+        },
+        {
+          "step": 3,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.517224+00:00",
+          "tool": "verify_reconciliation",
+          "status": "completed"
+        },
+        {
+          "step": 4,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.557925+00:00",
+          "tool": "request_review",
+          "status": "completed"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "tool": "inventory_evidence",
+          "status": "completed",
+          "summary": "Inventoried 11 evidence references; 11 readable, 0 require replacement. No missing facts inferred.",
+          "at": "2026-10-11T09:19:01.427462+00:00"
+        },
+        {
+          "number": 2,
+          "tool": "analyze_ledger",
+          "status": "completed",
+          "summary": "Deterministic tools produced 2 matches and 32 interest segments; 4 blockers. Rates, evidence and eligibility remain reviewable.",
+          "at": "2026-10-11T09:19:01.488528+00:00"
+        },
+        {
+          "number": 3,
+          "tool": "verify_reconciliation",
+          "status": "completed",
+          "summary": "Independent Decimal conservation checks pass. Unallocated bank receipts: INR 150000.00; unresolved allocation still blocks approval.",
+          "at": "2026-10-11T09:19:01.517224+00:00"
+        },
+        {
+          "number": 4,
+          "tool": "request_review",
+          "status": "completed",
+          "summary": "Stopped for 4 blocking reviewer decisions. No blocker waived and no approval issued.",
+          "at": "2026-10-11T09:19:01.557925+00:00"
+        }
+      ],
+      "totals": {
+        "invoiced": "800000.00",
+        "bank_received": "328000.00",
+        "allocated_bank": "328000.00",
+        "tds_recognized": "2000.00",
+        "principal": "470000.00",
+        "interest": "40777.36",
+        "total": "510777.36",
+        "unallocated": "0.00",
+        "reconciliation_difference": "0.00"
+      }
+    },
+    "waiting_approval": {
+      "case_id": "fdedbc2109cd4a5fad500e71dae74104",
+      "revision": 2,
+      "status": "waiting_approval",
+      "run_id": "43d7e28e499643ee91c8bbcb876ee472",
+      "checkpoints": [
+        {
+          "step": 1,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.427462+00:00",
+          "tool": "inventory_evidence",
+          "status": "completed"
+        },
+        {
+          "step": 2,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.488528+00:00",
+          "tool": "analyze_ledger",
+          "status": "completed"
+        },
+        {
+          "step": 3,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.517224+00:00",
+          "tool": "verify_reconciliation",
+          "status": "completed"
+        },
+        {
+          "step": 4,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.557925+00:00",
+          "tool": "request_review",
+          "status": "completed"
+        },
+        {
+          "step": 5,
+          "revision": 2,
+          "at": "2026-10-11T09:19:04.305725+00:00",
+          "tool": "refresh_checkpoint",
+          "status": "completed"
+        },
+        {
+          "step": 6,
+          "revision": 2,
+          "at": "2026-10-11T09:19:04.306629+00:00",
+          "tool": "inventory_evidence",
+          "status": "completed"
+        },
+        {
+          "step": 7,
+          "revision": 2,
+          "at": "2026-10-11T09:19:04.417248+00:00",
+          "tool": "analyze_ledger",
+          "status": "completed"
+        },
+        {
+          "step": 8,
+          "revision": 2,
+          "at": "2026-10-11T09:19:04.458703+00:00",
+          "tool": "verify_reconciliation",
+          "status": "completed"
+        },
+        {
+          "step": 9,
+          "revision": 2,
+          "at": "2026-10-11T09:19:04.485329+00:00",
+          "tool": "request_approval",
+          "status": "completed"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "tool": "inventory_evidence",
+          "status": "completed",
+          "summary": "Inventoried 11 evidence references; 11 readable, 0 require replacement. No missing facts inferred.",
+          "at": "2026-10-11T09:19:01.427462+00:00"
+        },
+        {
+          "number": 2,
+          "tool": "analyze_ledger",
+          "status": "completed",
+          "summary": "Deterministic tools produced 2 matches and 32 interest segments; 4 blockers. Rates, evidence and eligibility remain reviewable.",
+          "at": "2026-10-11T09:19:01.488528+00:00"
+        },
+        {
+          "number": 3,
+          "tool": "verify_reconciliation",
+          "status": "completed",
+          "summary": "Independent Decimal conservation checks pass. Unallocated bank receipts: INR 150000.00; unresolved allocation still blocks approval.",
+          "at": "2026-10-11T09:19:01.517224+00:00"
+        },
+        {
+          "number": 4,
+          "tool": "request_review",
+          "status": "completed",
+          "summary": "Stopped for 4 blocking reviewer decisions. No blocker waived and no approval issued.",
+          "at": "2026-10-11T09:19:01.557925+00:00"
+        },
+        {
+          "number": 5,
+          "tool": "refresh_checkpoint",
+          "status": "completed",
+          "summary": "Case revision changed after human review/upload; tools will recompute against current evidence.",
+          "at": "2026-10-11T09:19:04.305725+00:00"
+        },
+        {
+          "number": 6,
+          "tool": "inventory_evidence",
+          "status": "completed",
+          "summary": "Inventoried 11 evidence references; 11 readable, 0 require replacement. No missing facts inferred.",
+          "at": "2026-10-11T09:19:04.306629+00:00"
+        },
+        {
+          "number": 7,
+          "tool": "analyze_ledger",
+          "status": "completed",
+          "summary": "Deterministic tools produced 3 matches and 33 interest segments; 0 blockers. Rates, evidence and eligibility remain reviewable.",
+          "at": "2026-10-11T09:19:04.417248+00:00"
+        },
+        {
+          "number": 8,
+          "tool": "verify_reconciliation",
+          "status": "completed",
+          "summary": "Independent Decimal conservation checks pass. Unallocated bank receipts: INR 0.00; unresolved allocation still blocks approval.",
+          "at": "2026-10-11T09:19:04.458703+00:00"
+        },
+        {
+          "number": 9,
+          "tool": "request_approval",
+          "status": "completed",
+          "summary": "Evidence checks complete; waiting for explicit human approval. No packet leaves this local service.",
+          "at": "2026-10-11T09:19:04.485329+00:00"
+        }
+      ],
+      "totals": {
+        "invoiced": "800000.00",
+        "bank_received": "328000.00",
+        "allocated_bank": "328000.00",
+        "tds_recognized": "2000.00",
+        "principal": "470000.00",
+        "interest": "40777.36",
+        "total": "510777.36",
+        "unallocated": "0.00",
+        "reconciliation_difference": "0.00"
+      }
+    },
+    "approved": {
+      "case_id": "fdedbc2109cd4a5fad500e71dae74104",
+      "revision": 2,
+      "status": "waiting_approval",
+      "run_id": "43d7e28e499643ee91c8bbcb876ee472",
+      "checkpoints": [
+        {
+          "step": 1,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.427462+00:00",
+          "tool": "inventory_evidence",
+          "status": "completed"
+        },
+        {
+          "step": 2,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.488528+00:00",
+          "tool": "analyze_ledger",
+          "status": "completed"
+        },
+        {
+          "step": 3,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.517224+00:00",
+          "tool": "verify_reconciliation",
+          "status": "completed"
+        },
+        {
+          "step": 4,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.557925+00:00",
+          "tool": "request_review",
+          "status": "completed"
+        },
+        {
+          "step": 5,
+          "revision": 2,
+          "at": "2026-10-11T09:19:04.305725+00:00",
+          "tool": "refresh_checkpoint",
+          "status": "completed"
+        },
+        {
+          "step": 6,
+          "revision": 2,
+          "at": "2026-10-11T09:19:04.306629+00:00",
+          "tool": "inventory_evidence",
+          "status": "completed"
+        },
+        {
+          "step": 7,
+          "revision": 2,
+          "at": "2026-10-11T09:19:04.417248+00:00",
+          "tool": "analyze_ledger",
+          "status": "completed"
+        },
+        {
+          "step": 8,
+          "revision": 2,
+          "at": "2026-10-11T09:19:04.458703+00:00",
+          "tool": "verify_reconciliation",
+          "status": "completed"
+        },
+        {
+          "step": 9,
+          "revision": 2,
+          "at": "2026-10-11T09:19:04.485329+00:00",
+          "tool": "request_approval",
+          "status": "completed"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "tool": "inventory_evidence",
+          "status": "completed",
+          "summary": "Inventoried 11 evidence references; 11 readable, 0 require replacement. No missing facts inferred.",
+          "at": "2026-10-11T09:19:01.427462+00:00"
+        },
+        {
+          "number": 2,
+          "tool": "analyze_ledger",
+          "status": "completed",
+          "summary": "Deterministic tools produced 2 matches and 32 interest segments; 4 blockers. Rates, evidence and eligibility remain reviewable.",
+          "at": "2026-10-11T09:19:01.488528+00:00"
+        },
+        {
+          "number": 3,
+          "tool": "verify_reconciliation",
+          "status": "completed",
+          "summary": "Independent Decimal conservation checks pass. Unallocated bank receipts: INR 150000.00; unresolved allocation still blocks approval.",
+          "at": "2026-10-11T09:19:01.517224+00:00"
+        },
+        {
+          "number": 4,
+          "tool": "request_review",
+          "status": "completed",
+          "summary": "Stopped for 4 blocking reviewer decisions. No blocker waived and no approval issued.",
+          "at": "2026-10-11T09:19:01.557925+00:00"
+        },
+        {
+          "number": 5,
+          "tool": "refresh_checkpoint",
+          "status": "completed",
+          "summary": "Case revision changed after human review/upload; tools will recompute against current evidence.",
+          "at": "2026-10-11T09:19:04.305725+00:00"
+        },
+        {
+          "number": 6,
+          "tool": "inventory_evidence",
+          "status": "completed",
+          "summary": "Inventoried 11 evidence references; 11 readable, 0 require replacement. No missing facts inferred.",
+          "at": "2026-10-11T09:19:04.306629+00:00"
+        },
+        {
+          "number": 7,
+          "tool": "analyze_ledger",
+          "status": "completed",
+          "summary": "Deterministic tools produced 3 matches and 33 interest segments; 0 blockers. Rates, evidence and eligibility remain reviewable.",
+          "at": "2026-10-11T09:19:04.417248+00:00"
+        },
+        {
+          "number": 8,
+          "tool": "verify_reconciliation",
+          "status": "completed",
+          "summary": "Independent Decimal conservation checks pass. Unallocated bank receipts: INR 0.00; unresolved allocation still blocks approval.",
+          "at": "2026-10-11T09:19:04.458703+00:00"
+        },
+        {
+          "number": 9,
+          "tool": "request_approval",
+          "status": "completed",
+          "summary": "Evidence checks complete; waiting for explicit human approval. No packet leaves this local service.",
+          "at": "2026-10-11T09:19:04.485329+00:00"
+        }
+      ],
+      "totals": {
+        "invoiced": "800000.00",
+        "bank_received": "328000.00",
+        "allocated_bank": "328000.00",
+        "tds_recognized": "2000.00",
+        "principal": "470000.00",
+        "interest": "40777.36",
+        "total": "510777.36",
+        "unallocated": "0.00",
+        "reconciliation_difference": "0.00"
+      }
+    },
+    "complete": {
+      "case_id": "fdedbc2109cd4a5fad500e71dae74104",
+      "revision": 2,
+      "status": "complete",
+      "run_id": "43d7e28e499643ee91c8bbcb876ee472",
+      "checkpoints": [
+        {
+          "step": 1,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.427462+00:00",
+          "tool": "inventory_evidence",
+          "status": "completed"
+        },
+        {
+          "step": 2,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.488528+00:00",
+          "tool": "analyze_ledger",
+          "status": "completed"
+        },
+        {
+          "step": 3,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.517224+00:00",
+          "tool": "verify_reconciliation",
+          "status": "completed"
+        },
+        {
+          "step": 4,
+          "revision": 1,
+          "at": "2026-10-11T09:19:01.557925+00:00",
+          "tool": "request_review",
+          "status": "completed"
+        },
+        {
+          "step": 5,
+          "revision": 2,
+          "at": "2026-10-11T09:19:04.305725+00:00",
+          "tool": "refresh_checkpoint",
+          "status": "completed"
+        },
+        {
+          "step": 6,
+          "revision": 2,
+          "at": "2026-10-11T09:19:04.306629+00:00",
+          "tool": "inventory_evidence",
+          "status": "completed"
+        },
+        {
+          "step": 7,
+          "revision": 2,
+          "at": "2026-10-11T09:19:04.417248+00:00",
+          "tool": "analyze_ledger",
+          "status": "completed"
+        },
+        {
+          "step": 8,
+          "revision": 2,
+          "at": "2026-10-11T09:19:04.458703+00:00",
+          "tool": "verify_reconciliation",
+          "status": "completed"
+        },
+        {
+          "step": 9,
+          "revision": 2,
+          "at": "2026-10-11T09:19:04.485329+00:00",
+          "tool": "request_approval",
+          "status": "completed"
+        },
+        {
+          "step": 10,
+          "revision": 2,
+          "at": "2026-10-11T09:19:07.263663+00:00",
+          "tool": "build_local_packet",
+          "status": "completed"
+        }
+      ],
+      "steps": [
+        {
+          "number": 1,
+          "tool": "inventory_evidence",
+          "status": "completed",
+          "summary": "Inventoried 11 evidence references; 11 readable, 0 require replacement. No missing facts inferred.",
+          "at": "2026-10-11T09:19:01.427462+00:00"
+        },
+        {
+          "number": 2,
+          "tool": "analyze_ledger",
+          "status": "completed",
+          "summary": "Deterministic tools produced 2 matches and 32 interest segments; 4 blockers. Rates, evidence and eligibility remain reviewable.",
+          "at": "2026-10-11T09:19:01.488528+00:00"
+        },
+        {
+          "number": 3,
+          "tool": "verify_reconciliation",
+          "status": "completed",
+          "summary": "Independent Decimal conservation checks pass. Unallocated bank receipts: INR 150000.00; unresolved allocation still blocks approval.",
+          "at": "2026-10-11T09:19:01.517224+00:00"
+        },
+        {
+          "number": 4,
+          "tool": "request_review",
+          "status": "completed",
+          "summary": "Stopped for 4 blocking reviewer decisions. No blocker waived and no approval issued.",
+          "at": "2026-10-11T09:19:01.557925+00:00"
+        },
+        {
+          "number": 5,
+          "tool": "refresh_checkpoint",
+          "status": "completed",
+          "summary": "Case revision changed after human review/upload; tools will recompute against current evidence.",
+          "at": "2026-10-11T09:19:04.305725+00:00"
+        },
+        {
+          "number": 6,
+          "tool": "inventory_evidence",
+          "status": "completed",
+          "summary": "Inventoried 11 evidence references; 11 readable, 0 require replacement. No missing facts inferred.",
+          "at": "2026-10-11T09:19:04.306629+00:00"
+        },
+        {
+          "number": 7,
+          "tool": "analyze_ledger",
+          "status": "completed",
+          "summary": "Deterministic tools produced 3 matches and 33 interest segments; 0 blockers. Rates, evidence and eligibility remain reviewable.",
+          "at": "2026-10-11T09:19:04.417248+00:00"
+        },
+        {
+          "number": 8,
+          "tool": "verify_reconciliation",
+          "status": "completed",
+          "summary": "Independent Decimal conservation checks pass. Unallocated bank receipts: INR 0.00; unresolved allocation still blocks approval.",
+          "at": "2026-10-11T09:19:04.458703+00:00"
+        },
+        {
+          "number": 9,
+          "tool": "request_approval",
+          "status": "completed",
+          "summary": "Evidence checks complete; waiting for explicit human approval. No packet leaves this local service.",
+          "at": "2026-10-11T09:19:04.485329+00:00"
+        },
+        {
+          "number": 10,
+          "tool": "build_local_packet",
+          "status": "completed",
+          "summary": "Built 18276byte approved packet locally; synthetic DEMO marking retained; nothing filed or sent.",
+          "at": "2026-10-11T09:19:07.263663+00:00"
+        }
+      ],
+      "totals": {
+        "invoiced": "800000.00",
+        "bank_received": "328000.00",
+        "allocated_bank": "328000.00",
+        "tds_recognized": "2000.00",
+        "principal": "470000.00",
+        "interest": "40777.36",
+        "total": "510777.36",
+        "unallocated": "0.00",
+        "reconciliation_difference": "0.00"
+      }
+    }
+  }
+}

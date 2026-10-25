@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.env
+frontend/node_modules/
+frontend/dist/
+data/
+*.db
+*.sqlite3
+artifacts/
+*.tsbuildinfo
+deploy/production.env
+deploy/data/
+deploy/backups/
+
+.vercel

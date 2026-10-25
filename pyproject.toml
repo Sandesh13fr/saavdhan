@@ -1,0 +1,9 @@
+[project]
+name = "bakaya"
+version = "0.1.0"
+description = "Local evidence-backed receivables preparation demo"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

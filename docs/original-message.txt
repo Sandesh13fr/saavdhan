@@ -1,0 +1,67 @@
+I validated ShiftProof against the real market, and I'd change one thing before you build: **who pays**. The agent design is good. The market fit is weak.
+
+## ShiftProof as pitched (unpaid wages for workers)
+
+| Check | Result |
+|---|---|
+| Is the pain real? | Yes. In India the evidence workers need (offer letter, payslips, bank credits, attendance, messages) is well documented, and complaints go to the Labour Commissioner or the Samadhan portal. |
+| Who pays | **Weak.** A worker who is owed money is the least able to pay. ChatGPT moved the buyer to employment clinics and NGOs, which have small budgets and long sales cycles. |
+| Competition | **Crowded:** Reclamo (free; reportedly over $1M recovered in NYC), uplaw.ai, outh.ai, Australia's Mobilise union app, and [PaySnap](https://dev.to/aadarsh_praveen/paysnap-ai-powered-wage-theft-detector-e0o), which is a **hackathon entry doing nearly the same thing**. That's a direct hit to the 10% originality score. |
+| Market data | ChatGPT's evidence was UK-based (£ figures, Acas) but its pricing was in ₹. There's no India buyer data behind it. |
+
+## The pivot I'd make: same engine, aimed at small businesses owed money by their buyers
+
+Point the evidence-reconstruction agent at **micro and small businesses (MSMEs) whose B2B buyers pay late**. There's a statutory claim for this under India's MSMED Act.
+
+**Why the market fit is much stronger:**
+- **The pain is large and measured.** Through Aug 2026, micro and small businesses filed **2,56,892 delayed-payment claims worth ₹55,244 crore**. ₹20,979 crore is still pending, and about 16% of claims have been stuck for over a year ([Crisil](https://intelligence.crisil.com/en/homepage/newsroom/press-releases/2026/08/executed-well-msme-bill-can-be-an-ibc-moment-for-delayed-payments.html)). Indian small businesses wait **73 days** on average to get paid ([Recordent report](https://mediabrief.com/recordent-report-highlights-working-capital-stress-for-indian-smes-as-average-overdue-receivables-cross-%E2%82%B93-83-crore/)).
+- **The person who pays is the one who gains.** Section 16 entitles the business to compound interest at **3× the RBI bank rate, with monthly rests**. That's roughly 16–20% a year, so paying for a claim packet is easy to justify.
+- **The timing is good.** New claims moved to the **MSME ODR portal on 15 Oct 2025**, and an amendment in 2026 is reshaping the process ([mylegalpal](https://mylegalpal.com/articles/how-to-recover-payments-from-clients-in-india-msme-odr/), [incorpx](https://www.incorpx.io/guide/how-to-file-msme-delayed-payment-odr)). Businesses are confused, so guides are being written right now.
+- **There's a distribution channel.** Chartered accountants already handle these clients' Udyam registration and tax audits. Under Section 43B(h), the late-paying buyer also loses its tax deduction, which gives the business real leverage in its demand letter.
+- **I found no automated competitor.** [Recordent](https://recordent.com/collection-management) sends legal notices and runs collections. CredFlow sends reminders. Law firms and filing services like TaxClue and LegalBabu charge for filing by hand. None of these reconstructs the claim from messy records automatically. That conclusion is from search only; I didn't test their products.
+
+**The agent workflow:**
+1. **Read the records:** invoices, POs, delivery challans or e-way bills, emails/WhatsApp messages, and bank statements.
+2. **Match payments to invoices:** handle partial payments and payments that cover several invoices.
+3. **Work out the dates:** acceptance date (applying the 15-day objection rule), then a due date of agreed terms or 45 days at most.
+4. **Fetch the RBI bank rate for each period and calculate interest** with deterministic code.
+5. **Check eligibility:** was the business Udyam-registered before the contract, and is it a manufacturer or service provider? Traders are excluded.
+6. **Produce the outputs:** an ODR claim packet, an interest schedule with every figure linked to its source, a demand letter, and a 43B(h) note. A human approves before anything is sent.
+
+**Two demo moments that also cover the required evidence:**
+- **The before-and-after:** a buyer pays ₹98,000 against a ₹1,00,000 invoice. The first version of the agent flags a ₹2,000 short-payment. The fixed version recognises it as **2% tax deducted at source**, not an underpayment. It's very Indian, shows up clearly in a neatlogs trace, and is easy to score: run 20 synthetic ledgers and compare accuracy before and after the fix.
+- **Recovery from a failed action:** fetching the RBI rate fails. The agent falls back to a cached, dated rate table, flags the assumption, and then verifies it.
+
+The sources even disagree on the current bank rate (5.50% vs 6.5%). An agent that fetches the rate and records when it got it is exactly the verification behaviour the rubric rewards.
+
+**Business model hypotheses for cfo.ai (none validated):**
+- The interest calculator is free and brings in leads.
+- ₹1,999 per claim packet.
+- A plan for accountants at ₹4,999/month covering 10 clients.
+- No success fee, because that drifts into legal-practice territory.
+- Position it as **document preparation for self-filing** (the portal is built for self-filing), not legal advice.
+
+**Crustdata has a real use here:** looking up the buyer company (size, legal entity) to target the demand letter. It isn't added just to burn credits.
+
+## Trade-off and risks
+- **You lose some emotional pull.** "A worker can't pay rent" hits harder than "a supplier waits 73 days." Tell it through one person: a small manufacturer paying 12 salaries while ₹8 lakh sits unpaid with a large buyer.
+- **The legal rules need checking.** The amendment's status and the exact ODR fields came from secondary sources. Check odr.msme.gov.in before the demo.
+- **Willingness to pay is still unproven.** The fastest real validation is to message 3–5 chartered accountants or small business owners you know today and ask, "Would you pay ₹2k for this packet?" Posting their replies also counts toward the 15% building-in-public score.
+
+Searches turned up almost no Reddit threads for India, so the demand evidence above is official data and industry reports, not community posts.
+
+My recommendation is **the MSME version**. It has a clear payer, a measured market, timely regulation, and a better failure-and-fix story than ShiftProof, with roughly the same build scope. Should I start the repo with it, or do you want to keep the worker version?
+
+Sources:
+- [iPleaders – employer not paying salary](https://blog.ipleaders.in/what-to-do-if-employer-does-not-pay-salary/)
+- [Fast Company – Reclamo](https://www.fastcompany.com/90901958/reclamo-construction-workers-wage-theft)
+- [PaySnap](https://dev.to/aadarsh_praveen/paysnap-ai-powered-wage-theft-detector-e0o)
+- [United Workers Union – Mobilise](https://unitedworkers.org.au/archive/unions-mobilise-ai-to-turn-the-tables-on-wage-theft-in-hospitality/)
+- [Crisil MSME delayed payments](https://intelligence.crisil.com/en/homepage/newsroom/press-releases/2026/08/executed-well-msme-bill-can-be-an-ibc-moment-for-delayed-payments.html)
+- [Recordent receivables report](https://mediabrief.com/recordent-report-highlights-working-capital-stress-for-indian-smes-as-average-overdue-receivables-cross-%E2%82%B93-83-crore/)
+- [mylegalpal – MSME ODR](https://mylegalpal.com/articles/how-to-recover-payments-from-clients-in-india-msme-odr/)
+- [incorpx – ODR filing guide](https://www.incorpx.io/guide/how-to-file-msme-delayed-payment-odr)
+- [corplawupdates – Section 16 calculator](https://www.corplawupdates.in/tools/fee-calculator/msme)
+- [Recordent collections](https://recordent.com/collection-management)
+- [TaxClue Samadhaan](https://taxclue.in/msme-samadhaan)
+- [Swarajya – MSMEs waiting on government buyers](https://swarajyamag.com/amp/story/economy/beyond-gem-portal-why-msmes-are-still-waiting-for-their-money-from-government-buyers)

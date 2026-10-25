@@ -1,0 +1,4 @@
+package,currency,gross_per_packet,refund_assumption,payment_fee_assumption,delivery_base_assumption,delivery_stress_assumption,contribution_base,contribution_stress,evidence_status
+Self-serve,INR,1999,.03,.02,130,600,1769.05,1299.05,Unvalidated pricing and cost assumptions
+Monthly bundle fully used,INR,499.9,.03,.02,130,600,344.905,-125.095,Unvalidated pricing and cost assumptions
+Extra packet,INR,399,.03,.02,130,600,249.05,-220.95,Unvalidated pricing and cost assumptions

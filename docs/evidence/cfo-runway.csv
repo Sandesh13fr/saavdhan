@@ -1,0 +1,3 @@
+scenario,evidence_basis,self_serve_packets_monthly,ten_packet_bundles_monthly,extra_packets_monthly,owner_opening_cash_INR,owner_fixed_costs_monthly_INR,gross_revenue_monthly_INR,base_contribution_monthly_INR,stress_contribution_monthly_INR,stress_burn_monthly_INR,conditional_runway_months
+Main Scenario,zero-demand placeholder,0,0,0,30000,20000,0,0,0,20000,1.5
+Bakaya Illustrative Demand - Not Actuals,hypothetical demand; owner-provided cash/costs,10,2,5,30000,20000,31983,25833.85,9383.849999999999,10616.150000000001,2.8258832062470853

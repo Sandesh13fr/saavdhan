@@ -1,0 +1,2 @@
+record_type,start,end,bank_rate,source,synthetic
+rate,2024-01-01,2027-01-01,6.50,Fictional illustrative rate - not RBI,true

@@ -1,0 +1,2 @@
+record_type,id,date,amount,reference,invoice_ids
+payment,SAMPLE-PAY-001,2026-07-15,40000,SAMPLE-001,SAMPLE-001

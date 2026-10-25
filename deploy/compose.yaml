@@ -1,0 +1,43 @@
+services:
+  app:
+    build:
+      context: ..
+    image: bakaya:local
+    restart: unless-stopped
+    env_file: production.env
+    environment:
+      BAKAYA_ENV: production
+      BAKAYA_DATA_DIR: /app/data
+      BAKAYA_PUBLIC_ORIGIN: ${BAKAYA_PUBLIC_ORIGIN:?Set BAKAYA_PUBLIC_ORIGIN}
+      BAKAYA_ALLOWED_HOSTS: ${BAKAYA_DOMAIN},127.0.0.1
+      BAKAYA_OCR_ENABLED: "true"
+    volumes:
+      - ./data:/app/data
+    read_only: true
+    tmpfs:
+      - /tmp:size=256m,mode=1777
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 1g
+    cpus: 1.0
+    logging:
+      driver: json-file
+      options: {max-size: 10m, max-file: "3"}
+  proxy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    environment:
+      BAKAYA_DOMAIN: ${BAKAYA_DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      app: {condition: service_healthy}
+    logging:
+      driver: json-file
+      options: {max-size: 10m, max-file: "3"}
+volumes:
+  caddy_data:
+  caddy_config:

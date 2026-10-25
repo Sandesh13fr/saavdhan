@@ -1,0 +1,1164 @@
+{
+  "measurement": "Controlled replay performed now, not historical runtime",
+  "before": {
+    "revision": "233acc9",
+    "controlled_replay": true,
+    "synthetic": true,
+    "trace_id": "adede6146ac02b223da79587c5c46242",
+    "run_id": "ea12a0f2d00c4f689a395906d2963a0c",
+    "states": [
+      "waiting_review",
+      "waiting_approval",
+      "complete"
+    ],
+    "checkpoints": [
+      {
+        "step": 1,
+        "revision": 1,
+        "at": "2026-10-11T09:34:55.675715+00:00",
+        "tool": "inventory_evidence",
+        "status": "completed"
+      },
+      {
+        "step": 2,
+        "revision": 1,
+        "at": "2026-10-11T09:34:55.683608+00:00",
+        "tool": "analyze_ledger",
+        "status": "completed"
+      },
+      {
+        "step": 3,
+        "revision": 1,
+        "at": "2026-10-11T09:34:55.691743+00:00",
+        "tool": "verify_reconciliation",
+        "status": "completed"
+      },
+      {
+        "step": 4,
+        "revision": 1,
+        "at": "2026-10-11T09:34:55.699020+00:00",
+        "tool": "request_review",
+        "status": "completed"
+      },
+      {
+        "step": 5,
+        "revision": 2,
+        "at": "2026-10-11T09:34:55.741889+00:00",
+        "tool": "refresh_checkpoint",
+        "status": "completed"
+      },
+      {
+        "step": 6,
+        "revision": 2,
+        "at": "2026-10-11T09:34:55.742885+00:00",
+        "tool": "inventory_evidence",
+        "status": "completed"
+      },
+      {
+        "step": 7,
+        "revision": 2,
+        "at": "2026-10-11T09:34:55.750587+00:00",
+        "tool": "analyze_ledger",
+        "status": "completed"
+      },
+      {
+        "step": 8,
+        "revision": 2,
+        "at": "2026-10-11T09:34:55.758589+00:00",
+        "tool": "verify_reconciliation",
+        "status": "completed"
+      },
+      {
+        "step": 9,
+        "revision": 2,
+        "at": "2026-10-11T09:34:55.767637+00:00",
+        "tool": "request_approval",
+        "status": "completed"
+      },
+      {
+        "step": 10,
+        "revision": 2,
+        "at": "2026-10-11T09:34:55.845943+00:00",
+        "tool": "build_local_packet",
+        "status": "completed"
+      }
+    ],
+    "totals": {
+      "invoiced": "800000.00",
+      "bank_received": "328000.00",
+      "allocated_bank": "328000.00",
+      "tds_recognized": "2000.00",
+      "principal": "470000.00",
+      "interest": "40777.36",
+      "total": "510777.36",
+      "unallocated": "0.00",
+      "reconciliation_difference": "0.00"
+    },
+    "model_calls": 0,
+    "model_tokens": 0,
+    "model_inference_cost_usd": 0,
+    "total_delivery_cost_usd": null,
+    "redundant_packet_files": 1,
+    "nested_packet_entries": [],
+    "export_bytes": 18334,
+    "export_valid": true,
+    "simulated_recovery_passed": true,
+    "observed_local_seconds": 0.4649632999999085,
+    "readback_span_count": 27,
+    "all_spans_descend_from_lifecycle_root": true,
+    "readback_http_status": 200,
+    "neatlogs_readback": {
+      "status": "success",
+      "spanCount": 27,
+      "llmCalls": 0,
+      "toolCalls": 20,
+      "hasError": 0,
+      "errorCount": 0,
+      "promptTokens": 0,
+      "completionTokens": 0,
+      "totalTokensUsed": 0,
+      "spans": [
+        {
+          "node_name": "checkpoint-complete-revision-2",
+          "node_type": "tool_call",
+          "parent_span_id": "c14618cbedeae62e",
+          "span_id": "c2d44efc68a4cd3a",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "checkpoint-waiting-approval-revision-2",
+          "node_type": "tool_call",
+          "parent_span_id": "c14618cbedeae62e",
+          "span_id": "414e9f0810616bb8",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "checkpoint-waiting-review-revision-1",
+          "node_type": "tool_call",
+          "parent_span_id": "c14618cbedeae62e",
+          "span_id": "1325daaef83d37cc",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "inventory_evidence",
+          "node_type": "tool_call",
+          "parent_span_id": "3768a660ba7d2c65",
+          "span_id": "76041589750b3777",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "inventory_evidence",
+          "node_type": "tool_call",
+          "parent_span_id": "17791e12845e5e7b",
+          "span_id": "96a2b9ec429ade51",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "inventory_evidence",
+          "node_type": "tool_call",
+          "parent_span_id": "c5ea0ffe5ad0153f",
+          "span_id": "c4ab51d25599fc7e",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "request_approval",
+          "node_type": "tool_call",
+          "parent_span_id": "c5ea0ffe5ad0153f",
+          "span_id": "185015d06650b4f8",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "request_review",
+          "node_type": "tool_call",
+          "parent_span_id": "17791e12845e5e7b",
+          "span_id": "d2cc9c46bd94b90d",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "verify_reconciliation",
+          "node_type": "tool_call",
+          "parent_span_id": "3768a660ba7d2c65",
+          "span_id": "0c4dad179fc4b97f",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "verify_reconciliation",
+          "node_type": "tool_call",
+          "parent_span_id": "17791e12845e5e7b",
+          "span_id": "4b7526570b1429f6",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "verify_reconciliation",
+          "node_type": "tool_call",
+          "parent_span_id": "c5ea0ffe5ad0153f",
+          "span_id": "7f7d34f1e739d545",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "analyze_ledger",
+          "node_type": "tool_call",
+          "parent_span_id": "c5ea0ffe5ad0153f",
+          "span_id": "24a6022f6387d51f",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 1.016832,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "analyze_ledger",
+          "node_type": "tool_call",
+          "parent_span_id": "17791e12845e5e7b",
+          "span_id": "443d7836ce9a8422",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 0.979712,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "analyze_ledger",
+          "node_type": "tool_call",
+          "parent_span_id": "3768a660ba7d2c65",
+          "span_id": "76a1c87bdf5f18ae",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 0.94464,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "scripted-explicit-approval",
+          "node_type": "tool_call",
+          "parent_span_id": "c14618cbedeae62e",
+          "span_id": "9c3783d1717c0905",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 15.540736,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "scripted-human-review",
+          "node_type": "tool_call",
+          "parent_span_id": "c14618cbedeae62e",
+          "span_id": "ad77487b50a0db9c",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 16.131328,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "prepare-invoice-case",
+          "node_type": "workflow",
+          "parent_span_id": "a3dbc5fcefc4358e",
+          "span_id": "3768a660ba7d2c65",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 37.678336,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "prepare-invoice-case",
+          "node_type": "workflow",
+          "parent_span_id": "c14618cbedeae62e",
+          "span_id": "c5ea0ffe5ad0153f",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 37.169152,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "prepare-invoice-case",
+          "node_type": "workflow",
+          "parent_span_id": "c14618cbedeae62e",
+          "span_id": "17791e12845e5e7b",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 42.835712,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "build_local_packet",
+          "node_type": "tool_call",
+          "parent_span_id": "7bf1865a2989b173",
+          "span_id": "06d59f2224eb3539",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 44.442624,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "verify-approved-export",
+          "node_type": "tool_call",
+          "parent_span_id": "c14618cbedeae62e",
+          "span_id": "dfc4444c07c88e51",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 49.101824,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "prepare-invoice-case",
+          "node_type": "workflow",
+          "parent_span_id": "c14618cbedeae62e",
+          "span_id": "7bf1865a2989b173",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:55.000Z",
+          "metrics": {
+            "duration_ms": 57.154816,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "simulated-local-failure-recovery",
+          "node_type": "workflow",
+          "parent_span_id": "c14618cbedeae62e",
+          "span_id": "a3dbc5fcefc4358e",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:56.000Z",
+          "metrics": {
+            "duration_ms": 113.801984,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "bakaya-controlled-full-lifecycle",
+          "node_type": "workflow",
+          "parent_span_id": null,
+          "span_id": "c14618cbedeae62e",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:55.000Z",
+          "updatedAt": "2026-10-11T09:34:56.000Z",
+          "metrics": {
+            "duration_ms": 442.8096,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "request_review",
+          "node_type": "tool_call",
+          "parent_span_id": "ab6cc0b429453ebd",
+          "span_id": "827a308e4e1c442e",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:56.000Z",
+          "updatedAt": "2026-10-11T09:34:56.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "verify_reconciliation",
+          "node_type": "tool_call",
+          "parent_span_id": "ab6cc0b429453ebd",
+          "span_id": "4421b06a5168fded",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:56.000Z",
+          "updatedAt": "2026-10-11T09:34:56.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "prepare-invoice-case",
+          "node_type": "workflow",
+          "parent_span_id": "a3dbc5fcefc4358e",
+          "span_id": "ab6cc0b429453ebd",
+          "status": "SUCCESS",
+          "traceId": "adede6146ac02b223da79587c5c46242",
+          "createdAt": "2026-10-11T09:34:56.000Z",
+          "updatedAt": "2026-10-11T09:34:56.000Z",
+          "metrics": {
+            "duration_ms": 19.521024,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        }
+      ]
+    }
+  },
+  "after": {
+    "revision": "6985522",
+    "controlled_replay": true,
+    "synthetic": true,
+    "trace_id": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+    "run_id": "38a576ee7a8a40ce98be546d980252d5",
+    "states": [
+      "waiting_review",
+      "waiting_approval",
+      "complete"
+    ],
+    "checkpoints": [
+      {
+        "step": 1,
+        "revision": 1,
+        "at": "2026-10-11T09:35:00.518953+00:00",
+        "tool": "inventory_evidence",
+        "status": "completed"
+      },
+      {
+        "step": 2,
+        "revision": 1,
+        "at": "2026-10-11T09:35:00.528004+00:00",
+        "tool": "analyze_ledger",
+        "status": "completed"
+      },
+      {
+        "step": 3,
+        "revision": 1,
+        "at": "2026-10-11T09:35:00.536112+00:00",
+        "tool": "verify_reconciliation",
+        "status": "completed"
+      },
+      {
+        "step": 4,
+        "revision": 1,
+        "at": "2026-10-11T09:35:00.545487+00:00",
+        "tool": "request_review",
+        "status": "completed"
+      },
+      {
+        "step": 5,
+        "revision": 2,
+        "at": "2026-10-11T09:35:00.593165+00:00",
+        "tool": "refresh_checkpoint",
+        "status": "completed"
+      },
+      {
+        "step": 6,
+        "revision": 2,
+        "at": "2026-10-11T09:35:00.593165+00:00",
+        "tool": "inventory_evidence",
+        "status": "completed"
+      },
+      {
+        "step": 7,
+        "revision": 2,
+        "at": "2026-10-11T09:35:00.602818+00:00",
+        "tool": "analyze_ledger",
+        "status": "completed"
+      },
+      {
+        "step": 8,
+        "revision": 2,
+        "at": "2026-10-11T09:35:00.610253+00:00",
+        "tool": "verify_reconciliation",
+        "status": "completed"
+      },
+      {
+        "step": 9,
+        "revision": 2,
+        "at": "2026-10-11T09:35:00.618653+00:00",
+        "tool": "request_approval",
+        "status": "completed"
+      },
+      {
+        "step": 10,
+        "revision": 2,
+        "at": "2026-10-11T09:35:00.707764+00:00",
+        "tool": "build_local_packet",
+        "status": "completed"
+      }
+    ],
+    "totals": {
+      "invoiced": "800000.00",
+      "bank_received": "328000.00",
+      "allocated_bank": "328000.00",
+      "tds_recognized": "2000.00",
+      "principal": "470000.00",
+      "interest": "40777.36",
+      "total": "510777.36",
+      "unallocated": "0.00",
+      "reconciliation_difference": "0.00"
+    },
+    "model_calls": 0,
+    "model_tokens": 0,
+    "model_inference_cost_usd": 0,
+    "total_delivery_cost_usd": null,
+    "redundant_packet_files": 0,
+    "nested_packet_entries": [],
+    "export_bytes": 18355,
+    "export_valid": true,
+    "simulated_recovery_passed": true,
+    "observed_local_seconds": 0.5213373999995383,
+    "readback_span_count": 27,
+    "all_spans_descend_from_lifecycle_root": true,
+    "readback_http_status": 200,
+    "neatlogs_readback": {
+      "status": "success",
+      "spanCount": 27,
+      "llmCalls": 0,
+      "toolCalls": 20,
+      "hasError": 0,
+      "errorCount": 0,
+      "promptTokens": 0,
+      "completionTokens": 0,
+      "totalTokensUsed": 0,
+      "spans": [
+        {
+          "node_name": "analyze_ledger",
+          "node_type": "tool_call",
+          "parent_span_id": "8c7f5a6bd5e7c916",
+          "span_id": "02f742365733c7af",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "checkpoint-complete-revision-2",
+          "node_type": "tool_call",
+          "parent_span_id": "bd7bf9b02cff9ba8",
+          "span_id": "a41b54ce81930393",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "checkpoint-waiting-approval-revision-2",
+          "node_type": "tool_call",
+          "parent_span_id": "bd7bf9b02cff9ba8",
+          "span_id": "243f5ac3ba2639e1",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "checkpoint-waiting-review-revision-1",
+          "node_type": "tool_call",
+          "parent_span_id": "bd7bf9b02cff9ba8",
+          "span_id": "f28cdcba023d4c2f",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "inventory_evidence",
+          "node_type": "tool_call",
+          "parent_span_id": "8c7f5a6bd5e7c916",
+          "span_id": "981fec7ab950a874",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "inventory_evidence",
+          "node_type": "tool_call",
+          "parent_span_id": "2ac453047afe6beb",
+          "span_id": "eaab60b50c45b0cb",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "inventory_evidence",
+          "node_type": "tool_call",
+          "parent_span_id": "438007545d0d22b0",
+          "span_id": "f62e369c93403379",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "request_approval",
+          "node_type": "tool_call",
+          "parent_span_id": "8c7f5a6bd5e7c916",
+          "span_id": "9a38a50e4abfc9b6",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "request_review",
+          "node_type": "tool_call",
+          "parent_span_id": "438007545d0d22b0",
+          "span_id": "4e735966ca919eb0",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "request_review",
+          "node_type": "tool_call",
+          "parent_span_id": "30b9ebd9a00f96da",
+          "span_id": "7df7ddcc3a7749ab",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "verify_reconciliation",
+          "node_type": "tool_call",
+          "parent_span_id": "2ac453047afe6beb",
+          "span_id": "153bfcff2f082a57",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "verify_reconciliation",
+          "node_type": "tool_call",
+          "parent_span_id": "8c7f5a6bd5e7c916",
+          "span_id": "3720e4724bd84e4f",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "verify_reconciliation",
+          "node_type": "tool_call",
+          "parent_span_id": "438007545d0d22b0",
+          "span_id": "782338bf5c9439d4",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "verify_reconciliation",
+          "node_type": "tool_call",
+          "parent_span_id": "30b9ebd9a00f96da",
+          "span_id": "cca978895b1b17d3",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "analyze_ledger",
+          "node_type": "tool_call",
+          "parent_span_id": "2ac453047afe6beb",
+          "span_id": "5f30942a91c56c43",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 0.999936,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "analyze_ledger",
+          "node_type": "tool_call",
+          "parent_span_id": "438007545d0d22b0",
+          "span_id": "af3ab1e8f3b079df",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 0.999936,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "scripted-explicit-approval",
+          "node_type": "tool_call",
+          "parent_span_id": "bd7bf9b02cff9ba8",
+          "span_id": "6ea73ca5b2a98ec8",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 15.423488,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "scripted-human-review",
+          "node_type": "tool_call",
+          "parent_span_id": "bd7bf9b02cff9ba8",
+          "span_id": "64bd760e256fbe08",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 15.630336,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "prepare-invoice-case",
+          "node_type": "workflow",
+          "parent_span_id": "49089dfcb3032440",
+          "span_id": "30b9ebd9a00f96da",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 21.717248,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "prepare-invoice-case",
+          "node_type": "workflow",
+          "parent_span_id": "49089dfcb3032440",
+          "span_id": "2ac453047afe6beb",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 35.490816,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "prepare-invoice-case",
+          "node_type": "workflow",
+          "parent_span_id": "bd7bf9b02cff9ba8",
+          "span_id": "8c7f5a6bd5e7c916",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 37.76,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "prepare-invoice-case",
+          "node_type": "workflow",
+          "parent_span_id": "bd7bf9b02cff9ba8",
+          "span_id": "438007545d0d22b0",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 48.855552,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "build_local_packet",
+          "node_type": "tool_call",
+          "parent_span_id": "e58c0b8eb2f2f33b",
+          "span_id": "272cd761ea3972e0",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 51.36896,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "verify-approved-export",
+          "node_type": "tool_call",
+          "parent_span_id": "bd7bf9b02cff9ba8",
+          "span_id": "7284709c0fdebe2a",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 50.90048,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "prepare-invoice-case",
+          "node_type": "workflow",
+          "parent_span_id": "bd7bf9b02cff9ba8",
+          "span_id": "e58c0b8eb2f2f33b",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 87.19104,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "simulated-local-failure-recovery",
+          "node_type": "workflow",
+          "parent_span_id": "bd7bf9b02cff9ba8",
+          "span_id": "49089dfcb3032440",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 120.476928,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        },
+        {
+          "node_name": "bakaya-controlled-full-lifecycle",
+          "node_type": "workflow",
+          "parent_span_id": null,
+          "span_id": "bd7bf9b02cff9ba8",
+          "status": "SUCCESS",
+          "traceId": "3af784ca1b8dd9c7bcc69bb7d83fd1e7",
+          "createdAt": "2026-10-11T09:35:00.000Z",
+          "updatedAt": "2026-10-11T09:35:00.000Z",
+          "metrics": {
+            "duration_ms": 501.535488,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "tool_name": ""
+          }
+        }
+      ]
+    }
+  },
+  "same_totals": true
+}

@@ -1,0 +1,34 @@
+# Competitive evidence and positioning
+
+**Checked 2026-10-10. Desk research only; no trials, purchases, calls or customer interviews.** Vendor statements are evidence of advertised scope, not independently measured performance. No absent-feature claim is inferred from silence. Search volume, customer satisfaction and migration results are unknown.
+
+## Evidence matrix
+
+| Alternative | Verified public evidence | Pricing evidence | Best fit / strength | What Bakaya still needs to prove |
+|---|---|---|---|---|
+| Recordent | [Vendor promotional page](https://inpromo1.recordent.com/registrations) describes dues uploads, reminders, legal notices, credit reporting and e-arbitration. [Vendor demo subscription page](https://www.demo.recordent.com/subscription/platinum) additionally lists MSME Samadhaan filing, account statements and Tally/Zoho integration. Main collection page rendered only a shell. | Demo plan contains placeholder amounts; **not usable pricing**. Current production package/quote not verified. | Businesses wanting a broader collections/credit workflow, potentially including recovery services. | Field-level source traceability, partial-payment/TDS review and statutory schedule behavior require a product demonstration. Do not claim Recordent cannot prepare/file a claim. |
+| CredFlow / CredFloat | [Official group homepage](https://credflow.in/) indexed content links CredFloat as its SaaS product and advertises reminders, bank reconciliation and bill OCR. [Official product page](https://saas.credflow.in/) describes Tally/Busy access and multi-channel reminders. | [Linked product website](https://www.credfloat.in/) shows headline annual plans ₹4,999 / ₹9,999 / ₹14,999 / ₹19,999, but also inconsistent sub-line amounts. Quote and taxes need confirmation before a price comparison. | Ongoing accounting visibility, receivables operations and integrations. | The proposed evidence-to-claim workflow is a different evaluation dimension; no verified basis to call this “reminders only.” |
+| TaxClue | [Own service page](https://taxclue.in/msme-samadhaan), marked reviewed 17 Aug 2026, advertises assessment, appointed-day working, monthly compound interest, application/evidence preparation, filing and representation. | Itemized quote advertised; no numeric fee verified. | Buyers wanting professional service and representation through the dispute. | Bakaya must demonstrate review time savings and clear software scope. “Only option preparing evidence and interest” is contradicted by advertised scope. Page has conflicting 15/45-day statements; do not use as legal authority. |
+| LegalBabu | [Own service page](https://www.legalbabu.com/payment-recovery-under-msme/) describes MSME recovery and documentary preparation including purchase orders, communication, bank-related evidence and interest schedules. | Numeric current professional fee not verified. | Assisted recovery where a professional manages procedural work. | Speed/cost superiority unmeasured. Its 21% interest references may be historical; don't copy into rules. |
+| Official ODR / self preparation | [Official portal](https://odr.msme.gov.in/) and [Ministry Annual Report](https://msme.gov.in/sites/default/files/MSMEANNUALREPORT2025-26ENGLISH_0.pdf) establish the official digital route. Live form not inspected. | Universal current filing/ADR fee schedule unverified. Preparation time is still a customer cost even where access is free. | Supplier/adviser already able to assemble and review evidence without software. | Show preparation utility worth paying for; Bakaya is not an official portal or a substitute decision maker. |
+| Spreadsheet + existing accountant/lawyer | A realistic workflow hypothesis from the PRD; no observation session completed. | Customer-specific time and professional fees unknown. | Low case volume, complex disputes, established adviser relationship. | Observe actual work before claiming it is slow or error prone. Measure corrected totals and reviewer time with consent. |
+
+Evidence freshness: Recordent promotional search result is older; demo page may not reflect commercially available production packages. CredFloat headline prices are transcribed for research, not certified quotes. Recordent's performance percentages and CredFlow's customer counts/improvement claims have not been independently verified and should not appear as Bakaya facts.
+
+## Honest positioning
+
+Proposed sentence: **“Turn invoices, payments and delivery records into a claim-preparation packet your reviewer can check, with figures linked to their sources.”**
+
+The defensible wedge is a demonstrated review workflow: deterministic calculations, explicit unresolved differences, versioned assumptions and a human gate. These remain product claims to substantiate against the running build. Competitors may offer overlapping capabilities. Do not publish “first,” “only,” “guaranteed recovery,” “lawyer-free” or a speed comparison without evidence.
+
+Bakaya's initial limitations are material: no representation, no automatic filing or sending, limited input support, uncertain legal cases requiring professional review, and no production customer outcome evidence. A manufacturer facing quality disputes or a limitation issue may be better served by a lawyer. A business that mainly needs daily collection reminders may prefer its existing receivables product. A CA repeatedly reconstructing uncontested small-supplier records is the initial hypothesis to test.
+
+## Proof plan and comparison page backlog
+
+One permissioned demonstration per vendor should answer: raw-document ingestion; source granularity; payment/credit/TDS handling; interest-rate history; unresolved items; exports; data deletion; portal/representation scope; included fees. Record product version, test date, exact plan and unanswered questions centrally. Do not create accounts or send enquiries as part of this draft.
+
+The first useful public comparison would be **“Preparing an MSME claim: self preparation, professional help, or software”**. It can explain fit without invented vendor weaknesses. A future `/compare/receivables-software-vs-claim-preparation` page should explain complementary jobs. Named `/compare/bakaya-vs-recordent` should wait for product-level testing and feature verification. There is no search-volume evidence to prioritize a large competitor SEO program.
+
+Migration proposal: retain current accounting software; import an export and evidence copies into an isolated case. Reconcile totals, preview unresolved items, and obtain reviewer approval before generating a packet. No automatic system replacement or data transfer has been implemented or validated by this research.
+
+Refresh before publishing and quarterly thereafter. Keep unresolved facts as unknown, including pricing, support, privacy/security claims and current scope.

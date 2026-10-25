@@ -1,0 +1,3 @@
+record_type,name,category,activity,udyam_number,udyam_date,address
+supplier,Sample Precision Works,small,manufacturing,UDYAM-DEMO-0001,2023-01-01,Pune Maharashtra - fictional
+buyer,Sample Industrial Buyer,,,,,Pune Maharashtra - fictional

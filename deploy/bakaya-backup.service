@@ -1,0 +1,8 @@
+[Unit]
+Description=Encrypted Bakaya database and evidence backup
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/bakaya/deploy/backup.sh
