@@ -1,0 +1,29 @@
+{
+  "id": "007",
+  "synthetic": true,
+  "language": "hinglish",
+  "format": "ad",
+  "label": "scam_pattern",
+  "text": "SYNTHETIC — fictional evaluation material.\nLaos mein data entry vacancy! Mahine ka Rs 1,10,000 equivalent. Employment visa pehle milega. Processing ke liye 5 lakh cash dena hoga. Baat sirf Telegram par, office address nahi. Receipt, licence number, contract aur insurance ki details nahi di gayi hain. Recruiter ka naam bhi ad mein nahi hai.",
+  "expected": {
+    "verdict": "STOP",
+    "rule_hits": [
+      "R3_NO_RC_NUMBER",
+      "R4_FEE_OVER_CAP",
+      "R5_NO_TRIPARTITE_CONTRACT",
+      "R6_HIGH_RISK_CORRIDOR",
+      "R7_INFORMAL_CHANNEL_ONLY",
+      "R8_NO_RECEIPT",
+      "R9_PBBY_MISSING",
+      "H1_SALARY_ANOMALY"
+    ],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Laos",
+      "fees_demanded_inr": "500000",
+      "role_title": "data entry",
+      "agent_rc_number": null
+    },
+    "recruiter_list_date": "2026-10-01"
+  }
+}

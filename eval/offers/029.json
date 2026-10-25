@@ -1,0 +1,21 @@
+{
+  "id": "029",
+  "synthetic": true,
+  "language": "hinglish",
+  "format": "whatsapp",
+  "label": "legit_style",
+  "text": "SYNTHETIC — fictional evaluation material.\n[10/10/26, 2:00 PM] Example Store Placement (fictional): Licence DEMO-RA-029. Office: Room AC, Example Commerce Road, Demo Nagar. Malaysia warehouse assistant, employer Example Storage (fictional); employment visa pehle.\n[10/10/26, 2:02 PM] Example Store Placement (fictional): Fee Rs 15,000 plus Rs 2,700 GST, total Rs 17,700, bank transfer ki receipt milegi. Employer, agent aur worker departure se pehle tripartite contract sign karenge. Pravasi Bharatiya Bima Yojana (PBBY) policy pehle di jayegi. Office aa kar conditions padh lo; phone +91 90000 00029.",
+  "expected": {
+    "verdict": "NO_RED_FLAGS_FOUND",
+    "rule_hits": [],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Malaysia",
+      "fees_demanded_inr": "17700",
+      "role_title": "warehouse assistant",
+      "agent_rc_number": "DEMO-RA-029"
+    },
+    "recruiter_list_date": "2026-10-01",
+    "ra_assumed_listed": true
+  }
+}

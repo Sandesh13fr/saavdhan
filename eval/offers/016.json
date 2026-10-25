@@ -1,0 +1,33 @@
+{
+  "id": "016",
+  "synthetic": true,
+  "language": "hi",
+  "format": "ad",
+  "label": "scam_pattern",
+  "text": "SYNTHETIC — fictional evaluation material.\nExample डेटा भर्ती (fictional): कंबोडिया में डेटा एंट्री, मासिक वेतन एक लाख रुपये। विज़िट वीज़ा पर प्रस्थान; कार्य परमिट बाद में। पाँच लाख रुपये नकद आज ही जमा करें। पासपोर्ट हमारे प्रतिनिधि के पास नौकरी खत्म होने तक रहेगा। केवल Telegram पर संपर्क, कार्यालय नहीं। लाइसेंस नंबर नहीं दिया गया। रसीद, अनुबंध और बीमा उपलब्ध नहीं कराए गए हैं।",
+  "expected": {
+    "verdict": "STOP",
+    "rule_hits": [
+      "R1_TOURIST_VISA",
+      "R2_RA_NOT_LISTED",
+      "R3_NO_RC_NUMBER",
+      "R4_FEE_OVER_CAP",
+      "R5_NO_TRIPARTITE_CONTRACT",
+      "R6_HIGH_RISK_CORRIDOR",
+      "R7_INFORMAL_CHANNEL_ONLY",
+      "R8_NO_RECEIPT",
+      "R9_PBBY_MISSING",
+      "H1_SALARY_ANOMALY",
+      "H2_PASSPORT_HANDOVER",
+      "H3_PRESSURE"
+    ],
+    "facts": {
+      "visa_type": "visit",
+      "destination_country": "Cambodia",
+      "fees_demanded_inr": "500000",
+      "role_title": "data entry",
+      "agent_rc_number": null
+    },
+    "recruiter_list_date": "2026-10-01"
+  }
+}

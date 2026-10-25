@@ -17,7 +17,7 @@ DEMO_OFFERS = {
         "Position: Electrician, Example Facilities LLC (fictional), Dubai, UAE\n"
         "Visa: Employment visa\n"
         "Salary: AED 2,200 per month\n"
-        "Service charge: Rs 25,000 + GST, receipt will be issued\n"
+        "Service charge: Rs 45,000 + GST, receipt will be issued\n"
         "Employment contract to be signed by employer, recruiting agent and worker before departure.\n"
     ),
 }

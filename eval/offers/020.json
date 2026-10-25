@@ -1,0 +1,27 @@
+{
+  "id": "020",
+  "synthetic": true,
+  "language": "mr",
+  "format": "whatsapp",
+  "label": "scam_pattern",
+  "text": "SYNTHETIC — fictional evaluation material.\n[10/10/26, 5:20 PM] Example तंत्र भरती (fictional): परवाना DEMO-RA-020. कंबोडियामध्ये आयटी पद, रोजगार व्हिसा निघण्यापूर्वी मिळेल.\n[10/10/26, 5:21 PM] Example तंत्र भरती (fictional): दोन लाख रुपये रोख आजच भरा; पावती देऊ. कार्यालय: कक्ष T, काल्पनिक बाजार, डेमो नगर.\n[10/10/26, 5:22 PM] Example तंत्र भरती (fictional): त्रिपक्षीय करार किंवा विम्याचा तपशील सध्या दिलेला नाही.",
+  "expected": {
+    "verdict": "STOP",
+    "rule_hits": [
+      "R2_RA_NOT_LISTED",
+      "R4_FEE_OVER_CAP",
+      "R5_NO_TRIPARTITE_CONTRACT",
+      "R6_HIGH_RISK_CORRIDOR",
+      "R9_PBBY_MISSING",
+      "H3_PRESSURE"
+    ],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Cambodia",
+      "fees_demanded_inr": "200000",
+      "role_title": "IT",
+      "agent_rc_number": "DEMO-RA-020"
+    },
+    "recruiter_list_date": "2026-10-01"
+  }
+}

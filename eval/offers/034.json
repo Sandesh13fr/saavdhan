@@ -1,0 +1,21 @@
+{
+  "id": "034",
+  "synthetic": true,
+  "language": "hi",
+  "format": "ad",
+  "label": "legit_style",
+  "text": "SYNTHETIC — fictional evaluation material.\nExample विद्युत प्लेसमेंट (fictional), लाइसेंस DEMO-RA-034। कार्यालय: कक्ष AH, काल्पनिक औद्योगिक मार्ग, डेमो नगर। ओमान में Example विद्युत सेवा (fictional) के लिए इलेक्ट्रीशियन। रोजगार वीज़ा प्रस्थान से पहले। कुल भर्ती शुल्क ₹३०,०००, GST सहित; बैंक भुगतान पर रसीद। नियोक्ता, एजेंट और कर्मचारी द्वारा हस्ताक्षरित त्रिपक्षीय अनुबंध यात्रा से पहले दिया जाएगा। प्रवासी भारतीय बीमा योजना (PBBY) का बीमा और पॉलिसी प्रस्थान से पहले उपलब्ध होंगे। आवेदन कार्यालय में लें।",
+  "expected": {
+    "verdict": "NO_RED_FLAGS_FOUND",
+    "rule_hits": [],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Oman",
+      "fees_demanded_inr": "30000",
+      "role_title": "electrician",
+      "agent_rc_number": "DEMO-RA-034"
+    },
+    "recruiter_list_date": "2026-10-01",
+    "ra_assumed_listed": true
+  }
+}

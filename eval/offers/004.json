@@ -1,0 +1,23 @@
+{
+  "id": "004",
+  "synthetic": true,
+  "language": "en",
+  "format": "ad",
+  "label": "scam_pattern",
+  "text": "SYNTHETIC — fictional evaluation material.\nExample Cloud Placement (fictional), licence DEMO-RA-004. Office: Suite D, Example Road, Demo Nagar. Laos IT role for Example Cloud Employer (fictional), Rs 55,000 equivalent monthly. Employment visa before departure. Fee ₹30,000 plus ₹5,400 GST, total ₹35,400; bank payment and receipt. A tripartite contract signed by employer, agent and worker is required before departure. Pravasi Bharatiya Bima Yojana (PBBY) insurance documented.",
+  "expected": {
+    "verdict": "STOP",
+    "rule_hits": [
+      "R2_RA_NOT_LISTED",
+      "R6_HIGH_RISK_CORRIDOR"
+    ],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Laos",
+      "fees_demanded_inr": "35400",
+      "role_title": "IT",
+      "agent_rc_number": "DEMO-RA-004"
+    },
+    "recruiter_list_date": "2026-10-01"
+  }
+}

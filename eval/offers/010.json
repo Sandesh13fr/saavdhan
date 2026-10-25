@@ -1,0 +1,24 @@
+{
+  "id": "010",
+  "synthetic": true,
+  "language": "hinglish",
+  "format": "ad",
+  "label": "scam_pattern",
+  "text": "SYNTHETIC — fictional evaluation material.\nExample Reply Placement (fictional), licence DEMO-RA-010; office Room J, Example Square, Demo Nagar. Cambodia chat support, employment visa travel se pehle. Service fee Rs 30,001 plus GST Rs 5,400.18; rounded payable total Rs 35,401, receipt ke saath bank transfer. Employer, agent aur worker ka signed tripartite contract pehle milega. Pravasi Bharatiya Bima Yojana (PBBY) insurance bhi included hai.",
+  "expected": {
+    "verdict": "STOP",
+    "rule_hits": [
+      "R2_RA_NOT_LISTED",
+      "R4_FEE_OVER_CAP",
+      "R6_HIGH_RISK_CORRIDOR"
+    ],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Cambodia",
+      "fees_demanded_inr": "35401",
+      "role_title": "chat support",
+      "agent_rc_number": "DEMO-RA-010"
+    },
+    "recruiter_list_date": "2026-10-01"
+  }
+}

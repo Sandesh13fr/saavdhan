@@ -1,0 +1,23 @@
+{
+  "id": "039",
+  "synthetic": true,
+  "language": "mr",
+  "format": "letter",
+  "label": "legit_style",
+  "text": "SYNTHETIC — fictional evaluation material.\nनियुक्ती पत्र — Example उत्पादन प्लेसमेंट (fictional). कार्यालय: कक्ष AM, काल्पनिक कारखाना मार्ग, डेमो नगर. मलेशियामध्ये Example उत्पादन कामे (fictional) येथे मशीन ऑपरेटर. रोजगार व्हिसा प्रवासापूर्वी मिळेल. शुल्क ₹२०,००० + GST ₹३,६०० = ₹२३,६००; बँक भरण्याची पावती मिळेल. नियोक्ता, एजंट व कामगार यांचा स्वाक्षरी केलेला त्रिपक्षीय करार आणि प्रवासी भारतीय बीमा योजना (PBBY) विम्याची पॉलिसी प्रस्थानापूर्वी दिली जाईल. या पत्रात नोंदणी किंवा परवाना क्रमांक दिलेला नाही.",
+  "expected": {
+    "verdict": "VERIFY_FIRST",
+    "rule_hits": [
+      "R3_NO_RC_NUMBER"
+    ],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Malaysia",
+      "fees_demanded_inr": "23600",
+      "role_title": "machine operator",
+      "agent_rc_number": null
+    },
+    "recruiter_list_date": "2026-10-01",
+    "ra_assumed_listed": true
+  }
+}

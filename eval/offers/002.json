@@ -1,0 +1,23 @@
+{
+  "id": "002",
+  "synthetic": true,
+  "language": "en",
+  "format": "ad",
+  "label": "scam_pattern",
+  "text": "SYNTHETIC — fictional evaluation material.\nJOB AD — Cambodia customer support, monthly wage Rs 38,000 equivalent. Employment visa arranged before departure. Recruitment charge ₹30,000 total, paid by bank transfer with receipt. Employer, agent and worker sign a tripartite contract before departure. Pravasi Bharatiya Bima Yojana (PBBY) insurance included. Apply in person at Desk 2, Training Row, Demo Nagar. Recruiting agent name and registration number are not displayed.",
+  "expected": {
+    "verdict": "STOP",
+    "rule_hits": [
+      "R3_NO_RC_NUMBER",
+      "R6_HIGH_RISK_CORRIDOR"
+    ],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Cambodia",
+      "fees_demanded_inr": "30000",
+      "role_title": "customer support",
+      "agent_rc_number": null
+    },
+    "recruiter_list_date": "2026-10-01"
+  }
+}

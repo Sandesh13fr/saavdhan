@@ -1,0 +1,21 @@
+{
+  "id": "024",
+  "synthetic": true,
+  "language": "en",
+  "format": "letter",
+  "label": "legit_style",
+  "text": "SYNTHETIC — fictional evaluation material.\nExample Pipe Placement (fictional), registration DEMO-RA-024. Office: Suite X, Example Works Road, Demo Nagar. Employer Example Plumbing Services (fictional), Oman; position plumber. Employment visa issued before travel. Worker recruitment fee Rs 0; employer pays recruitment costs. A zero-charge acknowledgement will be issued. Employer, recruiting agent and worker sign the tripartite contract before departure. Pravasi Bharatiya Bima Yojana (PBBY) insurance policy supplied before travel. Review the documents at our office before deciding.",
+  "expected": {
+    "verdict": "NO_RED_FLAGS_FOUND",
+    "rule_hits": [],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Oman",
+      "fees_demanded_inr": "0",
+      "role_title": "plumber",
+      "agent_rc_number": "DEMO-RA-024"
+    },
+    "recruiter_list_date": "2026-10-01",
+    "ra_assumed_listed": true
+  }
+}

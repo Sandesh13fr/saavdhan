@@ -1,0 +1,24 @@
+{
+  "id": "008",
+  "synthetic": true,
+  "language": "hinglish",
+  "format": "letter",
+  "label": "scam_pattern",
+  "text": "SYNTHETIC — fictional evaluation material.\nOffer: Example Circuit Placement (fictional), licence DEMO-RA-008. Office: Room H, Example Lane, Demo Nagar. Employer Example Circuit Works (fictional), Thailand; IT technician ka role. Employment visa departure se pehle. Total fee Rs 30,000, GST included, bank transfer ki receipt milegi. Employer, agent aur worker ka signed tripartite contract aur Pravasi Bharatiya Bima Yojana (PBBY) policy departure se pehle milegi. Original passport employer ke paas poori job ke dauran jama rakhna zaroori hai.",
+  "expected": {
+    "verdict": "STOP",
+    "rule_hits": [
+      "R2_RA_NOT_LISTED",
+      "R6_HIGH_RISK_CORRIDOR",
+      "H2_PASSPORT_HANDOVER"
+    ],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Thailand",
+      "fees_demanded_inr": "30000",
+      "role_title": "IT",
+      "agent_rc_number": "DEMO-RA-008"
+    },
+    "recruiter_list_date": "2026-10-01"
+  }
+}

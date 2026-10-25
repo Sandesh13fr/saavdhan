@@ -1,0 +1,21 @@
+{
+  "id": "026",
+  "synthetic": true,
+  "language": "hinglish",
+  "format": "whatsapp",
+  "label": "legit_style",
+  "text": "SYNTHETIC — fictional evaluation material.\n[10/10/26, 11:10 AM] Example Machine Placement (fictional): Licence DEMO-RA-026. Office: Room Z, Example Lane, Demo Nagar. Japan mein Example Machine Works (fictional) ke liye machine operator. Employment visa departure se pehle milega.\n[10/10/26, 11:12 AM] Example Machine Placement (fictional): Fee Rs 30,000 + GST Rs 5,400, total ₹35,400. Agency bank account mein payment, itemised receipt milegi. Employer, agent aur worker tripartite contract par departure se pehle sign karenge. Pravasi Bharatiya Bima Yojana (PBBY) policy bhi travel se pehle milegi. Office mein documents padh sakte ho.",
+  "expected": {
+    "verdict": "NO_RED_FLAGS_FOUND",
+    "rule_hits": [],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Japan",
+      "fees_demanded_inr": "35400",
+      "role_title": "machine operator",
+      "agent_rc_number": "DEMO-RA-026"
+    },
+    "recruiter_list_date": "2026-10-01",
+    "ra_assumed_listed": true
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "040",
+  "synthetic": true,
+  "language": "mr",
+  "format": "ad",
+  "label": "legit_style",
+  "text": "SYNTHETIC — fictional evaluation material.\nExample आहार प्लेसमेंट (fictional), परवाना DEMO-RA-040. कार्यालय: कक्ष AN, काल्पनिक बाजार मार्ग, डेमो नगर. सिंगापूरमध्ये Example भोजन कामे (fictional) येथे स्वयंपाकघर सहाय्यक. रोजगार व्हिसा प्रवासापूर्वी मिळेल. कामगाराकडून भरती शुल्क ₹०; खर्च नियोक्ता भरेल, शून्य शुल्काची पावती देऊ. नियोक्ता, एजंट व कामगार यांचा स्वाक्षरी केलेला त्रिपक्षीय करार प्रस्थानापूर्वी मिळेल. प्रवासी भारतीय बीमा योजना (PBBY) विम्याची पॉलिसी प्रवासापूर्वी दिली जाईल. अर्ज व कागदपत्रांची तपासणी कार्यालयात करा.",
+  "expected": {
+    "verdict": "NO_RED_FLAGS_FOUND",
+    "rule_hits": [],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Singapore",
+      "fees_demanded_inr": "0",
+      "role_title": "kitchen assistant",
+      "agent_rc_number": "DEMO-RA-040"
+    },
+    "recruiter_list_date": "2026-10-01",
+    "ra_assumed_listed": true
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Saavdhan synthetic offer evaluation fixture",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "synthetic",
+    "language",
+    "format",
+    "label",
+    "text",
+    "expected"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^(00[1-9]|0[1-3][0-9]|040)$"
+    },
+    "synthetic": {
+      "type": "boolean",
+      "const": true
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "hinglish",
+        "hi",
+        "mr"
+      ]
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "whatsapp",
+        "letter",
+        "ad"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "enum": [
+        "scam_pattern",
+        "legit_style"
+      ]
+    },
+    "text": {
+      "type": "string",
+      "pattern": "^SYNTHETIC",
+      "minLength": 50
+    },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "verdict",
+        "rule_hits",
+        "facts",
+        "recruiter_list_date"
+      ],
+      "properties": {
+        "verdict": {
+          "type": "string",
+          "enum": [
+            "STOP",
+            "VERIFY_FIRST",
+            "NO_RED_FLAGS_FOUND"
+          ]
+        },
+        "rule_hits": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 12,
+          "items": {
+            "type": "string",
+            "enum": [
+              "R1_TOURIST_VISA",
+              "R2_RA_NOT_LISTED",
+              "R3_NO_RC_NUMBER",
+              "R4_FEE_OVER_CAP",
+              "R5_NO_TRIPARTITE_CONTRACT",
+              "R6_HIGH_RISK_CORRIDOR",
+              "R7_INFORMAL_CHANNEL_ONLY",
+              "R8_NO_RECEIPT",
+              "R9_PBBY_MISSING",
+              "H1_SALARY_ANOMALY",
+              "H2_PASSPORT_HANDOVER",
+              "H3_PRESSURE"
+            ]
+          }
+        },
+        "facts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "visa_type",
+            "destination_country",
+            "fees_demanded_inr",
+            "role_title",
+            "agent_rc_number"
+          ],
+          "properties": {
+            "visa_type": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "tourist",
+                "visit",
+                "employment",
+                "business",
+                null
+              ]
+            },
+            "destination_country": {
+              "type": "string",
+              "minLength": 1
+            },
+            "fees_demanded_inr": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "description": "Total worker recruitment fee in INR, including GST; null if no amount is stated."
+            },
+            "role_title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "agent_rc_number": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^DEMO-[A-Z0-9-]+$"
+            }
+          }
+        },
+        "recruiter_list_date": {
+          "type": "string",
+          "format": "date",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "description": "Synthetic lookup snapshot date, not a claim about a published MEA list."
+        },
+        "ra_assumed_listed": {
+          "type": "boolean",
+          "const": true,
+          "description": "Legit-style fixture lookup stub; never evidence of actual registration."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "027",
+  "synthetic": true,
+  "language": "hinglish",
+  "format": "letter",
+  "label": "legit_style",
+  "text": "SYNTHETIC — fictional evaluation material.\nExample Tool Placement (fictional), registration DEMO-RA-027. Office: Suite AA, Example Industrial Lane, Demo Nagar. Germany ke Example Tool Works (fictional) mein CNC operator ka offer. Employment visa pehle issue hoga. Total recruitment fee Rs 30,000 GST included; bank transfer par receipt. Employer, agent aur worker ka signed tripartite contract departure se pehle milega. Pravasi Bharatiya Bima Yojana (PBBY) insurance policy bhi departure se pehle di jayegi. Original passport worker ke paas rahega.",
+  "expected": {
+    "verdict": "NO_RED_FLAGS_FOUND",
+    "rule_hits": [],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Germany",
+      "fees_demanded_inr": "30000",
+      "role_title": "CNC operator",
+      "agent_rc_number": "DEMO-RA-027"
+    },
+    "recruiter_list_date": "2026-10-01",
+    "ra_assumed_listed": true
+  }
+}

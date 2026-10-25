@@ -1,0 +1,21 @@
+{
+  "id": "030",
+  "synthetic": true,
+  "language": "hinglish",
+  "format": "letter",
+  "label": "legit_style",
+  "text": "SYNTHETIC — fictional evaluation material.\nExample Repair Placement (fictional), licence DEMO-RA-030. Office: Suite AD, Example Service Road, Demo Nagar. Singapore mein Example Maintenance (fictional) ke liye maintenance technician. Employment visa departure se pehle issue hoga. Fee ₹30,000 + GST ₹5,400 = ₹35,400; bank payment par itemised receipt milegi. Employer, agent aur worker ka tripartite contract departure se pehle sign hoga. Pravasi Bharatiya Bima Yojana (PBBY) insurance policy travel se pehle milegi. Worker apna original passport khud rakhega.",
+  "expected": {
+    "verdict": "NO_RED_FLAGS_FOUND",
+    "rule_hits": [],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Singapore",
+      "fees_demanded_inr": "35400",
+      "role_title": "maintenance technician",
+      "agent_rc_number": "DEMO-RA-030"
+    },
+    "recruiter_list_date": "2026-10-01",
+    "ra_assumed_listed": true
+  }
+}

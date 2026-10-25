@@ -1,0 +1,28 @@
+{
+  "id": "003",
+  "synthetic": true,
+  "language": "en",
+  "format": "letter",
+  "label": "scam_pattern",
+  "text": "SYNTHETIC — fictional evaluation material.\nOFFER LETTER — Example Pixel Placement (fictional), Room C, Imaginary Arcade, Demo Nagar. Employer: Example Pixel Studio (fictional), Myanmar. Position: digital marketing. Processing fee Rs 1.5 lakh, payable in cash; receipt will not be issued. A work permit will be arranged after arrival; the entry visa category is not specified. No tripartite contract is provided. Registration number and insurance details are omitted.",
+  "expected": {
+    "verdict": "STOP",
+    "rule_hits": [
+      "R2_RA_NOT_LISTED",
+      "R3_NO_RC_NUMBER",
+      "R4_FEE_OVER_CAP",
+      "R5_NO_TRIPARTITE_CONTRACT",
+      "R6_HIGH_RISK_CORRIDOR",
+      "R8_NO_RECEIPT",
+      "R9_PBBY_MISSING"
+    ],
+    "facts": {
+      "visa_type": null,
+      "destination_country": "Myanmar",
+      "fees_demanded_inr": "150000",
+      "role_title": "digital marketing",
+      "agent_rc_number": null
+    },
+    "recruiter_list_date": "2026-10-01"
+  }
+}

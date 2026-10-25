@@ -1,0 +1,23 @@
+{
+  "id": "015",
+  "synthetic": true,
+  "language": "hi",
+  "format": "letter",
+  "label": "scam_pattern",
+  "text": "SYNTHETIC — fictional evaluation material.\nExample तकनीक प्लेसमेंट (fictional), लाइसेंस DEMO-RA-015। कार्यालय: कक्ष O, काल्पनिक चौक, डेमो नगर। नियोक्ता Example तकनीक सेवा (fictional), थाईलैंड। पद: आईटी तकनीशियन। रोजगार वीज़ा प्रस्थान से पहले जारी होगा। कुल शुल्क ₹३५,०००, GST सहित; बैंक से भुगतान और रसीद। नियोक्ता, एजेंट और कर्मचारी द्वारा हस्ताक्षरित त्रिपक्षीय अनुबंध तथा प्रवासी भारतीय बीमा योजना (PBBY) की पॉलिसी प्रस्थान से पहले दी जाएगी।",
+  "expected": {
+    "verdict": "STOP",
+    "rule_hits": [
+      "R2_RA_NOT_LISTED",
+      "R6_HIGH_RISK_CORRIDOR"
+    ],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Thailand",
+      "fees_demanded_inr": "35000",
+      "role_title": "IT",
+      "agent_rc_number": "DEMO-RA-015"
+    },
+    "recruiter_list_date": "2026-10-01"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "018",
+  "synthetic": true,
+  "language": "mr",
+  "format": "letter",
+  "label": "scam_pattern",
+  "text": "SYNTHETIC — fictional evaluation material.\nनियुक्ती पत्र: म्यानमारमध्ये ऑनलाइन मार्केटिंगचे काम. रोजगार व्हिसा प्रवासापूर्वी मिळेल. भरती शुल्क ₹३०,००० एकूण, GST सहित; बँक भरण्याची पावती मिळेल. नियोक्ता, एजंट आणि कामगार यांनी स्वाक्षरी केलेला त्रिपक्षीय करार प्रस्थानापूर्वी मिळेल. प्रवासी भारतीय बीमा योजना (PBBY) विमा समाविष्ट आहे. अर्ज कार्यालयात द्या: कक्ष R, काल्पनिक मार्ग, डेमो नगर. एजंटचे नाव आणि नोंदणी क्रमांक पत्रात दिलेला नाही.",
+  "expected": {
+    "verdict": "STOP",
+    "rule_hits": [
+      "R3_NO_RC_NUMBER",
+      "R6_HIGH_RISK_CORRIDOR"
+    ],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Myanmar",
+      "fees_demanded_inr": "30000",
+      "role_title": "online marketing",
+      "agent_rc_number": null
+    },
+    "recruiter_list_date": "2026-10-01"
+  }
+}

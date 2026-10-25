@@ -1,0 +1,23 @@
+{
+  "id": "025",
+  "synthetic": true,
+  "language": "en",
+  "format": "ad",
+  "label": "legit_style",
+  "text": "SYNTHETIC — fictional evaluation material.\nExample Cooling Placement (fictional), licence DEMO-RA-025. Office: Room Y, Example Centre, Demo Nagar. Kuwait HVAC technician at Example Cooling Works (fictional), employment visa before travel. Recruitment fee Rs 30,001 plus GST Rs 5,400.18; rounded total payable Rs 35,401, receipt issued for the bank payment. Employer, agent and worker sign the tripartite contract before departure; Pravasi Bharatiya Bima Yojana (PBBY) insurance policy provided before travel. Application and paperwork review at the office.",
+  "expected": {
+    "verdict": "VERIFY_FIRST",
+    "rule_hits": [
+      "R4_FEE_OVER_CAP"
+    ],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Kuwait",
+      "fees_demanded_inr": "35401",
+      "role_title": "HVAC technician",
+      "agent_rc_number": "DEMO-RA-025"
+    },
+    "recruiter_list_date": "2026-10-01",
+    "ra_assumed_listed": true
+  }
+}

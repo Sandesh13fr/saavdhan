@@ -1,0 +1,21 @@
+{
+  "id": "036",
+  "synthetic": true,
+  "language": "hi",
+  "format": "letter",
+  "label": "legit_style",
+  "text": "SYNTHETIC — fictional evaluation material.\nExample पैकिंग प्लेसमेंट (fictional), पंजीकरण DEMO-RA-036। कार्यालय: कक्ष AJ, काल्पनिक वाणिज्य मार्ग, डेमो नगर। जापान में Example पैकिंग कार्य (fictional) के लिए पैकेजिंग ऑपरेटर। रोजगार वीज़ा प्रस्थान से पहले जारी होगा। शुल्क ₹१०,००० और GST ₹१,८००, कुल ₹११,८००; बैंक भुगतान पर रसीद मिलेगी। नियोक्ता, एजेंट और कर्मचारी द्वारा हस्ताक्षरित त्रिपक्षीय अनुबंध और प्रवासी भारतीय बीमा योजना (PBBY) की पॉलिसी यात्रा से पहले मिलेंगे। मूल पासपोर्ट कर्मचारी के पास रहेगा।",
+  "expected": {
+    "verdict": "NO_RED_FLAGS_FOUND",
+    "rule_hits": [],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Japan",
+      "fees_demanded_inr": "11800",
+      "role_title": "packaging operator",
+      "agent_rc_number": "DEMO-RA-036"
+    },
+    "recruiter_list_date": "2026-10-01",
+    "ra_assumed_listed": true
+  }
+}

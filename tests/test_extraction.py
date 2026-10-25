@@ -65,7 +65,7 @@ def test_dubai_demo():
     o = run(DEMO_OFFERS["dubai-near-miss"])
     assert (v(o.visa_type), v(o.destination_country), v(o.role_title)) == ("employment", "United Arab Emirates", "electrician")
     assert v(o.agent_rc_number) == "B-0000/DEMO/PER/1000+/5/0000/2026"
-    assert (v(o.fees_demanded_inr), v(o.salary_amount), v(o.salary_currency)) == ("25000", "2200", "AED")
+    assert (v(o.fees_demanded_inr), v(o.salary_amount), v(o.salary_currency)) == ("45000", "2200", "AED")
     assert v(o.receipt_promised) == "yes" and v(o.contract_mentioned) == "yes"
     assert {v(s) for s in o.contract_signatories} == {"employer", "agent", "worker"}
     assert "office_address" in [v(c) for c in o.agent_channels]

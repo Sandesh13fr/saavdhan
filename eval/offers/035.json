@@ -1,0 +1,23 @@
+{
+  "id": "035",
+  "synthetic": true,
+  "language": "hi",
+  "format": "whatsapp",
+  "label": "legit_style",
+  "text": "SYNTHETIC — fictional evaluation material.\n[10/10/26, 3:14 PM] Example परिवहन प्लेसमेंट (fictional): लाइसेंस DEMO-RA-035। कार्यालय: कक्ष AI, काल्पनिक परिवहन मार्ग, डेमो नगर। कुवैत में Example वाहन सेवा (fictional) के लिए चालक। रोजगार वीज़ा पहले मिलेगा।\n[10/10/26, 3:15 PM] Example परिवहन प्लेसमेंट (fictional): भर्ती शुल्क ₹३६,००० कुल, GST सहित; बैंक से भुगतान और रसीद। नियोक्ता, एजेंट और कर्मचारी का हस्ताक्षरित त्रिपक्षीय अनुबंध तथा प्रवासी भारतीय बीमा योजना (PBBY) की पॉलिसी प्रस्थान से पहले देंगे। कार्यालय में दस्तावेज़ समीक्षा उपलब्ध है।",
+  "expected": {
+    "verdict": "VERIFY_FIRST",
+    "rule_hits": [
+      "R4_FEE_OVER_CAP"
+    ],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Kuwait",
+      "fees_demanded_inr": "36000",
+      "role_title": "driver",
+      "agent_rc_number": "DEMO-RA-035"
+    },
+    "recruiter_list_date": "2026-10-01",
+    "ra_assumed_listed": true
+  }
+}

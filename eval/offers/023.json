@@ -1,0 +1,21 @@
+{
+  "id": "023",
+  "synthetic": true,
+  "language": "en",
+  "format": "whatsapp",
+  "label": "legit_style",
+  "text": "SYNTHETIC — fictional evaluation material.\n[10/10/26, 10:14 AM] Example Kitchen Placement (fictional): Licence DEMO-RA-023. Office: Room W, Example Market Road, Demo Nagar. Qatar kitchen assistant role with Example Catering (fictional), employment visa before departure.\n[10/10/26, 10:16 AM] Applicant C (fictional): What is the total charge and paperwork?\n[10/10/26, 10:18 AM] Example Kitchen Placement (fictional): Rs 20,000 plus Rs 3,600 GST = Rs 23,600, bank payment with receipt. Employer, agent and worker sign the tripartite contract before travel. Pravasi Bharatiya Bima Yojana (PBBY) policy provided before departure. Visit our office or call +91 90000 00023.",
+  "expected": {
+    "verdict": "NO_RED_FLAGS_FOUND",
+    "rule_hits": [],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Qatar",
+      "fees_demanded_inr": "23600",
+      "role_title": "kitchen assistant",
+      "agent_rc_number": "DEMO-RA-023"
+    },
+    "recruiter_list_date": "2026-10-01",
+    "ra_assumed_listed": true
+  }
+}

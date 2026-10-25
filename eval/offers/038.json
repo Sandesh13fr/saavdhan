@@ -1,0 +1,21 @@
+{
+  "id": "038",
+  "synthetic": true,
+  "language": "mr",
+  "format": "whatsapp",
+  "label": "legit_style",
+  "text": "SYNTHETIC — fictional evaluation material.\n[10/10/26, 10:14 AM] Example बांधकाम प्लेसमेंट (fictional): परवाना DEMO-RA-038. कार्यालय: कक्ष AL, काल्पनिक बांधकाम चौक, डेमो नगर. इस्रायलमध्ये Example बांधकाम कामे (fictional) येथे गवंडी पद. रोजगार व्हिसा प्रस्थानापूर्वी.\n[10/10/26, 10:16 AM] Example बांधकाम प्लेसमेंट (fictional): शुल्क ₹३०,००० आणि GST ₹५,४००, एकूण ₹३५,४००. बँक भरण्याची पावती देऊ. नियोक्ता, एजंट व कामगार यांनी स्वाक्षरी केलेला त्रिपक्षीय करार आणि प्रवासी भारतीय बीमा योजना (PBBY) विम्याची पॉलिसी प्रवासापूर्वी मिळेल. कार्यालयात कागदपत्रे वाचता येतील; फोन +91 90000 00038.",
+  "expected": {
+    "verdict": "NO_RED_FLAGS_FOUND",
+    "rule_hits": [],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Israel",
+      "fees_demanded_inr": "35400",
+      "role_title": "mason",
+      "agent_rc_number": "DEMO-RA-038"
+    },
+    "recruiter_list_date": "2026-10-01",
+    "ra_assumed_listed": true
+  }
+}

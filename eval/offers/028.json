@@ -1,0 +1,23 @@
+{
+  "id": "028",
+  "synthetic": true,
+  "language": "hinglish",
+  "format": "ad",
+  "label": "legit_style",
+  "text": "SYNTHETIC — fictional evaluation material.\nExample Build Placement (fictional), office Room AB, Example Plaza, Demo Nagar. Israel mein Example Build Works (fictional) ke liye construction worker. Employment visa travel se pehle. Fee Rs 10,000 + Rs 1,800 GST = Rs 11,800; agency bank payment ki receipt milegi. Employer, agent aur worker ka signed tripartite contract aur Pravasi Bharatiya Bima Yojana (PBBY) insurance policy departure se pehle milegi. Registration/licence number is ad mein nahi diya gaya hai. Office mein application aur document review hoga.",
+  "expected": {
+    "verdict": "VERIFY_FIRST",
+    "rule_hits": [
+      "R3_NO_RC_NUMBER"
+    ],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Israel",
+      "fees_demanded_inr": "11800",
+      "role_title": "construction worker",
+      "agent_rc_number": null
+    },
+    "recruiter_list_date": "2026-10-01",
+    "ra_assumed_listed": true
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "013",
+  "synthetic": true,
+  "language": "hi",
+  "format": "ad",
+  "label": "scam_pattern",
+  "text": "SYNTHETIC — fictional evaluation material.\nम्यांमार में आईटी की नौकरी। भर्ती शुल्क साढ़े चार लाख रुपये नकद। प्रवेश वीज़ा की श्रेणी नहीं बताई गई; कार्य परमिट पहुँचने के बाद बनेगा। मूल पासपोर्ट नौकरी की पूरी अवधि के लिए जमा करना होगा। संपर्क केवल Telegram; कार्यालय नहीं। एजेंट का नाम, लाइसेंस नंबर, रसीद, त्रिपक्षीय अनुबंध और बीमा का उल्लेख नहीं है।",
+  "expected": {
+    "verdict": "STOP",
+    "rule_hits": [
+      "R3_NO_RC_NUMBER",
+      "R4_FEE_OVER_CAP",
+      "R5_NO_TRIPARTITE_CONTRACT",
+      "R6_HIGH_RISK_CORRIDOR",
+      "R7_INFORMAL_CHANNEL_ONLY",
+      "R8_NO_RECEIPT",
+      "R9_PBBY_MISSING",
+      "H2_PASSPORT_HANDOVER"
+    ],
+    "facts": {
+      "visa_type": null,
+      "destination_country": "Myanmar",
+      "fees_demanded_inr": "450000",
+      "role_title": "IT",
+      "agent_rc_number": null
+    },
+    "recruiter_list_date": "2026-10-01"
+  }
+}

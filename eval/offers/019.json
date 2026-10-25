@@ -1,0 +1,31 @@
+{
+  "id": "019",
+  "synthetic": true,
+  "language": "mr",
+  "format": "ad",
+  "label": "scam_pattern",
+  "text": "SYNTHETIC — fictional evaluation material.\nExample डेटा संधी (fictional): थायलंडमध्ये डेटा एंट्री. पगार दरमहा ₹१,२५,०००. पर्यटक व्हिसा वापरून प्रवास; वर्क परमिट आगमनानंतर. भरतीसाठी तीन लाख रुपये रोख द्यावे लागतील. पावती मिळणार नाही. फक्त Telegram वर संपर्क; कार्यालयाचा पत्ता नाही. परवाना क्रमांक, त्रिपक्षीय करार आणि विमा यांचा उल्लेख नाही.",
+  "expected": {
+    "verdict": "STOP",
+    "rule_hits": [
+      "R1_TOURIST_VISA",
+      "R2_RA_NOT_LISTED",
+      "R3_NO_RC_NUMBER",
+      "R4_FEE_OVER_CAP",
+      "R5_NO_TRIPARTITE_CONTRACT",
+      "R6_HIGH_RISK_CORRIDOR",
+      "R7_INFORMAL_CHANNEL_ONLY",
+      "R8_NO_RECEIPT",
+      "R9_PBBY_MISSING",
+      "H1_SALARY_ANOMALY"
+    ],
+    "facts": {
+      "visa_type": "tourist",
+      "destination_country": "Thailand",
+      "fees_demanded_inr": "300000",
+      "role_title": "data entry",
+      "agent_rc_number": null
+    },
+    "recruiter_list_date": "2026-10-01"
+  }
+}

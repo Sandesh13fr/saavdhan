@@ -1,0 +1,21 @@
+{
+  "id": "033",
+  "synthetic": true,
+  "language": "hi",
+  "format": "letter",
+  "label": "legit_style",
+  "text": "SYNTHETIC — fictional evaluation material.\nनियुक्ति पत्र — Example रसोई प्लेसमेंट (fictional), पंजीकरण DEMO-RA-033। कार्यालय: कक्ष AG, काल्पनिक भवन, डेमो नगर। कतर में Example भोजन सेवा (fictional) के लिए रसोइया। रोजगार वीज़ा प्रस्थान से पहले मिलेगा। भर्ती शुल्क ₹३०,००० + GST ₹५,४०० = ₹३५,४००; बैंक भुगतान पर मदवार रसीद दी जाएगी। नियोक्ता, एजेंट और कर्मचारी का हस्ताक्षरित त्रिपक्षीय अनुबंध तथा प्रवासी भारतीय बीमा योजना (PBBY) की पॉलिसी यात्रा से पहले मिलेगी। मूल पासपोर्ट कर्मचारी के पास रहेगा।",
+  "expected": {
+    "verdict": "NO_RED_FLAGS_FOUND",
+    "rule_hits": [],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Qatar",
+      "fees_demanded_inr": "35400",
+      "role_title": "cook",
+      "agent_rc_number": "DEMO-RA-033"
+    },
+    "recruiter_list_date": "2026-10-01",
+    "ra_assumed_listed": true
+  }
+}

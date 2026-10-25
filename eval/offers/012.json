@@ -1,0 +1,24 @@
+{
+  "id": "012",
+  "synthetic": true,
+  "language": "hi",
+  "format": "letter",
+  "label": "scam_pattern",
+  "text": "SYNTHETIC — fictional evaluation material.\nनियुक्ति प्रस्ताव: Example सेवा प्लेसमेंट (fictional), पंजीकरण DEMO-RA-012। कार्यालय: कक्ष L, काल्पनिक मार्ग, डेमो नगर। नियोक्ता Example सेवा केंद्र (fictional), कंबोडिया; पद ग्राहक सहायता। रोजगार वीज़ा यात्रा से पहले मिलेगा। कुल भर्ती शुल्क ₹३०,०००, GST सहित; बैंक भुगतान की रसीद मिलेगी। नियोक्ता, एजेंट और कर्मचारी का हस्ताक्षरित त्रिपक्षीय अनुबंध प्रस्थान से पहले दिया जाएगा। बीमा का विवरण नहीं दिया गया है।",
+  "expected": {
+    "verdict": "STOP",
+    "rule_hits": [
+      "R2_RA_NOT_LISTED",
+      "R6_HIGH_RISK_CORRIDOR",
+      "R9_PBBY_MISSING"
+    ],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Cambodia",
+      "fees_demanded_inr": "30000",
+      "role_title": "customer support",
+      "agent_rc_number": "DEMO-RA-012"
+    },
+    "recruiter_list_date": "2026-10-01"
+  }
+}

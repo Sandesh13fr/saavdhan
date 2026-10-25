@@ -1,0 +1,23 @@
+{
+  "id": "031",
+  "synthetic": true,
+  "language": "hi",
+  "format": "ad",
+  "label": "legit_style",
+  "text": "SYNTHETIC — fictional evaluation material.\nExample आतिथ्य प्लेसमेंट (fictional), लाइसेंस DEMO-RA-031। कार्यालय: कक्ष AE, काल्पनिक व्यापार मार्ग, डेमो नगर। UAE में Example अतिथि गृह (fictional) के लिए हाउसकीपिंग सहायक। रोजगार वीज़ा प्रस्थान से पहले जारी होगा। शुल्क ₹३०,००० + GST ₹५,४०० = ₹३५,४००; बैंक भुगतान पर रसीद मिलेगी। प्रवासी भारतीय बीमा योजना (PBBY) की पॉलिसी प्रस्थान से पहले मिलेगी। इस विज्ञापन में अनुबंध का विवरण नहीं दिया गया है। आवेदन और दस्तावेज़ समीक्षा कार्यालय में होगी।",
+  "expected": {
+    "verdict": "VERIFY_FIRST",
+    "rule_hits": [
+      "R5_NO_TRIPARTITE_CONTRACT"
+    ],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "UAE",
+      "fees_demanded_inr": "35400",
+      "role_title": "housekeeping attendant",
+      "agent_rc_number": "DEMO-RA-031"
+    },
+    "recruiter_list_date": "2026-10-01",
+    "ra_assumed_listed": true
+  }
+}

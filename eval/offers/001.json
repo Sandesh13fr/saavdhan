@@ -1,0 +1,33 @@
+{
+  "id": "001",
+  "synthetic": true,
+  "language": "en",
+  "format": "whatsapp",
+  "label": "scam_pattern",
+  "text": "SYNTHETIC — fictional evaluation material.\n[10/10/26, 9:14 PM] Example Border Desk (fictional): Thailand data entry job, salary Rs 1.2 lakh per month. Travel on a tourist visa; work permit after arrival.\n[10/10/26, 9:15 PM] Example Border Desk (fictional): Pay Rs 2,50,000 by UPI today only. No receipt or contract. Hand your passport to our coordinator for the whole assignment.\n[10/10/26, 9:16 PM] Applicant A (fictional): Where is your office and licence?\n[10/10/26, 9:17 PM] Example Border Desk (fictional): WhatsApp only, +91 90000 00001; no office visits or licence number to share.",
+  "expected": {
+    "verdict": "STOP",
+    "rule_hits": [
+      "R1_TOURIST_VISA",
+      "R2_RA_NOT_LISTED",
+      "R3_NO_RC_NUMBER",
+      "R4_FEE_OVER_CAP",
+      "R5_NO_TRIPARTITE_CONTRACT",
+      "R6_HIGH_RISK_CORRIDOR",
+      "R7_INFORMAL_CHANNEL_ONLY",
+      "R8_NO_RECEIPT",
+      "R9_PBBY_MISSING",
+      "H1_SALARY_ANOMALY",
+      "H2_PASSPORT_HANDOVER",
+      "H3_PRESSURE"
+    ],
+    "facts": {
+      "visa_type": "tourist",
+      "destination_country": "Thailand",
+      "fees_demanded_inr": "250000",
+      "role_title": "data entry",
+      "agent_rc_number": null
+    },
+    "recruiter_list_date": "2026-10-01"
+  }
+}

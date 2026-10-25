@@ -1,0 +1,21 @@
+{
+  "id": "022",
+  "synthetic": true,
+  "language": "en",
+  "format": "ad",
+  "label": "legit_style",
+  "text": "SYNTHETIC — fictional evaluation material.\nExample Weld Placement (fictional), licence DEMO-RA-022. Office: Room V, Example Trade Court, Demo Nagar. Saudi Arabia welder vacancies at Example Metal Works (fictional). Employment visa before travel. Recruitment service fee Rs 25,000 plus Rs 4,500 GST, total Rs 29,500, paid to the agency bank account against a receipt. Employer, agent and worker sign a tripartite employment contract before departure. Pravasi Bharatiya Bima Yojana (PBBY) insurance is included and the policy is supplied before travel. Apply at the office; document review appointment available.",
+  "expected": {
+    "verdict": "NO_RED_FLAGS_FOUND",
+    "rule_hits": [],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Saudi Arabia",
+      "fees_demanded_inr": "29500",
+      "role_title": "welder",
+      "agent_rc_number": "DEMO-RA-022"
+    },
+    "recruiter_list_date": "2026-10-01",
+    "ra_assumed_listed": true
+  }
+}

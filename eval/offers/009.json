@@ -1,0 +1,30 @@
+{
+  "id": "009",
+  "synthetic": true,
+  "language": "hinglish",
+  "format": "whatsapp",
+  "label": "scam_pattern",
+  "text": "SYNTHETIC — fictional evaluation material.\n[10/10/26, 7:20 PM] Example Click Desk (fictional): Licence DEMO-RA-009, Myanmar mein online marketing job. Visit visa par jao; work permit arrival ke baad.\n[10/10/26, 7:21 PM] Example Click Desk (fictional): 2.5 lakh UPI par aaj raat tak chahiye. Contract aur receipt nahi; insurance ka zikr nahi kar rahe.\n[10/10/26, 7:22 PM] Example Click Desk (fictional): Office nahi hai, sirf WhatsApp par +91 90000 00009.",
+  "expected": {
+    "verdict": "STOP",
+    "rule_hits": [
+      "R1_TOURIST_VISA",
+      "R2_RA_NOT_LISTED",
+      "R4_FEE_OVER_CAP",
+      "R5_NO_TRIPARTITE_CONTRACT",
+      "R6_HIGH_RISK_CORRIDOR",
+      "R7_INFORMAL_CHANNEL_ONLY",
+      "R8_NO_RECEIPT",
+      "R9_PBBY_MISSING",
+      "H3_PRESSURE"
+    ],
+    "facts": {
+      "visa_type": "visit",
+      "destination_country": "Myanmar",
+      "fees_demanded_inr": "250000",
+      "role_title": "online marketing",
+      "agent_rc_number": "DEMO-RA-009"
+    },
+    "recruiter_list_date": "2026-10-01"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "037",
+  "synthetic": true,
+  "language": "mr",
+  "format": "ad",
+  "label": "legit_style",
+  "text": "SYNTHETIC — fictional evaluation material.\nExample यंत्र प्लेसमेंट (fictional), परवाना DEMO-RA-037. कार्यालय: कक्ष AK, काल्पनिक उद्योग मार्ग, डेमो नगर. जर्मनीमध्ये Example यंत्र कामे (fictional) येथे औद्योगिक मेकॅनिक. रोजगार व्हिसा प्रवासापूर्वी मिळेल. शुल्क ₹२५,००० + GST ₹४,५०० = ₹२९,५००; बँक भरण्याची पावती मिळेल. नियोक्ता, एजंट व कामगार यांचा स्वाक्षरी केलेला त्रिपक्षीय करार प्रस्थानापूर्वी दिला जाईल. प्रवासी भारतीय बीमा योजना (PBBY) विम्याची पॉलिसी प्रवासापूर्वी मिळेल. अर्ज कार्यालयात उपलब्ध.",
+  "expected": {
+    "verdict": "NO_RED_FLAGS_FOUND",
+    "rule_hits": [],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "Germany",
+      "fees_demanded_inr": "29500",
+      "role_title": "industrial mechanic",
+      "agent_rc_number": "DEMO-RA-037"
+    },
+    "recruiter_list_date": "2026-10-01",
+    "ra_assumed_listed": true
+  }
+}

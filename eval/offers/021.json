@@ -1,0 +1,21 @@
+{
+  "id": "021",
+  "synthetic": true,
+  "language": "en",
+  "format": "letter",
+  "label": "legit_style",
+  "text": "SYNTHETIC — fictional evaluation material.\nOFFER LETTER — Example Gulf Trades (fictional), recruiting licence DEMO-RA-021. Office: Suite U, Example Avenue, Demo Nagar. Employer: Example Electrical Works (fictional), UAE. Role: electrician; monthly wage AED 2,400. Employment visa approved before departure. Service charge Rs 30,000 plus GST Rs 5,400, total ₹35,400; bank transfer with itemised receipt. Employer, recruiting agent and worker sign a tripartite contract before departure. Pravasi Bharatiya Bima Yojana (PBBY) insurance policy will be provided before travel. Worker retains original passport.",
+  "expected": {
+    "verdict": "NO_RED_FLAGS_FOUND",
+    "rule_hits": [],
+    "facts": {
+      "visa_type": "employment",
+      "destination_country": "UAE",
+      "fees_demanded_inr": "35400",
+      "role_title": "electrician",
+      "agent_rc_number": "DEMO-RA-021"
+    },
+    "recruiter_list_date": "2026-10-01",
+    "ra_assumed_listed": true
+  }
+}

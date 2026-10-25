@@ -84,4 +84,6 @@ def test_safety_plan_missed_checkin_alerts_family_and_packet(client):
 def test_demo_bangkok_story_stops(client):
     cid = client.post("/api/demo/offers/bangkok-data-entry").json()["id"]
     level = client.post(f"/api/offers/{cid}/analyze").json()["analysis"]["verdict"]["level"]
-    assert level in {"STOP", "VERIFY_FIRST"}  # STOP once the fallback extractor lands
+    assert level == "STOP"
+    near = client.post("/api/demo/offers/dubai-near-miss").json()["id"]
+    assert client.post(f"/api/offers/{near}/analyze").json()["analysis"]["verdict"]["level"] == "VERIFY_FIRST"
