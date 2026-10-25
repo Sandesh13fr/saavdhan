@@ -12,7 +12,7 @@ import re
 from decimal import Decimal, InvalidOperation
 
 import httpx
-import neatlogs
+from . import telemetry
 from .telemetry import record_usage
 from .auth import external_calls_allowed
 
@@ -42,7 +42,7 @@ def _normalize(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
-@neatlogs.span(kind="GUARDRAIL", name="validate-quoted-records", capture_input=False, capture_output=False)
+@telemetry.span(kind="GUARDRAIL", name="validate-quoted-records", capture_input=False, capture_output=False)
 def validate_extraction(payload: dict, text: str, source_id: str) -> dict:
     if not isinstance(payload, dict) or set(payload) != {"records"} or not isinstance(payload["records"], list):
         raise ValueError("Model returned an invalid record envelope; manual extraction required.")
@@ -111,7 +111,7 @@ async def extract_records(text: str, source_id: str) -> dict | None:
     try:
         # This custom HTTP client is not an OpenAI SDK client: wrap() cannot
         # capture it. Record one explicit LLM span without changing transport.
-        with neatlogs.trace("extract-invoice-records", kind="LLM") as span:
+        with telemetry.trace("extract-invoice-records", kind="LLM") as span:
             span.set_attribute("neatlogs.llm.model_name", request["model"])
             span.set_attribute("gen_ai.system", "litellm" if os.getenv("LITELLM_API_KEY") else "openai")
             span.set_attribute("gen_ai.request.model", request["model"])
@@ -153,7 +153,7 @@ async def plan_next_tool(summary: dict, allowed_tools: list[str]) -> dict | None
             "name": "next_invoice_tool", "strict": True, "schema": schema}},
     }
     try:
-        with neatlogs.trace("choose-next-invoice-tool", kind="LLM") as span:
+        with telemetry.trace("choose-next-invoice-tool", kind="LLM") as span:
             span.set_attribute("neatlogs.llm.model_name", request["model"])
             span.set_attribute("gen_ai.system", "litellm" if os.getenv("LITELLM_API_KEY") else "openai")
             span.set_attribute("gen_ai.request.model", request["model"])

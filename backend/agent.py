@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 from decimal import Decimal
 from pathlib import Path
 
-import neatlogs
+from . import telemetry
 
 from . import storage
 from .engine import analyze
@@ -223,7 +223,7 @@ async def advance(state,request:AgentRequest,fresh=False):
             break
         agent["attempts"][tool]=attempts+1
         try:
-            with neatlogs.trace(tool,kind="TOOL") as span:
+            with telemetry.trace(tool,kind="TOOL") as span:
                 span.set_attribute("neatlogs.tool.name",tool)
                 span.set_attribute("bakaya.invoice_count",len(state["input"]["invoices"]))
                 span.set_attribute("bakaya.source_count",len(state["input"]["sources"]))

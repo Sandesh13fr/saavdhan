@@ -5,13 +5,17 @@ __pycache__/
 .env
 frontend/node_modules/
 frontend/dist/
-data/
+data/uploads/
+data/*.sqlite3
 *.db
 *.sqlite3
 artifacts/
 *.tsbuildinfo
 deploy/production.env
-deploy/data/
+deploy/data/uploads/
+data/*.sqlite3
 deploy/backups/
 
 .vercel
+.agents/
+skills-lock.json

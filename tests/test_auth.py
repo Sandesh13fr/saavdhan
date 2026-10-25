@@ -46,8 +46,8 @@ def test_tenant_isolation_all_case_surfaces_and_actual_reviewer(secure):
     assert secure.get('/api/cases').json()==[]
     for tail in ('','/sources/REMIT-003','/sources/REMIT-003/download','/export','/agent'):
         assert secure.get(f'/api/cases/{cid}'+tail).status_code==404
-    for tail in ('/agent/run','/agent/resume','/buyer-context','/run'):
-        assert secure.post(f'/api/cases/{cid}'+tail,json=({'domain':'stripe.com','confirm':True} if tail=='/buyer-context' else {})).status_code==404
+    for tail in ('/agent/run','/agent/resume','/run'):
+        assert secure.post(f'/api/cases/{cid}'+tail,json={}).status_code==404
     login(secure,'e@example.com','e long password 123')
     assert secure.post(f'/api/cases/{cid}/approve',json={'reviewer':'Spoof'}).status_code==403
 
@@ -109,14 +109,12 @@ def test_database_context_closes_and_preserves_transactions(secure):
 
 
 def test_paid_calls_admin_only_and_approval_identity(secure,monkeypatch):
-    from backend import providers, enrichment
+    from backend import providers
     monkeypatch.setenv('BAKAYA_ENABLE_LLM','true')
     monkeypatch.setenv('LITELLM_API_KEY','test-non-secret')
     login(secure,'a@example.com','a long password 123')
     assert secure.get('/api/auth/me').json()['external_calls_allowed'] is False
     case=secure.post('/api/cases/demo').json()
-    monkeypatch.setattr(enrichment,'lookup',lambda *args: pytest.fail('Paid lookup attempted'))
-    assert secure.post(f"/api/cases/{case['id']}/buyer-context",json={'domain':'stripe.com','confirm':True}).status_code==403
     assert secure.post(f"/api/cases/{case['id']}/agent/run",json={'allow_model_planning':True}).status_code==403
     token=auth.USER.set({'role':'reviewer'})
     try:

@@ -15,8 +15,7 @@ from fastapi.staticfiles import StaticFiles
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 from pydantic import ValidationError
 
-from . import storage, telemetry, enrichment, auth
-import neatlogs
+from . import storage, telemetry, auth
 from .engine import analyze
 from .exports import packet_zip
 from .fixtures import demo_case
@@ -36,11 +35,7 @@ async def lifespan(app):
         raise RuntimeError("BAKAYA_ENV must be local or production")
     if auth.production() and not os.getenv("BAKAYA_PUBLIC_ORIGIN", "").startswith("https://"):
         raise RuntimeError("Production requires BAKAYA_PUBLIC_ORIGIN with HTTPS")
-    telemetry.initialize()
-    try:
-        yield
-    finally:
-        telemetry.shutdown()
+    yield
 
 
 app=FastAPI(title="Bakaya",version="0.1.0",description="Local evidence-backed claim preparation. No automatic filing or sending.", lifespan=lifespan)
@@ -164,19 +159,7 @@ def view(state):
             "sources":case["sources"],"rates":case["rates"],"audit":state["audit"],"review":state["review"],"revision":state["revision"],"approval":state["approval"],"mode":state.get("mode","fixed"),"evaluation":state.get("evaluation"),"agent":state.get("agent"),**state["analysis"]}
     if state["approval"] and state["approval"]["revision"]==state["revision"]:
         result["status"]="approved"
-    result["buyer_context"] = enrichment.read(state["id"])
     return result
-
-
-@app.post("/api/cases/{case_id}/buyer-context")
-def buyer_context(case_id: str, body: dict):
-    require_case(case_id)
-    if not isinstance(body.get("domain"), str) or body.get("confirm") is not True:
-        raise HTTPException(422, "Confirm the optional domain lookup before continuing")
-    if not auth.external_calls_allowed():
-        raise HTTPException(403, "External provider calls require an administrator")
-    enrichment.lookup(case_id, body["domain"])
-    return view(require_case(case_id))
 
 
 def create(case:CaseInput,is_demo=False):
@@ -280,7 +263,7 @@ def apply_linked_facts(case:CaseInput):
 
 
 @app.post("/api/cases/{case_id}/upload")
-@neatlogs.span(kind="WORKFLOW", name="invoice-document-extraction", capture_input=False, capture_output=False)
+@telemetry.span(kind="WORKFLOW", name="invoice-document-extraction", capture_input=False, capture_output=False)
 async def upload(case_id:str,files:list[UploadFile]=File(...)):
     state=require_case(case_id)
     if len(state["input"]["sources"])+len(files)>100:
@@ -481,7 +464,7 @@ async def advance_agent(case_id,request,fresh):
     lock=LOCKS.setdefault(case_id,asyncio.Lock())
     async with lock:
         state=require_case(case_id)
-        with neatlogs.trace("prepare-invoice-case", kind="WORKFLOW") as span:
+        with telemetry.trace("prepare-invoice-case", kind="WORKFLOW") as span:
             span.set_attribute("neatlogs.workflow.name", "prepare-invoice-case")
             try:
                 state=await advance(state,request,fresh)

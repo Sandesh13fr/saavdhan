@@ -1,7 +1,7 @@
 [project]
-name = "bakaya"
+name = "saavdhan"
 version = "0.1.0"
-description = "Local evidence-backed receivables preparation demo"
+description = "Check an overseas job offer against India's emigration rules"
 requires-python = ">=3.11"
 
 [tool.pytest.ini_options]
