@@ -128,12 +128,17 @@ def test_bangkok_whatsapp_only_contact(analyze_pdf):
 
 
 def test_generator_is_deterministic(tmp_path):
-    generate = runpy.run_path(str(DIRECTORY / "make_offer_pdfs.py"))["generate"]
+    generator = runpy.run_path(str(DIRECTORY / "make_offer_pdfs.py"))
+    generate = generator["generate"]
     first, second = tmp_path / "first", tmp_path / "second"
     generate(first)
     generate(second)
     names = {path.name for path in first.glob("*.pdf")}
-    assert {name for name in CASES if not name.endswith(("_hindi.pdf", "_marathi.pdf"))} <= names
+    expected = set(CASES)
+    if generator["devanagari_font"]() is None:
+        expected -= set(generator["DEVANAGARI_FILES"])
+    assert names == expected
     assert names == {path.name for path in second.glob("*.pdf")}
     for name in names:
         assert (first / name).read_bytes() == (second / name).read_bytes()
+        assert (first / name).read_bytes() == fixture_path(name).read_bytes()
