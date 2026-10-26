@@ -84,6 +84,10 @@ Sandesh13fr), Docker present, Tesseract 5.4.0 at `C:\Program Files\Tesseract-OCR
 - OpenFreeMap basemap not merged (mock shows a tile-less map); branch `lane/openfreemap` kept.
 - OpenRouter configured as the optional LLM gateway (off by default and in production).
 
+- Final pass (26 Oct): Marathi R7 title reworded (glyph rendered broken); private design references
+  and working notes gitignored; 210 tests pass. Offer-letter test fixtures (Codex lane) carry a visible
+  test-fixture label by design: they are software test inputs, not documents meant to pass as real.
+
 ## Known gaps
 
 - R2 shows "dated not loaded" until the MEA RA list is parsed.
