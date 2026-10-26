@@ -18,9 +18,12 @@ DEVANAGARI_FILES = ("laos_it_offer_hindi.pdf", "saudi_driver_offer_marathi.pdf")
 
 
 def devanagari_font():
+    """Return (path, subfontIndex) for the first usable Devanagari font, or None."""
     candidates = sorted((ROOT / "frontend/node_modules/@fontsource-variable/noto-sans-devanagari/files").glob("*.ttf"))
-    candidates += [Path("C:/Windows/Fonts/Nirmala.ttf"), Path("C:/Windows/Fonts/Mangal.ttf")]
-    return next((path for path in candidates if path.is_file()), None)
+    candidates = [(path, 0) for path in candidates]
+    # Windows ships Devanagari fonts as TrueType collections; reportlab embeds index 0.
+    candidates += [(Path("C:/Windows/Fonts/Nirmala.ttc"), 0), (Path("C:/Windows/Fonts/Nirmala.ttf"), 0), (Path("C:/Windows/Fonts/Mangal.ttf"), 0)]
+    return next(((path, index) for path, index in candidates if path.is_file()), None)
 
 
 def pdf(path):
@@ -137,7 +140,7 @@ def generate(directory=Path(__file__).resolve().parent):
         for name in DEVANAGARI_FILES:
             print(f"SKIPPED {name}: no Devanagari TTF in the specified locations")
         return
-    pdfmetrics.registerFont(TTFont("FixtureDevanagari", str(font)))
+    pdfmetrics.registerFont(TTFont("FixtureDevanagari", str(font[0]), subfontIndex=font[1]))
     letter(directory / DEVANAGARI_FILES[0], "Fixture Laos Placements (Test)", [[
         "संदर्भ: TEST-LAOS-004",
         "एजेंसी: Fixture Laos Placements (Test)",
