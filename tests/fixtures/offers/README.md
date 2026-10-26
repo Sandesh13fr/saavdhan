@@ -132,3 +132,19 @@ The generator embeds the Nirmala UI Devanagari face from `C:/Windows/Fonts/Nirma
   Vite's built-in alternate loader. No dependencies or configuration changed.
 - No backend, dependency manifests, configuration or other tracked files were
   changed. No dotenv files were read and no network calls were made.
+
+## Live end-to-end run (26 Oct 2026, https://saavdhan.onrender.com)
+
+Each PDF was uploaded with `POST /api/offers` and analysed with the LLM disabled.
+
+| File | Expected | Live verdict | Live rule hits |
+| --- | --- | --- | --- |
+| `bangkok_data_entry_offer.pdf` | STOP | STOP | R1, R3, R4, R5, R6, R8, R9, H1, H2, H3 (R7 missing: known xfail) |
+| `cambodia_customer_support_scan.pdf` | STOP | STOP | R1, R3, R4, R5, R6, R7, R8, R9, H3 (OCR read the scan) |
+| `dubai_electrician_offer.pdf` | VERIFY_FIRST | VERIFY_FIRST | R4 only |
+| `laos_it_offer_hindi.pdf` | STOP | STOP | R1, R3, R4, R5, R6, R7, R8, R9, H3 |
+| `saudi_driver_offer_marathi.pdf` | VERIFY_FIRST | VERIFY_FIRST | none (recruiter list not loaded) |
+
+The scanned fixture first failed on the live site with a generic "OCR failed" note. The
+retry after raising the OCR limit to 60 s and reporting the error type passed, so the
+time limit is the likely cause. That is inferred, not confirmed.
