@@ -47,7 +47,7 @@ def ocr_image(data: bytes) -> str:
             path = Path(directory) / "page.png"
             image.convert("RGB").save(path)
             result = subprocess.run([executable, str(path), "stdout", "-l", os.getenv("SAAVDHAN_OCR_LANGS", "eng"), "--psm", "6"],
-                                    capture_output=True, timeout=30, check=True)
+                                    capture_output=True, timeout=60, check=True)
     return result.stdout.decode("utf-8").strip()
 
 
@@ -79,8 +79,8 @@ def ingest_bytes(filename: str, data: bytes):
                 base.status = "unstructured_review"
                 base.text = checked_text(text)
                 base.kind = "ocr_document"
-        except (OSError, ValueError, subprocess.SubprocessError, Image.DecompressionBombError):
-            errors.append("OCR failed or exceeded its limit; paste the offer text instead.")
+        except Exception as exc:  # best-effort OCR: record the cause, never invent text
+            errors.append(f"OCR failed ({type(exc).__name__}) or exceeded its limit; paste the offer text instead.")
         return sources,errors
     if suffix == ".pdf":
         from pypdf import PdfReader
@@ -107,8 +107,8 @@ def ingest_bytes(filename: str, data: bytes):
                             bitmap.close()
                         finally:
                             scan.close()
-                except (OSError, ValueError, subprocess.SubprocessError, pdfium.PdfiumError):
-                    errors.append(f"Page {n}: OCR failed; manual evidence review required.")
+                except Exception as exc:  # best-effort OCR: record the cause, never invent text
+                    errors.append(f"Page {n}: OCR failed ({type(exc).__name__}); manual evidence review required.")
             sid=f"{root}-P{n}"
             source=base.model_copy(update={"id":sid,"page":n,"text":checked_text(text),"stored_name":base.stored_name})
             source.status="truncated" if len(text)>100000 else "unstructured_review" if text.strip() else "ocr_unavailable"
