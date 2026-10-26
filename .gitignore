@@ -20,3 +20,7 @@ deploy/backups/
 .agents/
 skills-lock.json
 .claude/worktrees/
+
+# Private design references and working notes (not for the public repo)
+docs/ui/
+prompt.md
