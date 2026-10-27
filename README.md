@@ -1,20 +1,51 @@
-# Saavdhan
+<p align="center">
+  <img src="./assets/readme/hero.svg" width="100%" alt="Saavdhan (सावधान): check the job before you board. Example: the chat line 'We will arrange tourist visa, work permit after you reach' hits rule R1, tourist visa is not for jobs, and the verdict is STOP: do not pay or travel yet.">
+</p>
 
-**Saavdhan** (सावधान, "alert") checks an overseas job offer against India's emigration rules before a young person pays an agent or travels. If they still go, it runs a family check-in net and gives authorities an anonymised pattern map of reported offers.
+<p align="center">
+  <b><a href="https://saavdhan.onrender.com">Live demo</a></b> ·
+  <a href="docs/ARCHITECTURE.md">Architecture</a> ·
+  <a href="docs/RULES.md">Rules and sources</a> ·
+  <a href="docs/PRIVACY.md">Privacy</a> ·
+  <a href="#quick-start-windows-powershell">Run it locally</a>
+</p>
 
-Tagline: **Check the job before you board.**
+**Saavdhan** (सावधान, "alert") checks an overseas job offer against India's emigration rules before a young person pays an agent or travels. If they still go, it runs a family check-in net. For colleges and cyber police it shows an anonymised map of reported offers.
 
-Live demo (synthetic data, free hosting, may take a minute to wake): https://saavdhan.onrender.com
+Prototype for Hack for Social Cause 2027, theme 8 (Digital Safety & Cyber Fraud Awareness), framed for Maharashtra. All demo data is synthetic. The live demo runs on free hosting and may take a minute to wake.
 
-Status: prototype for Hack for Social Cause 2027 (theme 8, Digital Safety & Cyber Fraud Awareness, state framing Maharashtra). Demo data is synthetic.
+<p align="center">
+  <img src="./assets/readme/proof.webp" width="100%" alt="Four phone screens from the live demo: a STOP verdict, a VERIFY FIRST verdict, a simulated missed check-in alert for the family, and the district pattern map with synthetic data.">
+</p>
 
-## Provenance
+More screens, including Hindi and Marathi: [docs/screenshots](docs/screenshots/README.md).
 
-Saavdhan reuses the evidence engine (ingest, OCR, quote-validated extraction, audit log, ZIP packet) from **Bakaya**, an open-source project by the same author: https://github.com/Sandesh13fr/Bakaya. The reused parts are listed in [docs/REUSE-MAP.md](docs/REUSE-MAP.md). The rest (offer schema, rules, verdict, check-in net, pattern map, UI) was written for this project.
+## What it does
 
-## The problem
+- **M1, offer check.** Paste WhatsApp text or upload an offer letter, job ad or screenshot (PDF, TXT, PNG, JPG, WEBP, TIFF; up to 10 files), in English, Hindi or Marathi. Saavdhan extracts the facts, runs 12 rules and shows a verdict. Every point carries the quoted line and the rule source. See [docs/RULES.md](docs/RULES.md).
+- **M2, check-in net.** The traveller picks up to two contacts (aliases only), a travel plan and a check-in interval. A missed check-in produces a **simulated** alert with the report packet. Nothing is sent to anyone.
+- **M3, pattern map.** A login-only view of anonymised reports across Maharashtra's 36 districts. Phone numbers are salted and hashed before aggregation, so the same agent number shows up across districts without being revealed. The current data is synthetic.
 
-Fake overseas job offers move young people into scam compounds and forced labour. Reports cited here are summarised as reported by the named outlets; they have not been independently re-verified in this repository.
+## How it decides
+
+<p align="center">
+  <img src="./assets/readme/workflow.svg" width="100%" alt="How Saavdhan decides: 1 paste or upload in English, Hindi or Marathi; 2 extract every fact with its quoted line; 3 run 12 rules on both readings, the stricter result wins; 4 verdict STOP or VERIFY FIRST, never an all-clear.">
+</p>
+
+- **Models extract, Python decides.** An optional LLM only reads the offer and must quote its evidence verbatim. The deterministic extractor always runs. Rules run on both extractions and the stricter result per rule is kept. An LLM never sets a verdict.
+- **Verdict levels:**
+  - `STOP`: any critical rule hit.
+  - `VERIFY_FIRST`: any high-severity hit, three or more unknowns on the key rules, or no valid recruiter-list date.
+  - `NO_RED_FLAGS_FOUND`: none of the above. The only text shown is: "No red flags found. Confirm with the Protector of Emigrants before paying anything."
+- Unknown is never treated as clear. Every verdict shows the date of the MEA recruiter list it was checked against.
+- Saavdhan never gives an all-clear for an offer and never calls a named person or agency a fraud. It states verifiable facts, such as "not found on MEA's active recruiting agent list dated X".
+
+## Why this exists
+
+Fake overseas job offers move young people into scam compounds and forced labour. The pattern is consistent: a data-entry or IT job in Thailand, high pay, a fee of several lakh paid by UPI, a tourist visa, and contact only through WhatsApp. The MEA rules that would expose these offers already exist. Nobody checks them before the money moves.
+
+<details>
+<summary><b>Sources</b> (summarised as reported by the named outlets; not independently re-verified in this repository)</summary>
 
 - As reported by Scroll: Maharashtra police rescued over 60 Indians from cyber scam centres in Myanmar; they had been lured through social media and sent to Thailand on tourist visas. https://scroll.in/latest/1081252/over-60-indians-rescued-from-cyber-scam-centres-in-myanmar-five-agents-arrested
 - As reported by EastMojo, an MEA advisory warned about fake Thailand data-entry jobs that led into Myanmar. https://www.eastmojo.com/national/2022/09/25/verify-credentials-of-foreign-employers-mea-advisory-following-fake-job-offers-in-myanmar/
@@ -24,31 +55,7 @@ Fake overseas job offers move young people into scam compounds and forced labour
 - As reported by Deccan Herald, a youth from Belagavi paid Rs 2.5 lakh for Singapore data-entry jobs in January 2026 and ended up in Cambodia. https://www.deccanherald.com/amp/story/india%2Fkarnataka%2F3-belagavi-youth-forced-into-cyber-slavery-in-cambodia-rescued-3862439
 - MEA publishes the overseas employment guidance and the active recruiting agent (RA) lists: https://www.mea.gov.in/overseas-employment.htm
 
-## What it does
-
-Three modules:
-
-- **M1, offer check.** Paste WhatsApp text or upload an offer letter, job ad or screenshot (PDF, TXT, PNG, JPG, WEBP, TIFF; up to 10 files). Saavdhan extracts the facts, runs 12 rules and shows a verdict with the quoted line and the rule source for every point. See [docs/RULES.md](docs/RULES.md).
-- **M2, check-in net.** The traveller picks up to two contacts (aliases only), a travel plan and a check-in interval. A missed check-in produces a **simulated** alert with the report packet. Nothing is sent to anyone.
-- **M3, pattern map.** A login-only view of anonymised reports by district (Maharashtra, 36 districts). Phone numbers are salted and hashed before aggregation. The current data is synthetic.
-
-## How it decides
-
-- **Models extract, Python decides.** An optional LLM only reads the offer and must quote its evidence verbatim; the deterministic extractor always runs. Rules run on both extractions and the stricter result per rule is kept. An LLM never sets a verdict.
-- **Verdict levels:**
-  - `STOP`: any critical rule hit.
-  - `VERIFY_FIRST`: any high-severity hit, three or more unknowns on the key rules, or no valid recruiter-list date.
-  - `NO_RED_FLAGS_FOUND`: none of the above. The only text shown is: "No red flags found. Confirm with the Protector of Emigrants before paying anything."
-- Unknown is never treated as clear. Every verdict shows the date of the MEA recruiter list it was checked against.
-- Saavdhan never gives an all-clear for an offer and never calls a named person or agency a fraud. It states verifiable facts, such as "not found on MEA's active recruiting agent list dated X".
-
-## Screenshots
-
-All screenshots use synthetic demo data (full set and capture script: [docs/screenshots](docs/screenshots/README.md)).
-
-| Verdict (STOP) | Check-in plan, missed check-in | Family alert (simulated) | Pattern map (synthetic) |
-|---|---|---|---|
-| ![Verdict](docs/screenshots/04-result-stop-mobile.png) | ![Missed check-in](docs/screenshots/09-missed-mobile.png) | ![Family alert](docs/screenshots/10-family-mobile.png) | ![Pattern map](docs/screenshots/13-map-mobile.png) |
+</details>
 
 ## Quick start (Windows PowerShell)
 
@@ -68,9 +75,9 @@ cd ..
 
 Open http://localhost:8000 and choose a demo offer.
 
-Optional steps:
+### Configuration and optional features
 
-- **Configuration.** Copy `.env.example` to `.env` and edit it. `.env` is gitignored; never commit it.
+- **Environment variables.** Copy `.env.example` to `.env` and edit it. `.env` is gitignored; never commit it.
 - **OCR for image offers.** Install Tesseract. For Hindi and Marathi screenshots add the `hin` and `mar` tessdata, then set `SAAVDHAN_OCR_LANGS=eng+hin+mar`. Set `SAAVDHAN_OCR_ENABLED=true` and `TESSERACT_CMD` if Tesseract is not on PATH.
 - **LLM extraction (off by default in the example configuration).** For OpenRouter, set `SAAVDHAN_ENABLE_LLM=true`, `SAAVDHAN_LLM_BASE_URL=https://openrouter.ai/api/v1`, `SAAVDHAN_OPENAI_MODEL=nvidia/nemotron-3-ultra-550b-a55b:free` and `OPENAI_API_KEY` in your ignored local `.env`. Offer text is then sent to that gateway; use synthetic demo text only. See [docs/PRIVACY.md](docs/PRIVACY.md). A live synthetic probe on 2026-10-26 returned four expected facts with validated quotes; broader model evaluation and hosted configuration remain unverified. Restart an existing backend after changing configuration.
 - **Pattern map (M3).** Run `.\.venv\Scripts\python scripts\seed_demo_officer.py` once. It creates a local demo officer account, and the password is written to `.env` as `SAAVDHAN_DEMO_OFFICER_PASSWORD`. Local use only.
@@ -82,17 +89,16 @@ Optional steps:
 .\.venv\Scripts\python eval\run_eval.py
 ```
 
-CI (`.github/workflows/validate.yml`) runs pytest, the frontend build, the i18n check and a grep that fails on the word "safe" in app code.
+- 227 tests in `tests/`, including labelled offer PDFs in English, Hindi and Marathi (`tests/fixtures/offers/`).
+- CI (`.github/workflows/validate.yml`) runs pytest, the frontend build, the i18n check and a grep that fails on the word "safe" in app code.
 
 Evaluation headline (from [eval/REPORT.md](eval/REPORT.md)): on 40 synthetic offers, verdict accuracy 1.000, macro rule F1 0.948, field accuracy 0.880, median analysis time 2.3 ms. **Caveat:** the set is synthetic and was written for this project. The fallback extractor was tuned on the same set after a first run that scored 27/40, so these numbers are optimistic. A held-out set is needed for an honest estimate. The eval also stubs the recruiter-list lookup; it does not use the real MEA list.
 
-## Deployment
+## Architecture and deployment
 
-See [docs/DEPLOY.md](docs/DEPLOY.md). That file is written by the lead and may not exist yet in this branch.
-
-## Architecture
-
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): components, data flow, trust boundaries, storage and security controls.
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): components, data flow diagram, trust boundaries, storage and security controls.
+- [docs/DEPLOY.md](docs/DEPLOY.md): one Docker image (FastAPI serves the API and the built React app), deployed on Render from [`render.yaml`](render.yaml). Tesseract with English, Hindi and Marathi is included.
+- [docs/CONTRACTS.md](docs/CONTRACTS.md): the field contracts shared by the extractors, rules and UI.
 
 ## Limits
 
@@ -108,9 +114,9 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): components, data flow, trust b
 ## Hack for Social Cause 2027
 
 - Theme 8 (Digital Safety & Cyber Fraud Awareness), sub-theme 8a: a scam detection and reporting assistant for job-offer scams. State framing: Maharashtra.
-- Aligned with UN SDG 8.7 (forced labour and trafficking) and SDG 16.2 (ending abuse, exploitation, trafficking).
+- UN SDGs: 8.7 and 8.8 (forced labour, migrant workers' rights), 10.7 (safe, orderly migration), 16.2 (ending exploitation and trafficking) and 16.10 (public access to information).
 - Submission components and where they live:
-  - Deck and speaker notes: `docs/DECK-OUTLINE.md` (the final PDF is built from it on the IIT Bombay template).
+  - Deck and speaker notes: `docs/DECK-OUTLINE.md` (the final PDF is built from it on the official template).
   - Demo video script: `docs/DEMO-SCRIPT.md`.
   - Architecture and data flow: `docs/ARCHITECTURE.md`.
   - Rules with sources: `docs/RULES.md`.
@@ -118,18 +124,23 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): components, data flow, trust b
   - Sample data and test cases: `eval/offers/` (synthetic), `tests/`, `eval/REPORT.md`.
   - Licence: `LICENSE` (MIT). Third-party licences: `docs/THIRD-PARTY.md`.
   - AI disclosure: `AI_USAGE.md`.
-- Team: to be added. Team members are not listed in this repository.
 
-## Licence
+## Team
 
-MIT. See [LICENSE](LICENSE).
+- Sandesh Prakash Dawkhar, team lead
+- Anshuman Singh Rajpurohit
+- Soyam Meghraj Kayasth
 
-## Credits
+## Provenance and credits
 
-Team: to be added.
+Saavdhan reuses the evidence engine (ingest, OCR, quote-validated extraction, audit log, ZIP packet) from **Bakaya**, an open-source project by the same author: https://github.com/Sandesh13fr/Bakaya. The reused parts are listed in [docs/REUSE-MAP.md](docs/REUSE-MAP.md). The rest (offer schema, rules, verdict, check-in net, pattern map, UI) was written for this project.
 
-Saavdhan builds on Bakaya by the same author (see Provenance). Map boundaries are from geoBoundaries (ODbL) and base tiles are from OpenStreetMap contributors (ODbL); see [docs/THIRD-PARTY.md](docs/THIRD-PARTY.md).
+Map boundaries are from geoBoundaries (ODbL) and base tiles are from OpenStreetMap contributors (ODbL); see [docs/THIRD-PARTY.md](docs/THIRD-PARTY.md).
 
 ## AI usage
 
 This project was built with AI coding tools under human direction and review. See [AI_USAGE.md](AI_USAGE.md) for the tools, the work each one did and the estimated share of AI-produced code.
+
+## Licence
+
+MIT. See [LICENSE](LICENSE).

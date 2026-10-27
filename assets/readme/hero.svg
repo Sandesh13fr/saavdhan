@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-labelledby="title desc">
+  <title id="title">Saavdhan (सावधान): check the job before you board</title>
+  <desc id="desc">Saavdhan checks an overseas job offer against India's emigration rules. Example from the synthetic Bangkok demo: the chat line "We will arrange tourist visa, work permit after you reach" (line 5) hits rule R1, tourist visa is not for jobs, sourced to MEA, and the verdict is STOP: do not pay or travel yet.</desc>
+
+  <rect width="1200" height="440" rx="28" fill="#F4F4F0"/>
+
+  <g id="title-block" transform="translate(64 0)">
+    <text x="0" y="74" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" letter-spacing="2" fill="#55554F">OVERSEAS JOB OFFER CHECK · MAHARASHTRA</text>
+
+    <!-- Saavdhan mark: angular S from five flat planes -->
+    <g transform="translate(0 104) scale(0.86)">
+      <path fill="#C62828" d="M18 8H92L80 30H42V44L82 68V112H8L20 90H58V76L18 52Z"/>
+      <path fill="#9F1D1D" d="M42 44L82 68L58 76L18 52Z"/>
+    </g>
+    <text x="98" y="190" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="88" font-weight="800" letter-spacing="-2" fill="#111111">Saavdhan</text>
+    <text x="100" y="236" font-family="'Nirmala UI', 'Noto Sans Devanagari', Mangal, 'Kohinoor Devanagari', sans-serif" font-size="34" font-weight="700" fill="#C62828">सावधान</text>
+
+    <text x="0" y="298" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="36" font-weight="700" fill="#111111">Check the job before you board<tspan fill="#C62828">.</tspan></text>
+    <text x="0" y="338" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="22" fill="#55554F">Rules decide. Every red flag shows the exact line it came from.</text>
+
+    <text x="0" y="392" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" fill="#72726E">12 rules · English · हिंदी · मराठी · MIT</text>
+  </g>
+
+  <!-- Real output from the synthetic Bangkok demo case: quote -> rule -> verdict -->
+  <g id="evidence" transform="translate(690 44)">
+    <rect width="446" height="118" rx="22" fill="#FFFFFF" stroke="#E2E2DC" stroke-width="2"/>
+    <text x="24" y="36" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" fill="#72726E">CHAT · RECRUITER (FICTIONAL)</text>
+    <text x="398" y="36" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" font-weight="700" fill="#C62828">◂ L5</text>
+    <rect x="18" y="52" width="350" height="30" rx="4" fill="#FBE9E7"/>
+    <text x="24" y="74" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="20" fill="#111111">"We will arrange tourist visa,</text>
+    <text x="24" y="102" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="20" fill="#111111">work permit after you reach"</text>
+
+    <path d="M60 118V146" stroke="#C62828" stroke-width="3"/>
+    <path d="M52 140L60 152L68 140" fill="none" stroke="#C62828" stroke-width="3" stroke-linejoin="round"/>
+
+    <rect y="156" width="446" height="104" rx="22" fill="#FFFFFF" stroke="#E2E2DC" stroke-width="2"/>
+    <text x="24" y="192" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" fill="#72726E">RULE R1 · CRITICAL</text>
+    <text x="24" y="226" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="26" font-weight="700" fill="#111111">Tourist visa is not for jobs</text>
+    <text x="24" y="250" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="16" fill="#72726E">source: mea.gov.in/overseas-employment.htm</text>
+
+    <path d="M60 260V288" stroke="#C62828" stroke-width="3"/>
+    <path d="M52 282L60 294L68 282" fill="none" stroke="#C62828" stroke-width="3" stroke-linejoin="round"/>
+
+    <rect y="298" width="446" height="70" rx="22" fill="#C62828"/>
+    <text x="24" y="346" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="36" font-weight="800" letter-spacing="2" fill="#FFFFFF">STOP</text>
+    <text x="150" y="341" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="21" font-weight="600" fill="#FFFFFF">Do not pay or travel yet.</text>
+  </g>
+</svg>
